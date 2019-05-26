@@ -1,0 +1,15 @@
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(411,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (zero_soln.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+  functions.cpp
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\Assignments\Assignment0_setup\zero_header.h(16): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\Assignments\Assignment0_setup\functions.cpp(8): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\Assignments\Assignment0_setup\functions.cpp(13): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\Assignments\Assignment0_setup\functions.cpp(172): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\Assignments\Assignment0_setup\functions.cpp(173): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\Assignments\Assignment0_setup\functions.cpp(176): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\Assignments\Assignment0_setup\functions.cpp(177): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\Assignments\Assignment0_setup\functions.cpp(190): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\Assignments\Assignment0_setup\functions.cpp(191): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\Assignments\Assignment0_setup\functions.cpp(238): warning C4018: '<': signed/unsigned mismatch
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\Assignments\Assignment0_setup\functions.cpp(288): warning C4305: 'initializing': truncation from 'double' to 'GLfloat'
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\Assignments\Assignment0_setup\functions.cpp(325): warning C4305: '+=': truncation from 'double' to 'GLfloat'
+  zero.vcxproj -> C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\Assignments\Assignment0_setup\Debug\zero.exe
