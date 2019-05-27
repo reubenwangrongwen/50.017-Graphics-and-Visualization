@@ -270,14 +270,14 @@ void drawScene(void)
 	// with [0,1,0] as the up direction.
 
 	// rotating the camera 
-	/*gluLookAt(5.0 * sin(angle * PI / 180), 0.0, 5.0 * cos(angle * PI / 180),
+	/*gluLookAt(5. * sin(angle * PI / 180.), 0., 5. * cos(angle * PI / 180.),
 		0.0, 0.0, 0.0,
 		0.0, 1.0, 0.0);*/ 
 	
 	// stationary camera
-	gluLookAt(0.0, 0.0, 5.0,
-		0.0, 0.0, 0.0,
-		0.0, 1.0, 0.0);
+	gluLookAt( 0.0, 0.0, 5.0,
+			   0.0, 0.0, 0.0,
+			   0.0, 1.0, 0.0 );
 
 	// Set material properties of object
 
@@ -325,7 +325,7 @@ void drawScene(void)
 		angle += 0.2; // for continuous rotation
 
 	}
-	else { glCallList(index); }
+	else { glCallList(index); glPopMatrix(); }
 
 	// Dump the image to the screen.
 	glutSwapBuffers();

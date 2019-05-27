@@ -12,4 +12,7 @@ C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github
 C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment0\functions.cpp(238): warning C4018: '<': signed/unsigned mismatch
 C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment0\functions.cpp(288): warning C4305: 'initializing': truncation from 'double' to 'GLfloat'
 C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment0\functions.cpp(325): warning C4305: '+=': truncation from 'double' to 'GLfloat'
+  main.cpp
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment0\zero_header.h(16): warning C4305: 'initializing': truncation from 'double' to 'float'
+  Generating Code...
   zero.vcxproj -> C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment0\Debug\zero.exe
