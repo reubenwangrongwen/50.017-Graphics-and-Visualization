@@ -268,16 +268,16 @@ void drawScene(void)
 
 	// Position the camera at [0,0,5], looking at [0,0,0],
 	// with [0,1,0] as the up direction.
-#if 0
-	gluLookAt(5.0 * sin(angle * PI / 180), 0.0, 5.0 * cos(angle * PI / 180),
+
+	// rotating the camera 
+	/*gluLookAt(5.0 * sin(angle * PI / 180), 0.0, 5.0 * cos(angle * PI / 180),
 		0.0, 0.0, 0.0,
-		0.0, 1.0, 0.0); // rotating the camera / object
-#endif
-#if 1
+		0.0, 1.0, 0.0);*/ 
+	
+	// stationary camera
 	gluLookAt(0.0, 0.0, 5.0,
 		0.0, 0.0, 0.0,
 		0.0, 1.0, 0.0);
-#endif
 
 	// Set material properties of object
 
