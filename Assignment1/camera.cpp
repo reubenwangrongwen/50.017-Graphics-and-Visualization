@@ -1,5 +1,5 @@
-#include "camera.h"
-#include "extra.h"
+#include "Headers/camera.h"
+#include "Headers/extra.h"
 #include <GL/glu.h>
 #include <iostream>
 using namespace std;

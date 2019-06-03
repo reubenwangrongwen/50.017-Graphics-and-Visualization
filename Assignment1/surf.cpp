@@ -1,5 +1,5 @@
-#include "surf.h"
-#include "extra.h"
+#include "Headers/surf.h"
+#include "Headers/extra.h"
 using namespace std;
 
 float PI = 3.141592653589793; // vlaue of pi

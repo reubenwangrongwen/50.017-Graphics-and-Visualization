@@ -1,5 +1,5 @@
-#include "curve.h"
-#include "extra.h"
+#include "Headers/curve.h"
+#include "Headers/extra.h"
 #ifdef WIN32
 #include <windows.h>
 #endif
