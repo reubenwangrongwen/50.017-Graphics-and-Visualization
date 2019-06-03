@@ -41,15 +41,9 @@ vector<vector<unsigned>> vecf;
 
 // These are convenience functions which allow us to call OpenGL 
 // methods on Vec3d objects
-inline void glVertex(const Vector3f& a)
-{
-	glVertex3fv(a);
-}
+inline void glVertex(const Vector3f& a){ glVertex3fv(a); }
 
-inline void glNormal(const Vector3f& a)
-{
-	glNormal3fv(a);
-}
+inline void glNormal(const Vector3f& a){ glNormal3fv(a); }
 
 
 // timer function 

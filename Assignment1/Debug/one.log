@@ -1,0 +1,5 @@
+﻿  surf.cpp
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment1\surf.cpp(5): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment1\surf.cpp(50): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment1\surf.cpp(48): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+  one.vcxproj -> C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment1\Debug\one.exe
