@@ -17,6 +17,7 @@ I am working on Windows 10, so in order to run the zero.exe executable file and 
 cd [path]
 zero.exe < [object filename].obj
 ```
+where [path] is the file path to the solution folder and [object filename] is the .obj filename you would like to load into the program.
 
 ## References
 
