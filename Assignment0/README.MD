@@ -9,13 +9,13 @@ This was done for organization sake and are named "zero_header.h" and "functions
 
 Currently, I have completed up to the medium extra credit components with the exception of smoothening the color toggling. 
 
-## Running the executable
+## Running the Executable
 
 I am working on Windows 10, so in order to run the zero.exe executable file and load the .obj object file, I used the following commands.
 
-```bash
+```
 cd [path]
-zero.exe < [object file name].obj
+zero.exe < [object filename].obj
 ```
 
 ## References
