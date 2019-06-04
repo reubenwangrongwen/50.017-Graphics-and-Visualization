@@ -9,7 +9,7 @@ Have yet to fix the normal vector issues for generating surfaces.
 
 ## Extra Credit Components
 
-Currently, I have not completed any of the extra credit components.
+Currently, I have attempted a coloring of the mesh faces based on their normal vectors (easy extra credit).
 
 ## Running the Executable
 
