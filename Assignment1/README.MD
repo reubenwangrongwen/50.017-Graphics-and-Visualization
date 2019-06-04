@@ -2,7 +2,10 @@
 
 Here is the completed code for assignment 0 writen in C++ on Visual Studio 2019. 
 This program requires Windows SDK version 10.0.16299.0 to run. 
-I have also grouped all the .h files into the folder "Headers" for organizational purposes.
+
+## TO DO
+
+Have yet to fix the normal vector issues for generating surfaces. 
 
 ## Extra Credit Components
 
@@ -12,7 +15,7 @@ Currently, I have not completed any of the extra credit components.
 
 ```
 cd [path]
-a1soln swp/[swp filename].swp
+one.exe swp/[swp filename].swp
 ```
 
 where [path] is the file path to the solution folder and [swp filename] is the .swp filename you would like to load into the program.
