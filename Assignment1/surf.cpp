@@ -225,7 +225,8 @@ void drawSurface(const Surface &surface, bool shaded)
     {
         // This will use the current material color and light
         // positions.  Just set these in drawScene();
-        glEnable(GL_LIGHTING);
+        // glEnable(GL_LIGHTING);
+		glDisable(GL_LIGHTING);
         glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
         // This tells openGL to *not* draw backwards-facing triangles.
@@ -246,6 +247,11 @@ void drawSurface(const Surface &surface, bool shaded)
     glBegin(GL_TRIANGLES);
     for (unsigned i=0; i<surface.VF.size(); i++)
     {
+		glColor4f(surface.VN[surface.VF[i][0]][0], 
+			surface.VN[surface.VF[i][0]][1], 
+			surface.VN[surface.VF[i][0]][2], 
+			1.f); // coloring the mesh faces based on normal vector
+
         glNormal(surface.VN[surface.VF[i][0]]);
         glVertex(surface.VV[surface.VF[i][0]]);
         glNormal(surface.VN[surface.VF[i][1]]);

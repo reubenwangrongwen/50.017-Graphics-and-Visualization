@@ -27,6 +27,7 @@ using namespace std;
 // Stroustup.  But basically, the functionality of putting all the
 // globals in an "unnamed namespace" is to ensure that everything in
 // here is only accessible to code in this file.
+
 namespace
 {
     // Global variables here.
@@ -35,7 +36,8 @@ namespace
     Camera camera;
 
     // These are state variables for the UI
-    bool gMousePressed = false;
+	bool surf_norms = false; // boolean variable to display surface normals
+	bool gMousePressed = false;
     int  gCurveMode = 1;
     int  gSurfaceMode = 1;
     int  gPointMode = 1;
@@ -47,7 +49,7 @@ namespace
     // convention is that drawmode 0 is "blank", and other drawmodes
     // just call the appropriate display lists.
     GLuint gCurveLists[3];
-    GLuint gSurfaceLists[3];
+    GLuint gSurfaceLists[4];
     GLuint gAxisList;
     GLuint gPointList;
    
@@ -91,17 +93,17 @@ namespace
         }
         case 'c':
         case 'C':
-            gCurveMode = (gCurveMode+1)%3;
+            gCurveMode = (gCurveMode+1) % 3;
             break;
         case 's':
         case 'S':
-            gSurfaceMode = (gSurfaceMode+1)%3;
+            gSurfaceMode = (gSurfaceMode+1) % 4;
             break;
         case 'p':
         case 'P':
             gPointMode = (gPointMode+1)%2;
-            break;            
-        default:
+            break;  
+		default:
             cout << "Unhandled key press " << key << "." << endl;        
         }
 
@@ -184,7 +186,7 @@ namespace
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         glMatrixMode( GL_MODELVIEW );  
-        glLoadIdentity();              
+        glLoadIdentity(); 
 
         // Light color (RGBA)
         GLfloat Lt0diff[] = {1.0,1.0,1.0,1.0};
@@ -216,7 +218,6 @@ namespace
                  
         // Dump the image to the screen.
         glutSwapBuffers();
-
 
     }
 
@@ -250,10 +251,13 @@ namespace
         GLfloat specColor[] = {0.9, 0.9, 0.9, 1};
         GLfloat shininess[] = {50.0};
 
+		//const GLfloat g_color_buffer_data[] = Surface.VN; // making the normal vectors the colors
+
         glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE, diffColor);
         glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, specColor);
         glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, shininess);
     }
+
 
     // Load in objects from standard input into the global variables: 
     // gCtrlPoints, gCurves, gCurveNames, gSurfaces, gSurfaceNames.  If
@@ -332,6 +336,7 @@ namespace
         gCurveLists[2] = glGenLists(1);
         gSurfaceLists[1] = glGenLists(1);
         gSurfaceLists[2] = glGenLists(1);
+		gSurfaceLists[3] = glGenLists(1);
         gAxisList = glGenLists(1);
         gPointList = glGenLists(1);
 
@@ -363,10 +368,19 @@ namespace
             for (unsigned i=0; i<gSurfaces.size(); i++)
             {
                 drawSurface(gSurfaces[i], false);
-                drawNormals(gSurfaces[i], gLineLen);
+				drawNormals(gSurfaces[i], gLineLen);
             }
         }
-        glEndList();
+		glEndList();
+
+		glNewList(gSurfaceLists[3], GL_COMPILE);
+		{
+			for (unsigned i = 0; i < gSurfaces.size(); i++)
+			{
+				drawNormals(gSurfaces[i], gLineLen);
+			}
+		}
+		glEndList();        
 
         glNewList(gAxisList, GL_COMPILE);
         {
