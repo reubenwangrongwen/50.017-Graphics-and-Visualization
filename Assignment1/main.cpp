@@ -15,11 +15,11 @@
 #endif
 #include <vecmath.h>
 
-#include "Headers/parse.h"
-#include "Headers/curve.h"
-#include "Headers/surf.h"
-#include "Headers/extra.h"
-#include "Headers/camera.h"
+#include "parse.h"
+#include "curve.h"
+#include "surf.h"
+#include "extra.h"
+#include "camera.h"
 
 using namespace std;
 
