@@ -4,6 +4,7 @@
 #include <windows.h>
 #endif
 #include <GL/gl.h>
+#include <random>
 
 using namespace std;
 
@@ -19,6 +20,22 @@ namespace
 
     
 }
+
+// monomial basis (1, t, t^2, t^3)
+Vector4f mono_basis(float t) {
+	return Vector4f (1., t, pow(t, 2), pow(t, 3));
+}
+
+// derivative of monomial basis w.r.t parameter t
+Vector4f mono_basis_prime(float t) {
+	return Vector4f (0., 1., 2. * t, 3. * pow(t, 2));
+}
+
+// computing the coordinates for given a basis
+Vector3f new_coordinates (Vector4f basis, Vector4f x, Vector4f y, Vector4f z) {
+	return Vector3f (Vector4f::dot(basis, x), Vector4f::dot(basis, y), Vector4f::dot(basis, z));
+}
+
     
 // function that generates points of Bezier spline given input control points
 Curve evalBezier( const vector< Vector3f >& P, unsigned steps ) {
@@ -50,48 +67,70 @@ Curve evalBezier( const vector< Vector3f >& P, unsigned steps ) {
     cerr << "\t>>> Steps (type steps): " << steps << endl;
     cerr << "\t>>> Returning empty curve." << endl;
 
-	Curve curve; // vector of 4 vectors (vertex, tangent, normal, binormal)
+	Curve curve; // declaring curve struct
+	CurvePoint point, new_point; // declaring curve points 
 
-	// iterating over t parameter values (entire curve)
-	for (float t = 0; t < 1.0; t += 1.0 / steps) {
-		float x = 1 - t; // variable for convenience
-		CurvePoint point; // current point along spline
+	// Bezier basis
+	Matrix4f Bezier_basis = Matrix4f(1., -3., 3., -1.,
+		0., 3., -6., 3.,
+		0., 0., 3., -3.,
+		0., 0., 0., 1.);
 
-		/* === closed forms ===
-			P'(t) = -3(1-t)^2 * P0 + 3(1-t)^2 * P1 - 6t(1-t) * P1 - 3t^2 * P2 + 6t(1-t) * P2 + 3t^2 * P3
-			P''(t) = 6(1-t) * P0 + 6(3t-2) * P1 + 6(1-3t) * P2 + 6t * P3
-		*/
-		
-		point.V = pow(x,3) * P[0]
-				+ 3 * t * pow(x,2) * P[1]
-				+ 3 * pow(t,2) * x * P[2]
-				+ pow(t,3) * P[3]; // value of vertices (Bezier)
+	float dt = 1. / steps;
+	Vector4f x, y, z, basis, basis_prime; // points
+	Vector3f V, B, N, T; // vectors
 
-		point.T = -3 * pow(x,2) * P[0]
-				+ (3 * pow(x,2) - 6 * pow(t,2)) * P[1]
-				+ (6 * t - 9 * pow(t,2)) * P[2]
-				+ 3 * pow(t, 2) * P[3]; // derivative of vertices
-		point.T.normalize(); // tangent at point
+	// loop over control points
+	for (unsigned i = 3; i < P.size(); i = i + 1) {
 
-		point.N = 6 * x * P[0] 
-				+ 6 * (3*t - 2) * P[1] 
-				+ 6 * (1 - 3*t) * P[2] 
-				+ 6 *t * P[3]; // second derivative of vertices
-		point.N.normalize(); // normal at point
+		// computing vertex entries for current iteration
+		x = Vector4f(P[i - 3][0], P[i - 2][0], P[i - 1][0], P[i][0]);
+		y = Vector4f(P[i - 3][1], P[i - 2][1], P[i - 1][1], P[i][1]);
+		z = Vector4f(P[i - 3][2], P[i - 2][2], P[i - 1][2], P[i][2]);
 
-		point.B = Vector3f::cross(point.T, point.N);
-		point.B.normalize(); // binormal at point
+		// looking at last point of current segment and first point of next segment
+		if (i == 3) {
+			B = Vector3f(0., 0., 1.);
+			T = new_coordinates(Bezier_basis * mono_basis(0), x, y, z);
 
-		curve.push_back(point);
+			// checking for T != B
+			if (Vector3f::cross(B, T) == Vector3f::ZERO) {
+				B = Vector3f(0., 1., 0.);
+			}
+		}
+
+		// loop over discretized parameter values
+		for (unsigned t_i = 0; t_i <= steps; t_i++) {
+			basis = Bezier_basis * mono_basis(t_i * dt); // Bezier basis
+			basis_prime = Bezier_basis * mono_basis_prime(t_i * dt); // Bezier differentiated basis
+
+			// computing Frenet-Serret vectors
+			V = new_coordinates(basis, x, y, z);
+			T = new_coordinates(basis_prime, x, y, z);
+			N = Vector3f::cross(B, T);
+			B = Vector3f::cross(T, N);
+
+			// normalizing vectors
+			T.normalize();
+			N.normalize();
+			B.normalize();
+
+			// updating vectors for next iteration
+			new_point = { V, T, N, B };
+			if (t_i == 0 && i == 3) {
+				point = new_point;
+			}
+			curve.push_back(new_point); // appending vectors to struct
+		}
 	}
 
-    return Curve(); // returns the curve
+	return curve; // returns curve struct
 }
+
 
 // function that generates points of B-spline curve given input control points
 Curve evalBspline( const vector< Vector3f >& P, unsigned steps )
 {
-    
 	/*
 	Description:
 		Function computes all the appropriate Vector3fs for each CurvePoint for a B-spline: V,T,N,B.
@@ -103,7 +142,6 @@ Curve evalBspline( const vector< Vector3f >& P, unsigned steps )
 	Output:
 		returns a Curve (e.g., a vector< CurvePoint >).
 	*/
-
 
 	// Check
     if( P.size() < 4 )
@@ -123,48 +161,65 @@ Curve evalBspline( const vector< Vector3f >& P, unsigned steps )
     cerr << "\t>>> Steps (type steps): " << steps << endl;
     cerr << "\t>>> Returning empty curve." << endl;
 
-	Curve curve; // vector of 4 vectors (vertex, tangent, normal, binormal)
+	Curve curve;
+	CurvePoint point, new_point;
 
-	for (unsigned int i = 0; i < P.size() - 3; i += 1) {
-		Vector3f P0, P1, P2, P3; // points for each B-spline segment
-		if (i == P.size() - 3) {
-			P0 = P[i]; P1 = P[i + 1]; P2 = P[i + 2]; P3 = P[i + 2];
+	// defining the B-spline basis as a matrix
+	Matrix4f Bspline_basis;
+	Bspline_basis = Matrix4f(1./6., -0.5, 0.5, -1. / 6.,
+		2./3., 0, -1., 0.5,
+		1. / 6., 0.5, 0.5, -0.5,
+		0, 0, 0, 1. / 6.);
+	
+	float dt = 1. / steps;
+	Vector4f x, y, z, basis, basis_prime; // points
+	Vector3f V, B, N, T; // vectors
+	
+	// loop over control points
+	for (unsigned i = 3; i < P.size(); i = i + 1) {
+
+		// computing vertex entries for current iteration
+		x = Vector4f(P[i - 3][0], P[i - 2][0], P[i - 1][0], P[i][0]);
+		y = Vector4f(P[i - 3][1], P[i - 2][1], P[i - 1][1], P[i][1]);
+		z = Vector4f(P[i - 3][2], P[i - 2][2], P[i - 1][2], P[i][2]);
+
+		// looking at last point of current segment and first point of next segment
+		if (i == 3) {
+			B = Vector3f(0., 0., 1.);
+			T = new_coordinates(Bspline_basis * mono_basis(0), x, y, z);
+
+			// checking for T != B
+			if (Vector3f::cross(B, T) == Vector3f::ZERO) {
+				B = Vector3f(0., 1., 0.);
+			}
 		}
-		else {
-			P0 = P[i]; P1 = P[i + 1]; P2 = P[i + 2]; P3 = P[i + 3];
-		}
 
-		for (float t = 0; t < 1.0; t += 1.0 / steps) {
-			float x = 1 - t;
-			CurvePoint point;
-			point.V = 1. / 6. * pow(x,3) * P0
-					+ 1. / 6. * (3 * pow(t,3) - 6 * pow(t,2) + 4) * P1
-					+ 1. / 6. * (-3 * pow(t,3) + 3 * pow(t,2) + 3 * t + 1) * P2
-					+ 1. / 6. * pow(t,3) * P3;
+		// loop over discretized parameter values
+		for (unsigned t_i = 0; t_i <= steps; t_i++) {
+			basis = Bspline_basis * mono_basis(t_i * dt);
+			basis_prime = Bspline_basis * mono_basis_prime(t_i * dt);
+			
+			// computing Frenet-Serret vectors
+			V = new_coordinates(basis, x, y, z);
+			T = new_coordinates(basis_prime, x, y, z);
+			N = Vector3f::cross(B, T);
+			B = Vector3f::cross(T, N);
 
-			point.T = -0.5 * pow(x,2) * P0
-					+ 0.5 * (3 * pow(t,2) - 4 * t) * P1
-					+ 0.5 * (-3 * pow(t,2) + 2 * t + 1) * P2
-					+ 0.5 * pow(t,2) * P3;
-			point.T.normalize();
+			// normalizing vectors
+			T.normalize();
+			N.normalize();
+			B.normalize();
 
-			point.N = -(1 - t) * P0
-					+ (3 * t - 2) * P1
-					+ (-3 * t + 1) * P2
-					+ t * P3;
-			point.N.normalize();
-
-			point.B = Vector3f::cross(point.T, point.N);
-			point.B.normalize();
-
-			curve.push_back(point);
+			// updating vectors for next iteration
+			new_point = { V, T, N, B };
+			if (t_i == 0 && i == 3) {
+				point = new_point;
+			}
+			curve.push_back(new_point); // appending vectors to struct
 		}
 	}
 
-	cerr << "\t>>> Steps (type steps): " << steps << endl;
-	cerr << "\t>>> Returning bsp curve." << endl;
-
-	return curve;
+	return curve; // returns curve struct
 }
 
 Curve evalCircle( float radius, unsigned steps )
