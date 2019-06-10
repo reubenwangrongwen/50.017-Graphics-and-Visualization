@@ -20,6 +20,7 @@
 #include "surf.h"
 #include "extra.h"
 #include "camera.h"
+#include <time.h>
 
 using namespace std;
 
@@ -64,7 +65,6 @@ namespace
     vector<string> gSurfaceNames;
 
     // Declarations of functions whose implementations occur later.
-    void arcballRotation(int endX, int endY);
     void keyboardFunc( unsigned char key, int x, int y);
     void specialFunc( int key, int x, int y );
     void mouseFunc(int button, int state, int x, int y);
@@ -363,7 +363,7 @@ namespace
         }
         glEndList();
 
-        glNewList(gSurfaceLists[2], GL_COMPILE);
+        glNewList(gSurfaceLists[2], GL_COMPILE); // additional list to view just the normals
         {
             for (unsigned i=0; i<gSurfaces.size(); i++)
             {
@@ -441,8 +441,10 @@ namespace
 
 // Main routine.
 // Set up OpenGL, define the callbacks and start the main loop
-int main( int argc, char* argv[] )
-{
+int main( int argc, char* argv[] ) {
+
+	srand(time(NULL));  // Initialize random number generator.
+
     // Load in from standard input
     loadObjects(argc, argv);
 

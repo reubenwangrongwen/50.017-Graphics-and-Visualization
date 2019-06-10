@@ -130,8 +130,8 @@ Surface makeGenCyl(const Curve &profile, const Curve &sweep )
 		Function creates sweep surfaces via a generalized cylinder.
 
 	Variables:
-		profile: curve profile to be swept.
-		steps: the number of iterations that constitute a sweep.
+		profile: trajectory curve to be swept over.
+		sweep: curve to be swept.
 
 	Output:
 		returns a surface.
@@ -145,9 +145,7 @@ Surface makeGenCyl(const Curve &profile, const Curve &sweep )
         exit(0);
     }
 
-	Curve curve = profile; // profile curve 
-	Curve sweep_curve = sweep; // sweep curve
-	Curve new_curve;
+	Curve new_curve; // curve variable for surface iteration 
 	CurvePoint point, new_point; // declaring points along curve
 
 	Matrix4f transform, transform_inv_T; // declaring transformation and its inverse transpose
@@ -155,9 +153,9 @@ Surface makeGenCyl(const Curve &profile, const Curve &sweep )
 	Vector3f new_vert, new_norm; // vectors (3f) for iteration
 	vector<Curve> curve_array; // vector of curves
 
-	// loop over sweep curve steps
-	for (unsigned s = 0; s < sweep.size(); s++) {
-		point = sweep_curve[s];
+	// loop over curve to be swept (parameter values)
+	for (unsigned t_i = 0; t_i < sweep.size(); t_i++) {
+		point = sweep[t_i];
 
 		// computing the transformation
 		transform = Matrix4f(Vector4f(point.N, 0),
@@ -172,16 +170,16 @@ Surface makeGenCyl(const Curve &profile, const Curve &sweep )
 		new_curve.clear(); // clearing memory
 
 		// loop over trajectory curve
-		for (unsigned j = 0; j < curve.size(); j++) {
+		for (unsigned j = 0; j < profile.size(); j++) {
 
-			vert = transform * Vector4f(curve[j].V, 1);
-			norm = transform_inv_T * Vector4f(curve[j].N, 1);
+			vert = transform * Vector4f(profile[j].V, 1);
+			norm = transform_inv_T * Vector4f(profile[j].N, 1);
 
 			new_vert = Vector3f(vert[0], vert[1], vert[2]);
 			new_norm = Vector3f(-norm[0], -norm[1], -norm[2]);
 
-			new_point = { new_vert, curve[j].T,new_norm, curve[j].B };
-			new_curve.push_back(new_point);
+			new_point = { new_vert, profile[j].T,new_norm, profile[j].B };
+			new_curve.push_back(new_point); // appending point to curve
 		}
 
 		curve_array.push_back(new_curve); // appending new curve
@@ -225,8 +223,9 @@ void drawSurface(const Surface &surface, bool shaded)
     {
         // This will use the current material color and light
         // positions.  Just set these in drawScene();
+
         // glEnable(GL_LIGHTING);
-		glDisable(GL_LIGHTING);
+		glDisable(GL_LIGHTING); // disabled to color surfaces (easy extra credit)
         glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
         // This tells openGL to *not* draw backwards-facing triangles.
@@ -250,7 +249,7 @@ void drawSurface(const Surface &surface, bool shaded)
 		glColor4f(surface.VN[surface.VF[i][0]][0], 
 			surface.VN[surface.VF[i][0]][1], 
 			surface.VN[surface.VF[i][0]][2], 
-			1.f); // coloring the mesh faces based on normal vector
+			1.f); // coloring the mesh faces based on normal vector (easy extra credit)
 
         glNormal(surface.VN[surface.VF[i][0]]);
         glVertex(surface.VV[surface.VF[i][0]]);

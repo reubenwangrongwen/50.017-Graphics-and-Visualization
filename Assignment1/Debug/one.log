@@ -2,6 +2,17 @@
 C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment1\curve.cpp(31,38): warning C4244:  'argument': conversion from 'double' to 'float', possible loss of data
 C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment1\curve.cpp(31,30): warning C4244:  'argument': conversion from 'double' to 'float', possible loss of data
 C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment1\curve.cpp(58,11): warning C4244:  'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment1\curve.cpp(193,19): warning C4305:  'argument': truncation from 'double' to 'float'
-C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment1\curve.cpp(211,17): warning C4244:  'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment1\curve.cpp(234,19): warning C4305:  'argument': truncation from 'double' to 'float'
+  main.cpp
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment1\curve.cpp(279,17): warning C4244:  'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment1\main.cpp(250,48): warning C4305:  'initializing': truncation from 'double' to 'GLfloat'
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment1\main.cpp(251,48): warning C4305:  'initializing': truncation from 'double' to 'GLfloat'
+  surf.cpp
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment1\main.cpp(446,12): warning C4244:  'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment1\surf.cpp(5,29): warning C4305:  'initializing': truncation from 'double' to 'float'
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment1\surf.cpp(50,28): warning C4244:  'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment1\surf.cpp(50,12): warning C4244:  'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment1\surf.cpp(48,42): warning C4244:  'argument': conversion from 'double' to 'float', possible loss of data
+  Generating Code...
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment1\surf.cpp(48,29): warning C4244:  'argument': conversion from 'double' to 'float', possible loss of data
   one.vcxproj -> C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment1\Debug\one.exe

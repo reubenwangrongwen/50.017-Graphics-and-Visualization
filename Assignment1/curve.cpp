@@ -4,7 +4,6 @@
 #include <windows.h>
 #endif
 #include <GL/gl.h>
-#include <random>
 
 using namespace std;
 
@@ -21,13 +20,14 @@ namespace
     
 }
 
+
 // monomial basis (1, t, t^2, t^3)
-Vector4f mono_basis(float t) {
+Vector4f mono_basis (float t) {
 	return Vector4f (1., t, pow(t, 2), pow(t, 3));
 }
 
 // derivative of monomial basis w.r.t parameter t
-Vector4f mono_basis_prime(float t) {
+Vector4f mono_basis_prime (float t) {
 	return Vector4f (0., 1., 2. * t, 3. * pow(t, 2));
 }
 
@@ -36,14 +36,14 @@ Vector3f new_coordinates (Vector4f basis, Vector4f x, Vector4f y, Vector4f z) {
 	return Vector3f (Vector4f::dot(basis, x), Vector4f::dot(basis, y), Vector4f::dot(basis, z));
 }
 
-
 // function that computes the curve given a specific spline basis
-Curve get_curve(const vector< Vector3f >& P, unsigned steps, Curve curve, Matrix4f spline_basis) {
+Curve get_curve (const vector< Vector3f >& P, unsigned steps, Curve curve, Matrix4f spline_basis) {
 
 	/*
 	Description:
 		Function computes all the appropriate Vector3fs for each CurvePoint ( V, T, N, B ) for a given basis.
 		(Assume all curves received have G1 continuity. TNB will not be be defined otherwise.)
+		** This iterative method of getting the Frenet-Serret vectors may lead to misalignmnet in closed curves **
 
 	Variables:
 		P: vector of points.
@@ -58,10 +58,10 @@ Curve get_curve(const vector< Vector3f >& P, unsigned steps, Curve curve, Matrix
 	float dt = 1. / steps; // differential parameter steps
 	Vector4f x, y, z, basis, basis_prime; // points
 	Vector3f V, B, N, T; // vectors
-	CurvePoint point, new_point; // declaring curve points 
+	CurvePoint point; // declaring curve points 
 
-	// loop over control points
-	for (unsigned i = 3; i < P.size(); i = i + 1) {
+	// loop over control point "segments"
+	for (unsigned i = 3; i < P.size(); i++) {
 
 		// computing vertex entries for current iteration
 		x = Vector4f(P[i - 3][0], P[i - 2][0], P[i - 1][0], P[i][0]);
@@ -70,12 +70,12 @@ Curve get_curve(const vector< Vector3f >& P, unsigned steps, Curve curve, Matrix
 
 		// looking at last point of current segment and first point of next segment
 		if (i == 3) {
-			B = Vector3f(0., 0., 1.);
-			T = new_coordinates(spline_basis * mono_basis(0), x, y, z);
+			B = Vector3f(0., 0., 1.); // initi binormal vector
+			T = new_coordinates(spline_basis * mono_basis_prime(0), x, y, z); // init tangent vector
 
-			// checking for T != B
-			if (Vector3f::cross(B, T) == Vector3f::ZERO) {
-				B = Vector3f(0., 1., 0.);
+			// checking for T != B and initilizing another binormal
+			if (1. - Vector3f::dot(B, T) < 1e-8f) { // 1e-8 is just arbitrary numerical tolerance value
+				B = Vector3f(0., 1., 0.); 
 			}
 		}
 
@@ -91,16 +91,13 @@ Curve get_curve(const vector< Vector3f >& P, unsigned steps, Curve curve, Matrix
 			B = Vector3f::cross(T, N);
 
 			// normalizing vectors
-			T.normalize();
-			N.normalize();
+			T.normalize(); 
+			N.normalize(); 
 			B.normalize();
 
-			// updating vectors for next iteration
-			new_point = { V, T, N, B };
-			if (t_i == 0 && i == 3) {
-				point = new_point;
-			}
-			curve.push_back(new_point); // appending vectors to struct
+			// computing Frenet-Serret vectors 
+			point = { V, T, N, B };
+			curve.push_back(point); // appending vectors to struct
 		}
 	}
 
@@ -149,6 +146,46 @@ Curve evalBezier( const vector< Vector3f >& P, unsigned steps ) {
 	return get_curve( P, steps, curve, Bezier_basis); 
 }
 
+// function that check the direction of rotation (easy extra credit)
+float get_parity (Curve curve, int num_pts) {
+
+	/*
+	Description:
+		Function checks the necessary direction for rotation based on the anticlockwise convention.
+		(Does so by rotating as per convention then checking if misalignment is still present.)
+
+	Variables:
+		curve: vector of curvepoint structs
+		num_pts: the number of curve points.
+
+	Output:
+		returns +1 if rotation required is anticlockwise, -1 otherwise.
+	*/
+
+	float theta; // angular error in radians
+	Vector4f quaternion; // vector of quaternion entries 
+	Matrix3f R; // 3D rotation matrix
+
+	// computing rotation matrix necessary for correction
+	theta = acos(Vector3f::dot(curve[0].N, curve[num_pts - 1].N)); // computing angular error
+	quaternion = Vector4f(cos(theta / 2),
+		sin(theta / 2) * (curve[num_pts - 1].T)[0],
+		sin(theta / 2) * (curve[num_pts - 1].T)[1],
+		sin(theta / 2) * (curve[num_pts - 1].T)[2]); // computing quaternion
+	quaternion.normalize(); // normalizing
+	R = Matrix3f::rotation(quaternion); // rotation matrix
+
+	// rotating n-th Frenet-Serret frame
+	curve[num_pts - 1].N = R * curve[num_pts - 1].N; // rotating last frame normal
+
+	// checking alignment 
+	if (1. - Vector3f::dot(curve[0].N, curve[num_pts - 1].N) > 1e-6f) {
+		return -1.;
+	}
+	else {
+		return 1.; 
+	}
+}
 
 // function that generates points of B-spline curve given input control points
 Curve evalBspline( const vector< Vector3f >& P, unsigned steps )
@@ -184,15 +221,46 @@ Curve evalBspline( const vector< Vector3f >& P, unsigned steps )
     cerr << "\t>>> Returning empty curve." << endl;
 
 	Curve curve;
+	Vector4f quaternion; // vector of quaternion entries 
+	float theta, dtheta; // for closed-curve angular interpolation error
+	int num_pts; // declaring variable to store number of curve points
 
 	// defining the B-spline basis as a matrix
 	Matrix4f Bspline_basis;
+	Matrix3f R_e; // rotation matrix to interpolate angular error 
 	Bspline_basis = Matrix4f(1./6., -0.5, 0.5, -1. / 6.,
 		2./3., 0, -1., 0.5,
 		1. / 6., 0.5, 0.5, -0.5,
 		0, 0, 0, 1. / 6.);
 
-	return get_curve(P, steps, curve, Bspline_basis);
+	curve = get_curve(P, steps, curve, Bspline_basis); // final unchecked curve
+	num_pts = curve.size(); // number of curve points
+
+	// checking if start and end normals of closed-curve align (easy extra credit)
+	if (1. - Vector3f::dot(curve[0].N, curve[num_pts-1].N) > 1e-6f) { // 1e-6 is an arbitrary numerical tolerance
+		theta = get_parity(curve, num_pts) * acos(Vector3f::dot(curve[0].N, curve[num_pts - 1].N)); // angular error in radians
+		dtheta = theta / num_pts; // rotation for each Frenet-Serret frame
+
+		// loop over all points on the curve
+		for (int i = 1; i < num_pts; i++) { // index starts from 1 to leave init frame invariant
+			
+			// computing rotation matrix necessary for correction
+			quaternion = Vector4f(cos(dtheta /2), 
+				sin(dtheta / 2) * (curve[i].T)[0],
+				sin(dtheta / 2) * (curve[i].T)[1],
+				sin(dtheta / 2) * (curve[i].T)[2]); // computing quaternion
+			quaternion.normalize(); // normalizing
+			R_e = Matrix3f::rotation(quaternion); // rotation matrix
+
+			// rotating i-th Frenet-Serret frame
+			curve[i].N = R_e * curve[i].N; // rotating frame normals
+			curve[i].B = Vector3f::cross(curve[i].T, curve[i].N); // re-computing frame binormals
+			
+			dtheta += theta / num_pts; // increment rotation angle for next frame
+		}
+	}
+	
+	return curve;
 }
 
 
