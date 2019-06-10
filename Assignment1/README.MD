@@ -5,11 +5,11 @@ This program requires Windows SDK version 10.0.16299.0 to run.
 
 ## TO DO
 
-Have yet to fix the normal vector issues for generating surfaces. 
+Extra credit assignments (optional).
 
 ## Extra Credit Components
 
-Currently, I have attempted a coloring of the mesh faces based on their normal vectors (easy extra credit).
+Currently, I have implemented a coloring of the mesh faces based on their normal vectors and ensured alignment of the Frenet-Serret frames for closed trajectory curves based on a "backpropagation" type correction (both easy extra credit).
 
 ## Running the Executable
 
