@@ -25,6 +25,7 @@ Refer to the individual assignment readme's.
 ## Built With
 
 * [Windows Visual Studio 2019](https://visualstudio.microsoft.com/) - The IDE.
+* [OpenGL](https://www.opengl.org/) - Open source C++ graphics library.
 
 ## Authors
 
