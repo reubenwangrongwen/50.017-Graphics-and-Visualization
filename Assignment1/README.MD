@@ -1,6 +1,6 @@
-# Assignment 2
+# Assignment 1
 
-Here is the completed code for assignment 0 writen in C++ on Visual Studio 2019. 
+Here is the completed code for assignment 1 writen in C++ on Visual Studio 2019. 
 This program requires Windows SDK version 10.0.16299.0 to run. 
 
 ## TO DO
