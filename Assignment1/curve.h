@@ -41,6 +41,8 @@ Curve evalBspline( const std::vector< Vector3f >& P, unsigned steps );
 // Create a circle on the xy-plane of radius and steps
 Curve evalCircle( float radius, unsigned steps);
 
+// Centripetal Catmull-Rom splines
+Curve evalCatmullRomChain( const std::vector< Vector3f >& P, unsigned steps);
 
 // Draw the curve and (optionally) the associated coordinate frames
 // If framesize == 0, then no frames are drawn.  Otherwise, drawn.
