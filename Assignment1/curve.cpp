@@ -344,7 +344,7 @@ Curve evalCatmullRomChain(const vector< Vector3f >& P, unsigned steps) {
 	Curve C, c; // curve variables
 
 	// loop over control points
-	for (int i = 0; i < num_pts - 3; i++) {
+	for (int i = 0; i < num_pts - 3; i += 4) {
 		c = evalCatmullRom(P[i], P[i + 1], P[i + 2], P[i + 3], steps);
 
 		// loop over the 4 control points in each Catmull-Rom spline
@@ -357,6 +357,8 @@ Curve evalCatmullRomChain(const vector< Vector3f >& P, unsigned steps) {
 		}
 		
 	}
+
+	cout << C.size() << endl;
 
 	return C;
 }

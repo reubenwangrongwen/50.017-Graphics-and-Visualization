@@ -42,6 +42,8 @@ Curve evalBspline( const std::vector< Vector3f >& P, unsigned steps );
 Curve evalCircle( float radius, unsigned steps);
 
 // Centripetal Catmull-Rom splines
+float t_j(float t_i, Vector3f P_i, Vector3f P_j);
+Curve evalCatmullRom(Vector3f P_0, Vector3f P_1, Vector3f P_2, Vector3f P_3, unsigned steps);
 Curve evalCatmullRomChain( const std::vector< Vector3f >& P, unsigned steps);
 
 // Draw the curve and (optionally) the associated coordinate frames

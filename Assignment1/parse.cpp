@@ -211,12 +211,12 @@ bool parseFile(istream &in,
         }
 		else if (objType == "catmullrom")
 		{
-		cerr << " reading catmullrom " << "[" << objName << "]" << endl;
-		in >> steps;
-		curves.push_back(evalCatmullRomChain(cpsToAdd = readCps(in, 2), steps));
-		curveNames.push_back(objName);
-		dims.push_back(2); 
-		if (named) curveIndex[objName] = dims.size() - 1;
+			cerr << " reading catmullrom " << "[" << objName << "]" << endl;
+			in >> steps;
+			curves.push_back( evalCatmullRomChain(cpsToAdd = readCps(in, 2), steps) );
+			curveNames.push_back(objName);
+			dims.push_back(2);
+			if (named) curveIndex[objName] = dims.size() - 1;
 		}
         else
         {
