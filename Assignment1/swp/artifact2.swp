@@ -12,7 +12,7 @@ bsp2 profile 8 10
 [-0.750000 3.000000]
 
 
-circ sweep 30  0.75
+circ sweep 30  0.
 
 
 gcyl artifact2 profile sweep
