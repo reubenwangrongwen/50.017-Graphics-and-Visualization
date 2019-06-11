@@ -9,7 +9,7 @@ Extra credit assignments (optional).
 
 ## Extra Credit Components
 
-Currently, I have implemented a coloring of the mesh faces based on their normal vectors and ensured alignment of the Frenet-Serret frames for closed trajectory curves based on a "backpropagation" type correction (both easy extra credit).
+Currently, I have implemented a coloring of the mesh faces based on their normal vectors and ensured alignment of the Frenet-Serret frames for closed trajectory curves based on a "backpropagation" type correction. I have also attempted implementing a Catmull-Rom spline method but have yet been able to get the parse.cpp file to parse the test .swp file I have made to visualize a Catmull-Rom spline. All these are under the easy extra credit assignments.
 
 ## Running the Executable
 
