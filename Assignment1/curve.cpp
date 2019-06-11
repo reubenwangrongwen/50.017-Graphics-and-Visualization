@@ -264,6 +264,104 @@ Curve evalBspline( const vector< Vector3f >& P, unsigned steps )
 }
 
 
+// function that computes the knots t_j
+float t_j(float t_i, Vector3f P_i, Vector3f P_j) {
+	/*
+	Description:
+		Function computes the j-th knot for a centripetal Catmull-Rom spline.
+
+	Variables:
+		t_i: the previous knot (t_i = t_{j-1})
+		P_i: the root point 
+		P_j: the subsequent point (P_j = P_{i+1}).
+
+	Output:
+		returns a float of the knot value.
+	*/
+	
+	float alpha = 0.5; // knot paramterization
+	return (pow(pow(P_j[0] - P_i[0], 2) + pow(P_j[1] - P_i[1], 2), 0.5 * alpha))  + t_i;
+}
+
+
+Curve evalCatmullRom(Vector3f P_0, Vector3f P_1, Vector3f P_2, Vector3f P_3, unsigned steps) {
+	/*
+	Description:
+		Function evaluates a centripetal Catmull-Rom spline given 4 control points.
+
+	Variables:
+		P_0, P_1, P_2, P_3: the control points.
+		steps: the number of discretized parameter values.
+
+	Output:
+		returns a curve (vector <CurvePoint>) of the Catmull-Rom spline.
+	*/
+
+	float t, t_0, t_1, t_2, t_3; // knot variables
+	Vector3f A_1, A_2, A_3, B_1, B_2, C; // Catmull–Rom spline vectors
+	Curve C_vect; // declaring curve variable
+
+	// computing knots (t0 to t4)
+	t_0 = 0;
+	t_1 = t_j(t_0, P_0, P_1);
+	t_2 = t_j(t_1, P_1, P_2);
+	t_3 = t_j(t_2, P_2, P_3);
+
+	// loop over interpolated parameter values
+	for (float i = 0; i < steps; i++) {
+		t = i * (t_1 - t_2) / steps;
+
+		// computing vertices of the curve
+		A_1 = (t_1 - t) / (t_1 - t_0) * P_0 + (t - t_0) / (t_1 - t_0) * P_1;
+		A_2 = (t_2 - t) / (t_2 - t_1) * P_1 + (t - t_1) / (t_2 - t_1) * P_2;
+		A_3 = (t_3 - t) / (t_3 - t_2) * P_2 + (t - t_2) / (t_3 - t_2) * P_3;
+
+		B_1 = (t_2 - t) / (t_2 - t_0) * A_1 + (t - t_0) / (t_2 - t_0) * A_2;
+		B_2 = (t_3 - t) / (t_3 - t_1) * A_2 + (t - t_1) / (t_3 - t_1) * A_3;
+
+		C_vect[i].V = (t_2 - t) / (t_2 - t_1) * B_1 + (t - t_1) / (t_2 - t_1) * B_2;
+	}
+	
+	return C_vect; 
+}
+
+
+Curve evalCatmullRomChain(const vector< Vector3f >& P, unsigned steps) {
+	/*
+	Description:
+		Function evaluates a chain of centripetal Catmull-Rom splines.
+
+	Variables:
+		P: the control points.
+		steps: the number of discretized parameter values for each 4 point segment.
+
+	Output:
+		returns the ombined curve (vector <CurvePoint>) of the "stitched" Catmull-Rom spline.
+	*/
+
+	int num_pts = P.size();
+	CurvePoint point; // curve point variable
+	Curve C, c; // curve variables
+
+	// loop over control points
+	for (int i = 0; i < num_pts - 3; i++) {
+		c = evalCatmullRom(P[i], P[i + 1], P[i + 2], P[i + 3], steps);
+
+		// loop over the 4 control points in each Catmull-Rom spline
+		for (int j = 0; j < c.size(); j++) {
+			point = { c[j].V,
+			Vector3f::ZERO,
+			Vector3f::ZERO,
+			Vector3f::ZERO };
+			C.push_back(point);
+		}
+		
+	}
+
+	return C;
+}
+
+
 Curve evalCircle( float radius, unsigned steps )
 {
     // This is a sample function on how to properly initialize a Curve
