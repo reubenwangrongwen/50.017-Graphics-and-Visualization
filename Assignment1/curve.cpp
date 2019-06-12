@@ -297,9 +297,10 @@ Curve evalCatmullRom(Vector3f P_0, Vector3f P_1, Vector3f P_2, Vector3f P_3, uns
 		returns a curve (vector <CurvePoint>) of the Catmull-Rom spline.
 	*/
 
-	float t, t_0, t_1, t_2, t_3; // knot variables
+	float t_0, t_1, t_2, t_3, t; // knot variables
 	Vector3f A_1, A_2, A_3, B_1, B_2, C; // Catmull–Rom spline vectors
-	Curve C_vect; // declaring curve variable
+	CurvePoint point;
+	Curve curve; // declaring curve variable
 
 	// computing knots (t0 to t4)
 	t_0 = 0;
@@ -308,9 +309,8 @@ Curve evalCatmullRom(Vector3f P_0, Vector3f P_1, Vector3f P_2, Vector3f P_3, uns
 	t_3 = t_j(t_2, P_2, P_3);
 
 	// loop over interpolated parameter values
+	t = t_1;
 	for (float i = 0; i < steps; i++) {
-		t = i * (t_1 - t_2) / steps;
-
 		// computing vertices of the curve
 		A_1 = (t_1 - t) / (t_1 - t_0) * P_0 + (t - t_0) / (t_1 - t_0) * P_1;
 		A_2 = (t_2 - t) / (t_2 - t_1) * P_1 + (t - t_1) / (t_2 - t_1) * P_2;
@@ -319,10 +319,15 @@ Curve evalCatmullRom(Vector3f P_0, Vector3f P_1, Vector3f P_2, Vector3f P_3, uns
 		B_1 = (t_2 - t) / (t_2 - t_0) * A_1 + (t - t_0) / (t_2 - t_0) * A_2;
 		B_2 = (t_3 - t) / (t_3 - t_1) * A_2 + (t - t_1) / (t_3 - t_1) * A_3;
 
-		C_vect[i].V = (t_2 - t) / (t_2 - t_1) * B_1 + (t - t_1) / (t_2 - t_1) * B_2;
+		C = (t_2 - t) / (t_2 - t_1) * B_1 + (t - t_1) / (t_2 - t_1) * B_2;
+
+		point = { C, Vector3f(0., 0., 0.), Vector3f(0., 0., 0.), Vector3f(0., 0., 0.) };
+		curve.push_back(point);
+
+		t += (t_2 - t_1) / steps; // updating parameter for next iteration
 	}
 	
-	return C_vect; 
+	return curve;
 }
 
 
@@ -341,24 +346,53 @@ Curve evalCatmullRomChain(const vector< Vector3f >& P, unsigned steps) {
 
 	int num_pts = P.size();
 	CurvePoint point; // curve point variable
-	Curve C, c; // curve variables
+	Curve c; // indiv segments
+	Curve C; // combined curve variables
 
 	// loop over control points
-	for (int i = 0; i < num_pts - 3; i += 4) {
+	for (int i = 0; i < num_pts - 3; i++) {
 		c = evalCatmullRom(P[i], P[i + 1], P[i + 2], P[i + 3], steps);
 
-		// loop over the 4 control points in each Catmull-Rom spline
-		for (int j = 0; j < c.size(); j++) {
-			point = { c[j].V,
-			Vector3f::ZERO,
-			Vector3f::ZERO,
-			Vector3f::ZERO };
+		// loop over the individual Catmull-Rom splines (parameter values)
+		for (int t = 0; t < c.size(); t++) {
+			point = { c[t].V,
+			Vector3f(0., 0., 0.),
+			Vector3f(0., 0., 0.),
+			Vector3f(0., 0., 0.) };
 			C.push_back(point);
 		}
 		
 	}
 
-	cout << C.size() << endl;
+	// computing Frenet-Serret frame vectors
+	float dt = 1. / C.size();
+	Vector3f B, T, N;
+	B = Vector3f(0., 0., 1.); // initi binormal vector
+	T = (C[1].V - C[0].V) / dt; T.normalize(); // init tangent vector
+
+	// checking for T != B and initilizing another binormal
+	if (1. - Vector3f::dot(B, T) < 1e-8f) { // 1e-8 is just arbitrary numerical tolerance value
+		B = Vector3f(0., 1., 0.);
+	}
+	
+
+	// loop over discretized parameter values
+	for (unsigned t_i = 1; t_i < C.size(); t_i++) {
+		// computing Frenet-Serret vectors
+		T = (C[t_i].V - C[t_i - 1].V) / dt; 
+		N = Vector3f::cross(B, T);
+		B = Vector3f::cross(T, N);
+
+		// normalizing vectors
+		T.normalize();
+		N.normalize();
+		B.normalize();
+
+		// assigning Frenet-Serret vectors 
+		C[t_i].T = T;
+		C[t_i].N = -N;
+		C[t_i].B = -B;
+	}
 
 	return C;
 }

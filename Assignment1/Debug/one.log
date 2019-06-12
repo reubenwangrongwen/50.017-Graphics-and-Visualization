@@ -1,2 +1,10 @@
-﻿  parse.cpp
+﻿  curve.cpp
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment1\curve.cpp(31,38): warning C4244:  'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment1\curve.cpp(31,30): warning C4244:  'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment1\curve.cpp(58,11): warning C4244:  'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment1\curve.cpp(234,19): warning C4305:  'argument': truncation from 'double' to 'float'
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment1\curve.cpp(283,80): warning C4244:  'return': conversion from 'double' to 'float', possible loss of data
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment1\curve.cpp(357,21): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment1\curve.cpp(368,11): warning C4244:  'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment1\curve.cpp(413,17): warning C4244:  'initializing': conversion from 'double' to 'float', possible loss of data
   one.vcxproj -> C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment1\Debug\one.exe
