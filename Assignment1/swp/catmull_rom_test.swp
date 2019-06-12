@@ -19,3 +19,7 @@ catmullrom . 10 20
 [0.000000 3.000000]
 [-0.250000 2.750000]
 [-0.600000 2.500000]
+
+circ sweep 30  2.5
+
+gcyl catmull_rom_test profile sweep
