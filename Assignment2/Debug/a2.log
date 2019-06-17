@@ -1,0 +1,4 @@
+﻿  SkeletalModel.cpp
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment2\SkeletalModel.cpp(7,23): warning C4305:  'initializing': truncation from 'double' to 'float'
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment2\SkeletalModel.cpp(65,33): warning C4018:  '<': signed/unsigned mismatch
+  a2.vcxproj -> C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment2\Debug\a2.exe
