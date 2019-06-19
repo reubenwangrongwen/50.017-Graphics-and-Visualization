@@ -45,10 +45,12 @@ void SkeletalModel::loadSkeleton( const char* filename )
 {
 	// declaring variables
 	fstream fskel; // file stream variable
-	fskel.open(filename, fstream::in);
-	string data; // variable for reading line in .skel file 
+	string data; // variable for reading line in input file 
 	Vector3f v; // vector of transformation coordinates
 	int idx; // joint index in the hierarchy
+
+	// opening input file
+	fskel.open(filename, fstream::in);
 
 	if (fskel.is_open() == true) {
 		while (getline(fskel, data)) {
@@ -65,10 +67,10 @@ void SkeletalModel::loadSkeleton( const char* filename )
 			else if ((idx != -1) && (idx < m_joints.size())) {
 					Joint* parentJoint = m_joints[idx]; // parent pointer to a pointer entry of m_joints 
 					parentJoint->children.push_back(joint); // assigning parent pointer to child
-					m_joints.push_back(joint);	
+					m_joints.push_back(joint); // appending current joint to joints
 			}
 			else {
-				cerr << "Skeleton file has wrong parent!" << endl;
+				cerr << "Error: skeleton file has wrong parent!" << endl;
 			}
 		}
 		fskel.close();
@@ -91,7 +93,7 @@ void get_joint (MatrixStack& stack, Joint* joint) {
 	*/
 
 	stack.push(joint->transform); // pushing transformation matrix to stack
-	glLoadMatrixf(stack.top());  // loading the matrix to the stack
+	glLoadMatrixf(stack.top());  // loading the matrix to the stack top
 	glutSolidSphere(0.025f, 12, 12); // creating the joint sphere 
 
 	// recursion to load matrices to stack
@@ -124,12 +126,12 @@ void get_bone (MatrixStack& stack, Joint* joint) {
 	Vector4f pt; // declaring points
 	float theta; // declaring rotation parameter
 
-	stack.push(joint->transform);
+	stack.push(joint->transform); // pushing joint transformation to stack
 	
 	// recursion loop
 	std::vector< Joint* >::iterator iter;
 	for (iter = joint->children.begin(); iter != joint->children.end(); iter++) {
-		M = stack.top();
+		M = stack.top(); // take matrix from top of stack
 		vect = Vector3f(0.0, 0.0, 0.0); // reinit vector
 		pt = Vector4f(0.0, 0.0, 0.0, 1.0); // reinit point
 
@@ -137,7 +139,7 @@ void get_bone (MatrixStack& stack, Joint* joint) {
 		pt = (*iter)->transform * pt;
 		vect = Vector3f(pt[0], pt[1], pt[2]); // getting vector info from point
 		x_hat = Vector3f(1.0, 0.0, 0.0); // x-axis unit vector 
-		r_axis = Vector3f::cross(x_hat, vect); r_axis.normalize(); // rotation axis
+		r_axis = Vector3f::cross(x_hat, vect); r_axis.normalize(); // normalized rotation axis
 
 		// computing transformation matrices
 		theta = acos( Vector3f::dot(vect, x_hat) / vect.abs() ); // rotation parameter
@@ -164,7 +166,7 @@ void SkeletalModel::setJointTransform(int jointIndex, float rX, float rY, float 
 
 	Arguments:
 		- jointIndex: integer that labels the joint index.
-		- rX, rY, rZ: Euler angles.
+		- rX, rY, rZ: Euler angles (inputs are in degrees).
 
 	Return:
 		void
@@ -172,17 +174,16 @@ void SkeletalModel::setJointTransform(int jointIndex, float rX, float rY, float 
 
 	Matrix4f M_x, M_y, M_z; // declaring rotation matrices
 
-	Joint* joint = m_joints[jointIndex]; // defining pointer variable
-
 	// computing rotation matrices from Euler angles
-	M_x = Matrix4f::rotateX(rX * pi / 180);
-	M_y = Matrix4f::rotateY(rY * pi / 180);
-	M_z = Matrix4f::rotateZ(rZ * pi / 180);
+	M_x = Matrix4f::rotateX(rX * pi / 180.);
+	M_y = Matrix4f::rotateY(rY * pi / 180.);
+	M_z = Matrix4f::rotateZ(rZ * pi / 180.);
 
+	Joint* joint = m_joints[jointIndex]; // defining pointer variable
 	joint->transform = joint->transform * M_z * M_y * M_x; // applying rotations
 }
 
-void world_to_joint(MatrixStack m_stack, Joint* joint) {
+void world_to_joint (MatrixStack m_stack, Joint* joint) {
 	/*
 	Description:
 		Sets the joint rotation transformation matrix w.r.t the joint coordinates from the world coordinates
@@ -274,7 +275,7 @@ void SkeletalModel::updateMesh()
 			update = Vector4f(current_v, 1.);
 			update = (joint->bindWorldToJointTransform) * update;
 			update = (joint->currentJointToWorldTransform) * update;
-			new_v = new_v + weight[w] * update; 
+			new_v = new_v + (weight[w] * update); 
 		}
 
 		// update mesh vertex for next iteration
