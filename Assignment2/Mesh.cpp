@@ -4,17 +4,29 @@ using namespace std;
 
 void Mesh::load( const char* filename )
 {
-	// 2.1.1. load() should populate bindVertices, currentVertices, and faces
+	/*
+	Description:
+		Function that loads the skin mesh file.
+
+	Arguments:
+		- filename: name of the mesh data file to be read.
+
+	Return:
+		void
+	*/
 
 	// declaring variables
 	fstream fskel; // file stream object
 	string str, s; // for file data
+	Tuple3u vf; // tuple variable
 	Vector3f v; // vector to store file data
 
 	fskel.open(filename, fstream::in); // opening file
 
 	// checking if file is open
 	if (fskel.is_open() == true) {
+
+		// loop over file data
 		while (getline(fskel, str)) {
 			stringstream stream(str); // stringstream object reading the file string
 			stream >> s; // storing file data to string variable
@@ -25,11 +37,9 @@ void Mesh::load( const char* filename )
 				bindVertices.push_back(v);
 			}
 			else if (s == "f") {
-				Tuple3u vf;
 				stream >> vf[0] >> vf[1] >> vf[2];
 				faces.push_back(vf);
 			}
-			else {}
 		}
 
 		fskel.close(); // closing read file
@@ -44,14 +54,20 @@ void Mesh::load( const char* filename )
 
 void Mesh::draw()
 {
-	// Since these meshes don't have normals
-	// be sure to generate a normal per triangle.
-	// Notice that since we have per-triangle normals
-	// rather than the analytical normals from
-	// assignment 1, the appearance is "faceted".
+	/*
+	Description:
+		Function that draws the skin over the skeleton.
+		(We have per-triangle normals rather than the analytical normals so the appearance is "faceted".)
+
+	Arguments:
+		- 
+
+	Return:
+		void
+	*/
 
 	Vector3f vertex_1, vertex_2, vertex_3;
-	Vector3f normal_1, normal_2, normal_3;
+	Vector3f normal;
 
 	for (unsigned i = 0; i < faces.size(); i++) {
 		// mesh vertices
@@ -60,44 +76,58 @@ void Mesh::draw()
 		vertex_3 = currentVertices[faces[i][2] - 1];
 		
 		// computing normals
-		normal_1 = Vector3f::cross(vertex_2 - vertex_1, vertex_3 - vertex_1);
-		normal_2 = Vector3f::cross(vertex_3 - vertex_2, vertex_1 - vertex_2);
-		normal_3 = Vector3f::cross(vertex_1 - vertex_3, vertex_2 - vertex_3);
-		normal_1.normalize(); normal_2.normalize(); normal_3.normalize();// normalizing 
+		normal = Vector3f::cross(vertex_2 - vertex_1, vertex_3 - vertex_1);
+		normal.normalize(); 
 
 		glBegin(GL_TRIANGLES);
+
+		// storing normal
+		glNormal3f(normal[0], normal[1], normal[2]);
+
 		// storing vertices
 		glVertex3f(vertex_1[0], vertex_1[1], vertex_1[2]); 
 		glVertex3f(vertex_2[0], vertex_2[1], vertex_2[2]); 
 		glVertex3f(vertex_3[0], vertex_3[1], vertex_3[2]);
-
-		// storing normal
-		glNormal3f(normal_1[0], normal_1[1], normal_1[2]);
-		glNormal3f(normal_2[0], normal_2[1], normal_2[2]);
-		glNormal3f(normal_3[0], normal_3[1], normal_3[2]);
 		glEnd();
 	}
 }
 
 void Mesh::loadAttachments( const char* filename, int numJoints )
 {
-	// 2.2. Implement this method to load the per-vertex attachment weights
-	// this method should update m_mesh.attachments
+	/*
+	Description:
+		Function that loads the per-vertex attachment weights.
+		(This method updates m_mesh.attachments.)
 
-	ifstream file(filename); // opening file
+	Arguments:
+		- filename: name of the mesh data file to be read.
+		- numJoints: number of joints.
 
-	if (file.is_open() == true) {
-		string str; // declaring string variable
+	Return:
+		void
+	*/
 
-		while (getline(file, str)) {
-			istringstream iss(str); // stringstream object
-			vector<float> weights; // vector of weights 
-			float weight; // weight variable
+	fstream fskel; // declaring file stream variable
+	string str; // declaring string variable for reading data
 
-			for (string s; iss >> weight; )
-				weights.push_back(weight);
-			attachments.push_back(weights);
+	fskel.open(filename, fstream::in); // opening file
+	if (fskel.is_open() == true) {
+		
+		while (getline(fskel, str)) {
+			stringstream stream(str); // stringstream object
+			vector<float> weights; // vector of weights
+			
+			weights.push_back(0); // appending initial trivial weight
+
+			// loop over joints
+			for (int i = 0; i < numJoints - 1; i++) {
+				float weight; // declaring joint weight variable
+				stream >> weight; // storing file data to float variable
+				weights.push_back(weight); // appending weight to weights vector
+			}
+			attachments.push_back(weights); // appending weights 
 		}
+		fskel.close(); // closing file
 	}
 
 }
