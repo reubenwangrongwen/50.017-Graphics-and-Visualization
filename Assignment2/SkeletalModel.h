@@ -75,6 +75,7 @@ private:
 
 	// pointer to the root joint
 	Joint* m_rootJoint;
+
 	// the list of joints.
 	std::vector< Joint* > m_joints;
 

@@ -102,7 +102,7 @@ void get_joint (MatrixStack& stack, Joint* joint) {
 		get_joint(stack, *iter);
 	}
 
-	stack.pop();
+	stack.pop(); // pop the current joint if no child
 }
 
 void SkeletalModel::drawJoints( ) { get_joint(m_matrixStack, m_rootJoint); }
@@ -174,10 +174,10 @@ void SkeletalModel::setJointTransform(int jointIndex, float rX, float rY, float 
 
 	Matrix4f M_x, M_y, M_z; // declaring rotation matrices
 
-	// computing rotation matrices from Euler angles
-	M_x = Matrix4f::rotateX(rX * pi / 180.);
-	M_y = Matrix4f::rotateY(rY * pi / 180.);
-	M_z = Matrix4f::rotateZ(rZ * pi / 180.);
+	// computing rotation matrices from Euler angles (* pi / 180.)
+	M_x = Matrix4f::rotateX(rX);
+	M_y = Matrix4f::rotateY(rY);
+	M_z = Matrix4f::rotateZ(rZ); 
 
 	Joint* joint = m_joints[jointIndex]; // defining pointer variable
 	joint->transform = joint->transform * M_z * M_y * M_x; // applying rotations
@@ -228,13 +228,13 @@ void joint_to_world (MatrixStack m_stack, Joint* joint) {
 
 	m_stack.push(joint->transform);
 	glLoadMatrixf(m_stack.top());  // loading the matrix to the stack
-
+	
 	// recursion to load matrices to stack
 	std::vector< Joint* >::iterator iter; // iterator for recursion
 	for (iter = joint->children.begin(); iter != joint->children.end(); iter++) {
 		joint_to_world(m_stack, *iter);
 	}
-
+	
 	m_stack.pop();
 }
 
