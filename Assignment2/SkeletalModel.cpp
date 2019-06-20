@@ -75,6 +75,9 @@ void SkeletalModel::loadSkeleton( const char* filename )
 		}
 		fskel.close();
 	}
+	else {
+		cout << "Error: File could not be opened!" << endl;
+	}
 
 }
 
@@ -137,7 +140,7 @@ void get_bone (MatrixStack& stack, Joint* joint) {
 
 		// computing vectors for transformation
 		pt = (*iter)->transform * pt;
-		vect = Vector3f(pt[0], pt[1], pt[2]); // getting vector info from point
+		vect = pt.xyz(); // getting vector info from point
 		x_hat = Vector3f(1.0, 0.0, 0.0); // x-axis unit vector 
 		r_axis = Vector3f::cross(x_hat, vect); r_axis.normalize(); // normalized rotation axis
 
@@ -147,15 +150,16 @@ void get_bone (MatrixStack& stack, Joint* joint) {
 		T = Matrix4f::translation(0.5 * vect); // translation matrix
 		S = Matrix4f::scaling(50 * vect.abs(), 1, 1); // scale matrix
 
-		M = M * T * R * S; // M = TRS
+		M = M * T * R * S; // M = MTRS
 
 		glLoadMatrixf(M); // loading transformed matrix to the stack
-		glutSolidCube(.020); // drawing bone block
+		glutSolidCube(0.02f); // drawing bone block
 		get_bone(stack, *iter); // recalling function for recursion
 	}
 
 	stack.pop();
 }
+
 
 void SkeletalModel::drawSkeleton() { get_bone(m_matrixStack, m_rootJoint);  }
 
@@ -271,8 +275,8 @@ void SkeletalModel::updateMesh()
 		for (unsigned w = 0; w < weight.size(); w++) {
 			Joint* joint = m_joints[w]; // init joint pointer
 
-			// computing new vector
-			update = Vector4f(current_v, 1.);
+			// computing new vector for current iteration
+			update = Vector4f(current_v, 1.); 
 			update = (joint->bindWorldToJointTransform) * update;
 			update = (joint->currentJointToWorldTransform) * update;
 			new_v = new_v + (weight[w] * update); 

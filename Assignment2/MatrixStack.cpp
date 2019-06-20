@@ -10,14 +10,14 @@ MatrixStack::MatrixStack()
 void MatrixStack::clear()
 {
 	// Revert to just containing the identity matrix.
-	m_matrices.clear();
-	m_matrices.push_back(Matrix4f::identity());
+	m_matrices.clear(); // clearing the stack
+	m_matrices.push_back(Matrix4f::identity()); // adding the identity matrix
 }
 
 Matrix4f MatrixStack::top()
 {
 	// Return the top of the stack
-	return m_matrices[0];
+	return m_matrices[0]; 
 }
 
 void MatrixStack::push( const Matrix4f& m )
