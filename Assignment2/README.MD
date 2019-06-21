@@ -10,7 +10,7 @@ Extra credit assignments (optional).
 
 ## Extra Credit Components
 
-NIL
+Have yet to attempt extra credit components.
 
 ## Running the Executable
 
