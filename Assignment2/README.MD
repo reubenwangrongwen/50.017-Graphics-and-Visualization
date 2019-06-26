@@ -26,7 +26,7 @@ where [path] is the file path to the solution folder and [obj filename] is the .
 
 ![](https://github.com/ReubsWRW/50.017-Graphics-and-Visualization/blob/master/Assignment2/Artifact/floss.gif)
 
-![](https://github.com/ReubsWRW/50.017-Graphics-and-Visualization/blob/master/Assignment2/Artifact/pose_pose.jpg)
+![](https://github.com/ReubsWRW/50.017-Graphics-and-Visualization/blob/master/Assignment2/Artifact/pose_pose.jpg =250x250)
 
 ## References
 
