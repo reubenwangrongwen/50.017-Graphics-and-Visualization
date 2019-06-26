@@ -2,6 +2,7 @@
 
 Here is the completed code for assignment 2 writen in C++ on Visual Studio 2019. 
 As of now, none of the extra credit assignments have been completed or attempted.  
+I have added normal-based coloring to the model skin for aesthetic appeal but is not an official extra credit component.
 This program requires Windows SDK version 10.0.16299.0 to run. 
 
 ## TO DO
@@ -20,6 +21,12 @@ a2.exe data/[obj filename]
 ```
 
 where [path] is the file path to the solution folder and [obj filename] is the .obj filename you would like to load into the program.
+
+## Artifacts
+
+![](https://github.com/ReubsWRW/50.017-Graphics-and-Visualization/blob/master/Assignment2/Artifact/floss.gif)
+
+![](https://github.com/ReubsWRW/50.017-Graphics-and-Visualization/blob/master/Assignment2/Artifact/pose_pose.jpg)
 
 ## References
 
