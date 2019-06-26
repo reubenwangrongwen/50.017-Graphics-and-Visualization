@@ -30,8 +30,7 @@ struct Mesh
 	std::vector< Vector3f > currentVertices;
 
 	// list of vertex to joint attachments
-	// each element of attachments is a vector< float > containing
-	// one attachment weight per joint
+	// each element of attachments is a vector< float > containing one attachment weight per joint
 	std::vector< std::vector< float > > attachments;
 
 	// 2.1.1. load() should populate bindVertices, currentVertices, and faces

@@ -29,6 +29,8 @@
 #include "Mesh.h"
 #include "MatrixStack.h"
 
+
+
 class SkeletalModel
 {
 public:
@@ -83,5 +85,12 @@ private:
 
 	MatrixStack m_matrixStack;
 };
+
+
+// functions required for model construction
+void get_joint(Joint* joint, MatrixStack& stack);
+void get_bone(Joint* joint, MatrixStack& stack);
+void world_to_joint(Joint* joint, MatrixStack stack);
+void joint_to_world(Joint* joint, MatrixStack stack);
 
 #endif

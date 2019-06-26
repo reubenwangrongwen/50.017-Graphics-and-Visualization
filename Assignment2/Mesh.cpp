@@ -69,27 +69,35 @@ void Mesh::draw()
 	Vector3f vertex_1, vertex_2, vertex_3;
 	Vector3f normal;
 
+	glPushAttrib(GL_ALL_ATTRIB_BITS);
+	glDisable(GL_LIGHTING); // disabled to color surfaces (for fun)
+
+	// loop over joints
 	for (unsigned i = 0; i < faces.size(); i++) {
 		// mesh vertices
 		vertex_1 = currentVertices[faces[i][0] - 1];
 		vertex_2 = currentVertices[faces[i][1] - 1];
 		vertex_3 = currentVertices[faces[i][2] - 1];
-		
+
 		// computing normals
 		normal = Vector3f::cross(vertex_2 - vertex_1, vertex_3 - vertex_1);
-		normal.normalize(); 
+		normal.normalize();
 
 		glBegin(GL_TRIANGLES);
+
+		// coloring skins
+		glColor4f(normal[0], normal[1], normal[2], 1.f); 
 
 		// storing normal
 		glNormal3f(normal[0], normal[1], normal[2]);
 
 		// storing vertices
-		glVertex3f(vertex_1[0], vertex_1[1], vertex_1[2]); 
-		glVertex3f(vertex_2[0], vertex_2[1], vertex_2[2]); 
+		glVertex3f(vertex_1[0], vertex_1[1], vertex_1[2]);
+		glVertex3f(vertex_2[0], vertex_2[1], vertex_2[2]);
 		glVertex3f(vertex_3[0], vertex_3[1], vertex_3[2]);
 		glEnd();
 	}
+	
 }
 
 void Mesh::loadAttachments( const char* filename, int numJoints )
@@ -129,5 +137,4 @@ void Mesh::loadAttachments( const char* filename, int numJoints )
 		}
 		fskel.close(); // closing file
 	}
-
 }
