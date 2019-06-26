@@ -24,9 +24,9 @@ where [path] is the file path to the solution folder and [obj filename] is the .
 
 ## Artifacts
 
-![](https://github.com/ReubsWRW/50.017-Graphics-and-Visualization/blob/master/Assignment2/Artifact/floss.gif)
+![Floss Gif](https://github.com/ReubsWRW/50.017-Graphics-and-Visualization/blob/master/Assignment2/Artifact/floss.gif)
 
-![](https://github.com/ReubsWRW/50.017-Graphics-and-Visualization/blob/master/Assignment2/Artifact/pose_pose.jpg | width=48)
+![Inspired Pose](https://github.com/ReubsWRW/50.017-Graphics-and-Visualization/blob/master/Assignment2/Artifact/pose_pose.jpg)
 
 ## References
 
