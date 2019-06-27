@@ -15,6 +15,7 @@ void SkeletalModel::load(const char* skeletonFile, const char* meshFile, const c
 	updateCurrentJointToWorldTransforms();
 }
 
+
 void SkeletalModel::draw(Matrix4f cameraMatrix, bool skeletonVisible)
 {
 	// draw() gets called whenever a redraw is required
@@ -123,7 +124,6 @@ void get_joint (Joint* joint, MatrixStack& stack) {
 void SkeletalModel::drawJoints() { get_joint (m_rootJoint, m_matrixStack); }
 
 
-
 void get_bone (Joint* joint, MatrixStack& stack) {
 	/*
 	Description:
@@ -152,19 +152,19 @@ void get_bone (Joint* joint, MatrixStack& stack) {
 		for (int i = 0; i < joint->children.size(); i++) {
 			
 			Joint* child = joint->children[i]; // joint pointers from children vector
-			vect = child->transform.getCol(3).xyz(); // getting vector from point
+			vect = child->transform.getCol(3).xyz(); // getting vector point from current joint to the next
 			len = vect.abs(); // norm of the vector
 			
 			// computing rotation axis 
 			z_axis = vect.normalized();
-			normal = Vector3f::cross(Vector3f(0, 0, 1), z_axis);
+			normal = Vector3f::cross(Vector3f(0., 0., 1.), z_axis); // joint normal
 
 			// computing transformation matrices
 			T = Matrix4f::translation(0, 0, 0.5);
-			R = Matrix4f::rotation(normal, float(acos(z_axis.z()) * (len != 0)));
 			S = Matrix4f::scaling(0.025f, 0.025f, len);
+			R = Matrix4f::rotation(normal, float(acos(z_axis.z()) * (len != 0)));
 
-			stack.push(R * S * T); // pushing matrix transformation to stack
+			stack.push(R * S * T); // pushing bone transformations to stack
 			glLoadMatrixf(stack.top()); // loading transformation matrix
 			glutSolidCube(1.0f); // block bone
 			stack.pop();
@@ -183,7 +183,7 @@ void SkeletalModel::drawSkeleton() { get_bone(m_rootJoint, m_matrixStack); }
 void SkeletalModel::setJointTransform(int jointIndex, float rX, float rY, float rZ) {
 	/*
 	Description:
-		Set the rotation part of the joint's transformation matrix based on the arguments.
+		Set the rotation of the joint's transformation matrix based on the user inputs (arguments).
 
 	Arguments:
 		- jointIndex: integer that labels the joint index.

@@ -95,6 +95,7 @@ void Mesh::draw()
 		glVertex3f(vertex_1[0], vertex_1[1], vertex_1[2]);
 		glVertex3f(vertex_2[0], vertex_2[1], vertex_2[2]);
 		glVertex3f(vertex_3[0], vertex_3[1], vertex_3[2]);
+
 		glEnd();
 	}
 	
@@ -105,6 +106,7 @@ void Mesh::loadAttachments( const char* filename, int numJoints )
 	/*
 	Description:
 		Function that loads the per-vertex attachment weights.
+		Weights dictate the degree of follow the vertex does w.r.t a joint.
 		(This method updates m_mesh.attachments.)
 
 	Arguments:
@@ -121,6 +123,7 @@ void Mesh::loadAttachments( const char* filename, int numJoints )
 	fskel.open(filename, fstream::in); // opening file
 	if (fskel.is_open() == true) {
 		
+		// loop over all data
 		while (getline(fskel, str)) {
 			stringstream stream(str); // stringstream object
 			vector<float> weights; // vector of weights
@@ -129,7 +132,7 @@ void Mesh::loadAttachments( const char* filename, int numJoints )
 
 			// loop over joints
 			for (int i = 0; i < numJoints - 1; i++) {
-				float weight; // declaring joint weight variable
+				float weight; // declaring weight variable for give joint
 				stream >> weight; // storing file data to float variable
 				weights.push_back(weight); // appending weight to weights vector
 			}

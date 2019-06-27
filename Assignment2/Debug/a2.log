@@ -1,28 +1,9 @@
-﻿  ModelerView.cpp
+﻿  Mesh.cpp
   SkeletalModel.cpp
-C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment2\SkeletalModel.cpp(78,33): warning C4018:  '<': signed/unsigned mismatch
-C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment2\SkeletalModel.cpp(113,21): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment2\SkeletalModel.cpp(79,33): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment2\SkeletalModel.cpp(114,21): warning C4018:  '<': signed/unsigned mismatch
 C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment2\SkeletalModel.cpp(152,21): warning C4018:  '<': signed/unsigned mismatch
-C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment2\SkeletalModel.cpp(227,21): warning C4018:  '<': signed/unsigned mismatch
-  main.cpp
-C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment2\SkeletalModel.cpp(259,21): warning C4018:  '<': signed/unsigned mismatch
-C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment2\main.cpp(49,1): warning C4996:  'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\ucrt\stdio.h(1774): message :  see declaration of 'sprintf'
-C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment2\main.cpp(51,1): warning C4996:  'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\ucrt\stdio.h(1774): message :  see declaration of 'sprintf'
-C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment2\main.cpp(53,1): warning C4996:  'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  modelerapp.cpp
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\ucrt\stdio.h(1774): message :  see declaration of 'sprintf'
-C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment2\modelerapp.cpp(41,1): warning C4996:  'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  modelerui.cpp
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\ucrt\string.h(338): message :  see declaration of 'strncpy'
-C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment2\modelerui.cpp(69,19): warning C4018:  '>=': signed/unsigned mismatch
-C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment2\modelerui.cpp(94,27): warning C4018:  '<': signed/unsigned mismatch
-C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment2\modelerui.cpp(89,1): warning C4996:  'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\ucrt\stdio.h(208): message :  see declaration of 'fopen'
-C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment2\modelerui.cpp(91,36): warning C4101:  'twist': unreferenced local variable
-C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment2\modelerui.cpp(91,29): warning C4101:  'dolly': unreferenced local variable
-C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment2\modelerui.cpp(91,9): warning C4101:  'elevation': unreferenced local variable
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment2\SkeletalModel.cpp(229,21): warning C4018:  '<': signed/unsigned mismatch
   Generating Code...
-C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment2\modelerui.cpp(91,20): warning C4101:  'azimuth': unreferenced local variable
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment2\SkeletalModel.cpp(261,21): warning C4018:  '<': signed/unsigned mismatch
   a2.vcxproj -> C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment2\Debug\a2.exe
