@@ -1,7 +1,7 @@
 # Assignment 2
 
 Here is the completed code for assignment 2 writen in C++ on Visual Studio 2019. 
-As of now, none of the extra credit assignments have been completed or attempted.  
+As of now, none of the extra credit assignments have been completed or attempted. 
 I have added normal-based coloring to the model skin for aesthetic appeal but is not an official extra credit component.
 This program requires Windows SDK version 10.0.16299.0 to run. 
 
