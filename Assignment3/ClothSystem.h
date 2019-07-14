@@ -14,34 +14,31 @@
 class ClothSystem: public ParticleSystem {
 
 public:
-	ClothSystem(int num_particles);
-	vector<Vector3f> evalF(vector<Vector3f> state);
+
+	ClothSystem(int grid_x, int grid_y, float ds); // to set-up cloth system
+	vector<Vector3f> evalF(vector<Vector3f> state); // to evaluate force
 	
+	// for drawing the scene
+	virtual void render_toggle() {};
+	virtual void motion_toggle() {};
 	void draw();
-	void render_toggle();
-	void motion_toggle();
 
 private:
 
-	int grid_size;
+	// private class variables for cloth system
+	int height;
+	int width;
+	float spacing;
 	bool render;
-	bool move;
-	bool backward;
-	vector<int> s_points;
+	vector<vector<vector<int>>> spring_indices;
 
-	// additional required methods
-	int get_index(int row, int col);
-	Vector3f get_position (int row, int col, vector<Vector3f> state);
-	Vector3f get_velocity (int row, int col, vector<Vector3f> state);
+	// necessary methods for cloth system
 	Vector3f get_gravity ();
 	Vector3f get_drag (Vector3f v);
-	Vector3f get_spring (char type, int row1, int col1, int row2, int col2);
-	Vector3f get_force (int row, int col, vector<Vector3f> state);
-	Vector3f get_motion (Vector3f pos);
-
-	void draw_line(int row1, int row2, int col1, int col2);
-	void draw_cloth(int row, int col);
-
+	Vector3f get_net_force (vector<Vector3f> state, int idx);
+	int get_index (int row, int col);
+	void draw_cloth (int row, int col);
+	void draw_line (int row1, int col1, int row2, int col2);
 };
 
 

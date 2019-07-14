@@ -1,23 +1,7 @@
-﻿  ClothSystem.cpp
-C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment3\ClothSystem.cpp(35,34): warning C4244:  'argument': conversion from 'double' to 'float', possible loss of data
-C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment3\ClothSystem.cpp(35,21): warning C4244:  'argument': conversion from 'double' to 'float', possible loss of data
-C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment3\ClothSystem.cpp(99,58): warning C4305:  'argument': truncation from 'int' to 'char'
-C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment3\ClothSystem.cpp(99,30): warning C4309:  'argument': truncation of constant value
-C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment3\ClothSystem.cpp(100,46): warning C4305:  'argument': truncation from 'int' to 'char'
-C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment3\ClothSystem.cpp(100,18): warning C4309:  'argument': truncation of constant value
-C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment3\ClothSystem.cpp(101,46): warning C4305:  'argument': truncation from 'int' to 'char'
-C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment3\ClothSystem.cpp(101,18): warning C4309:  'argument': truncation of constant value
-C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment3\ClothSystem.cpp(102,46): warning C4305:  'argument': truncation from 'int' to 'char'
-C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment3\ClothSystem.cpp(102,18): warning C4309:  'argument': truncation of constant value
-C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment3\ClothSystem.cpp(104,61): warning C4305:  'argument': truncation from 'int' to 'char'
-C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment3\ClothSystem.cpp(104,29): warning C4309:  'argument': truncation of constant value
-C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment3\ClothSystem.cpp(105,50): warning C4305:  'argument': truncation from 'int' to 'char'
-C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment3\ClothSystem.cpp(105,18): warning C4309:  'argument': truncation of constant value
-C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment3\ClothSystem.cpp(106,50): warning C4305:  'argument': truncation from 'int' to 'char'
-C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment3\ClothSystem.cpp(106,18): warning C4309:  'argument': truncation of constant value
-C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment3\ClothSystem.cpp(107,50): warning C4305:  'argument': truncation from 'int' to 'char'
-C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment3\ClothSystem.cpp(107,18): warning C4309:  'argument': truncation of constant value
-C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment3\ClothSystem.cpp(150,20): warning C4018:  '<': signed/unsigned mismatch
-C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment3\ClothSystem.cpp(245,36): warning C4244:  'argument': conversion from 'float' to 'GLint', possible loss of data
-C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment3\ClothSystem.cpp(245,29): warning C4244:  'argument': conversion from 'float' to 'GLint', possible loss of data
+﻿  main.cpp
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment3\main.cpp(48,16): warning C4244:  'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment3\main.cpp(111,11): warning C4244:  '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment3\main.cpp(151,32): warning C4244:  'argument': conversion from 'float' to 'GLint', possible loss of data
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment3\main.cpp(151,26): warning C4244:  'argument': conversion from 'float' to 'GLint', possible loss of data
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment3\main.cpp(237,9): warning C4060:  switch statement contains no 'case' or 'default' labels
   a3.vcxproj -> C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment3\Debug\a3.exe

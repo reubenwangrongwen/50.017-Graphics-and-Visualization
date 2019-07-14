@@ -40,7 +40,6 @@ namespace
 	int particle_idx = -1; // variable to store particle index 
 
   // initialize your particle systems
-  ///TODO: read argv here. set timestepper , step size etc
   void initSystem(int argc, char * argv[]) {
 	  
 	int time_step = 0; // init time stepper argument variable
@@ -67,7 +66,6 @@ namespace
 
 	// if correct number of arguments have been parsed...
 	else { 
-
 		// for selecting the type of system to load (simple, pendulum, cloth)
 		if (*argv[1] == 's') { // simple system 
 
@@ -98,8 +96,9 @@ namespace
 		}
 		else if (*argv[1] == 'c') { // cloth system 
 
-			num_particles = atoi(argv[2]); // parse number of particles
-			system = new ClothSystem(num_particles);
+			num_particles = atoi(argv[2]); // parse the number of particles 
+			system = new ClothSystem(num_particles, num_particles, 0.1f);
+			//system = new ClothSystem(num_particles);
 			time_step = 3; // update time stepper argument variable
 			sim_system = 'c'; // update system type char variable
 		}
@@ -118,8 +117,11 @@ namespace
 		else if (*argv[time_step] == 't') { // trapezoidal ODE solver
 			timeStepper = new Trapezoidal();
 		}
-		else { // RK4 ODE solver
+		else if (*argv[time_step] == 'r') { // RK4 ODE solver
 			timeStepper = new RK4();
+		}
+		else {
+			cout << "Error: Please input an appropriate argument (e/t/r) !" << endl;
 		}
 	}
   }
