@@ -17,19 +17,22 @@ public:
 
 	ClothSystem(int grid_x, int grid_y, float ds); // to set-up cloth system
 	vector<Vector3f> evalF(vector<Vector3f> state); // to evaluate force
-	
+
 	// for drawing the scene
-	virtual void render_toggle() {};
-	virtual void motion_toggle() {};
+	virtual void render_toggle();
+	virtual void motion_toggle();
 	void draw();
 
 private:
+
+	// render and motion toggle booleans
+	bool render;
+	bool motion;
 
 	// private class variables for cloth system
 	int height;
 	int width;
 	float spacing;
-	bool render;
 	vector<vector<vector<int>>> spring_indices;
 
 	// necessary methods for cloth system

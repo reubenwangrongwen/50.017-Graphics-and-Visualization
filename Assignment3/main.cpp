@@ -212,10 +212,10 @@ namespace
 			}
 			break;
 		}
-		case 's':
+		case 'm':
 		{
 			if (sim_system == 'c') {
-				cout << "commencing motion..." << endl;
+				cout << "motion toggled..." << endl;
 				system->motion_toggle ();
 			}
 			else {

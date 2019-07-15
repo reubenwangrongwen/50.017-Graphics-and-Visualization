@@ -8,11 +8,9 @@ void ForwardEuler::takeStep(ParticleSystem* particleSystem, float stepSize) {
 	/*
 	Description:
 		Running the fowar Euler numerical integration ODE solver.
-
 	Arguments:
 		- particleSystem: pointer to ParticleSystem class.
 		- stepSize: input step size for numerical integration
-
 	Return:
 		-
 	*/
@@ -39,11 +37,9 @@ void Trapezoidal::takeStep(ParticleSystem* particleSystem, float stepSize) {
 	/*
 	Description:
 		Running the Trapezoidal numerical integration ODE solver.
-
 	Arguments:
 		- particleSystem: pointer to ParticleSystem class.
 		- stepSize: input step size for numerical integration
-
 	Return:
 		-
 	*/
@@ -80,13 +76,11 @@ void RK4::takeStep(ParticleSystem* particleSystem, float stepSize) {
 	/*
 	Description:
 		Running the Runge-Kutta 4th order numerical integration ODE solver.
-
 	Arguments:
 		- particleSystem: pointer to ParticleSystem class.
 		- stepSize: input step size for numerical integration
-
 	Return:
-		-
+		- Optimal step size for the current iteration (float).
 	*/
 
 	// declaring variables
@@ -126,7 +120,19 @@ void RK4::takeStep(ParticleSystem* particleSystem, float stepSize) {
 }
 
 
+
+// medium extra credit component
 float optimal_step_size(ParticleSystem* particleSystem, float stepSize, float tol_h) {
+	/*
+	Description:
+		Computes the optimal step size for the Runge-Kutta-Fehlberg numerical integration ODE solver.
+	Arguments:
+		- particleSystem: pointer to ParticleSystem class.
+		- stepSize: input step size for numerical integration
+		- tol_h: comparative scalar tolerance value. 
+	Return:
+		- 
+	*/
 
 	// declaring variables
 	vector<Vector3f> current_state, next_state1, next_state2, next_state3, next_state4, next_state5;
@@ -180,7 +186,7 @@ float optimal_step_size(ParticleSystem* particleSystem, float stepSize, float to
 
 	// evaluating absolute difference in approximate solutions (4th and 5th order RK)
 	for (int i = 0; i < current_state.size(); i++) { // final iterative sequence for RK4 numerical integration
-		
+
 		state1 = current_state[i] + (25. * stepSize / 216.) * K1[i]
 			+ (1408. * stepSize / 2565.) * K3[i]
 			+ (2197. * stepSize / 4101.) * K4[i]
@@ -195,20 +201,20 @@ float optimal_step_size(ParticleSystem* particleSystem, float stepSize, float to
 		denom += 2. * (state2 - state1).abs(); // computing term in the comparative scalar denominator
 	}
 
-	return stepSize * pow(tol_h / denom, 1. / 4.);
+	// cout << stepSize * pow(tol_h / denom, 1. / 4.) << endl; // printing step sizes
+	
+	return stepSize * pow(tol_h / denom, 1./4.);
 }
 
 
-
+// medium extra credit component
 void RKF45::takeStep(ParticleSystem* particleSystem, float stepSize) {
 	/*
 	Description:
-		Running the Runge-Kutta 4th order numerical integration ODE solver.
-
+		Running the Runge-Kutta-Fehlberg numerical integration ODE solver.
 	Arguments:
 		- particleSystem: pointer to ParticleSystem class.
 		- stepSize: input step size for numerical integration
-
 	Return:
 		-
 	*/
@@ -219,7 +225,7 @@ void RKF45::takeStep(ParticleSystem* particleSystem, float stepSize) {
 	float sh; // comparative factor
 	Vector3f state;
 
-	sh = optimal_step_size (particleSystem, stepSize, 2e-5); // getting optimal step sizes
+	sh = optimal_step_size(particleSystem, stepSize, 2e-5); // getting optimal step sizes
 
 	// using new step size to compute the 4 terms for the Runge-Kutta 4th order solver
 	c_state = particleSystem->getState(); // initializing states for RK 4th order solver	

@@ -1,4 +1,7 @@
 #include "ClothSystem.h"
+#include <iostream>
+
+using namespace std;
 
 // simulation parameters
 float m = 0.25f; // mass
@@ -16,12 +19,10 @@ vector<vector<int>> get_spring_indices (int grid_x, int grid_y, int i, int j) {
 	Description:
 		Gets the relevant spring indices to compute the spring 
 		force for the current particle in question.
-
 	Arguments:
 		- grid_x: number of particles along x-direction (horizontal)
 		- grid_y: number of particles along y-direction (vertical)
 		- i,j: indices of current particle
-
 	Returns:
 		2D array of spring indices (vector of vectors).
 	*/
@@ -62,7 +63,8 @@ vector<vector<int>> get_spring_indices (int grid_x, int grid_y, int i, int j) {
 ClothSystem::ClothSystem (int grid_x, int grid_y, float ds) {
 
 	// initializing particle cloth-grid parameters
-	this->render = false; // rendering boolean variable
+	this->motion = false; // init motion boolean 
+	this->render = false; // init rendering boolean 
 	m_numParticles = grid_x * grid_y; // total number of particles
 	height = grid_y; // height of grid
 	width = grid_x; // width of grid
@@ -78,7 +80,7 @@ ClothSystem::ClothSystem (int grid_x, int grid_y, float ds) {
 		for (int j = 0; j < grid_x; j++) { // n: width
 
 			// appending position and velocity vectors
-			m_vVecState.push_back(Vector3f(1 + spacing * j, -spacing * i, -2));
+			m_vVecState.push_back(Vector3f(1 + spacing * j, -spacing * i, 0));
 			m_vVecState.push_back(Vector3f(0, 0, 0));			
 			
 			// getting all indices for springs
@@ -93,10 +95,8 @@ Vector3f ClothSystem::get_gravity () {
 	/*
 	Description:
 		Computes gravitational force.
-
 	Arguments:
 		-
-
 	Returns:
 		Gravitational force vector.
 	*/
@@ -109,10 +109,8 @@ Vector3f ClothSystem::get_drag (Vector3f v) {
 	/*
 	Description:
 		Computes drag force.
-
 	Arguments:
 		- v: velocity vector.
-
 	Returns:
 		Viscous drag force vector.
 	*/
@@ -125,11 +123,9 @@ Vector3f ClothSystem::get_net_force(vector<Vector3f> state, int idx) {
 	/*
 	Description:
 		Gets the net force acting on the current particle with index idx.
-
 	Arguments:
 		- state: current state-space vector for cloth-particle system.
 		- idx: particle index.
-
 	Returns:
 		Net force acting on current particle (Vector3f).
 	*/
@@ -184,16 +180,17 @@ Vector3f ClothSystem::get_net_force(vector<Vector3f> state, int idx) {
 }
 
 
+void ClothSystem::motion_toggle() {
+	this->motion = !this->motion;
+}
 
 // for a given state, evaluate f(X,t)
 vector<Vector3f> ClothSystem::evalF(vector<Vector3f> state) {
 	/*
 	Description:
 		Evaluates forces for current state.
-
 	Arguments:
 		- state: current state-space vectors.
-
 	Returns:
 		Array of force vectors.
 	*/
@@ -207,7 +204,14 @@ vector<Vector3f> ClothSystem::evalF(vector<Vector3f> state) {
 
 		if (i == 0 || i == (width - 1) * 2) { // boundary particles
 			force.push_back (state[i + 1]);
-			Vector3f edge_force = - (state[i] - Vector3f(state[i].x(), 0, 2));
+
+			Vector3f edge_force = Vector3f(0., 0., 0.); // cloth is stationary
+			// checking motion toggle
+			if (motion) {
+				// Vector3f edge_force = -(state[i] - Vector3f(state[i].x(), 0, 2)); // cloth rides back and forth
+				edge_force = -state[i]; // cloth circulates around  
+			}
+
 			force.push_back(edge_force);
 		}
 		else { // non-boundary particles 
@@ -225,11 +229,9 @@ int ClothSystem::get_index(int row, int col) {
 	/*
 	Description:
 		Takes in current  2D array index and converts it to a flattened array index.
-
 	Arguments:
 		- row: input row index
 		- col: input column index
-
 	Returns:
 		Equivalent index in the flattened array.
 	*/
@@ -237,6 +239,10 @@ int ClothSystem::get_index(int row, int col) {
 	return row * (this->width) + col;
 }
 
+
+void ClothSystem::render_toggle() {
+	this->render = !this->render;
+}
 
 void ClothSystem::draw_cloth(int row, int col) {
 
