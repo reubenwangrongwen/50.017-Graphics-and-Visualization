@@ -30,7 +30,7 @@ cd [path] a3.exe c grid_edge e/t/r/R h
 
 where [path] is the file path to the solution folder, "num_particles" is the number of particles in the simulation, 
 "grid_edge" is the number of particles per edge of the cloth simulation, "idx" is the index of the particle to be rendered, 
-e/t/r/R is the choice of numerical ODE solver:
+"e/t/r/R" is the choice of numerical ODE solver:
 
 * e: Forward Euler method.
 * t: Trapezoidal method.
