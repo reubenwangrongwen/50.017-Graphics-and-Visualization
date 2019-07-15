@@ -1,4 +1,4 @@
-# Assignment 1
+# Assignment 3
 
 Here is the completed code for assignment 3 writen in C++ on Visual Studio 2019. 
 This program requires Windows SDK version 10.0.16299.0 to run. 
