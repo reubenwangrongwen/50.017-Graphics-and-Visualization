@@ -9,8 +9,7 @@ Extra credit assignments (optional).
 
 ## Extra Credit Components
 
-No extra credit components have been implemented thus far. 
-
+Attempted an implementation of the Runge-Kutta-Felhberg numerical ODE technique. It is still very slow and needs to be optimized. 
 
 ## Running the Executable
 
