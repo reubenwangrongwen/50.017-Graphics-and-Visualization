@@ -51,16 +51,16 @@ namespace
 	if (argc < 4) {
 		cout << "Error: too few arguments have been parsed!" << endl << endl;
 		
-		cout << "To run: a3.exe s e/t/r h" << endl;
-		cout << "To run: a3.exe p num_particles particle_idx e/t/r h" << endl;
-		cout << "To run: a3.exe c grid_size e/t/r h" << endl << endl;
+		cout << "To run: a3.exe s e/t/r/R h" << endl;
+		cout << "To run: a3.exe p num_particles particle_idx e/t/r/R h" << endl;
+		cout << "To run: a3.exe c grid_size e/t/r/R h" << endl << endl;
 		
 		// running default simulation instead
-		cout << "Default: Running simpleSystem with the RK4 ODE solver..." << endl;
+		cout << "Default: Running simpleSystem with the RKF45 ODE solver..." << endl;
 		system = new SimpleSystem();
 		sim_system = 's'; // update system type char variable
 		time_step = 2; // update time stepper argument variable
-		timeStepper = new RK4();
+		timeStepper = new RKF45();
 		// exit(0);
 	}
 
@@ -77,7 +77,7 @@ namespace
 
 			// checking the right number of argumets for the pendulum system
 			if (argc < 6) {
-				cout << "To run: a3.exe p num_particles particle_idx e/t/r h" << endl;
+				cout << "To run: a3.exe p num_particles particle_idx e/t/r/R h" << endl;
 				exit(0);
 			}
 
@@ -120,8 +120,11 @@ namespace
 		else if (*argv[time_step] == 'r') { // RK4 ODE solver
 			timeStepper = new RK4();
 		}
+		else if (*argv[time_step] == 'R') { // RKF45 ODE solver
+			timeStepper = new RKF45();
+		}
 		else {
-			cout << "Error: Please input an appropriate argument (e/t/r) !" << endl;
+			cout << "Error: Please input an appropriate argument (e/t/r/R) !" << endl;
 		}
 	}
   }

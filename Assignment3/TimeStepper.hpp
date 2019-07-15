@@ -13,20 +13,22 @@ public:
 
 //IMPLEMENT YOUR TIMESTEPPERS
 
-class ForwardEuler:public TimeStepper
-{
+class ForwardEuler:public TimeStepper {
   void takeStep(ParticleSystem* particleSystem, float stepSize);
 };
 
-class Trapezoidal:public TimeStepper
-{
+class Trapezoidal:public TimeStepper {
   void takeStep(ParticleSystem* particleSystem, float stepSize);
 };
 
-class RK4:public TimeStepper
-{
+class RK4:public TimeStepper {
 	void takeStep(ParticleSystem* particleSystem, float stepSize);
 };
+
+class RKF45 :public TimeStepper {
+	void takeStep(ParticleSystem* particleSystem, float stepSize);
+};
+
 
 /////////////////////////
 
