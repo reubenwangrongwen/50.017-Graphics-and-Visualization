@@ -4,16 +4,16 @@
 
 PendulumSystem::PendulumSystem(int numParticles) :ParticleSystem(numParticles)
 {
-	m_numParticles = numParticles;
-	this->m_vVecState.push_back(Vector3f(0, 0, 0));
-	this->m_vVecState.push_back(Vector3f(0, 0, 0));
+	m_numParticles = static_cast<int>(numParticles / 2.);
+	this->m_vVecState.push_back(Vector3f(0., 0., 0.));
+	this->m_vVecState.push_back(Vector3f(0., 0., 0.));
 
 	// loop over numner of particles
 	for (unsigned i = 1; i < m_numParticles; i++) {
 		
 		// appending vectors to compute velocity and force
-		this->m_vVecState.push_back(Vector3f(pow(-1, i) * 0.5, -0.5 * i, 0));
-		this->m_vVecState.push_back(Vector3f(0, 0, 0));
+		this->m_vVecState.push_back(Vector3f(pow(-1, i) * 0.5, -0.5 * i, 0.)); // init positions to be alternating
+		this->m_vVecState.push_back(Vector3f(0., 0., 0.));
 	}
 }
 
@@ -21,10 +21,8 @@ vector<Vector3f> get_position (vector<Vector3f> state) {
 	/*
 	Description:
 		Gets the positions from the current state.
-
 	Arguments:
 		- state: current state vector of particles.
-
 	Return:
 		- vector of positions at the current state.
 	*/
@@ -129,7 +127,7 @@ vector<Vector3f> PendulumSystem::evalF(vector<Vector3f> state) {
 	Vector3f spring_diffeq, net_force;
 	
 	// init parameters and states
-	m = 0.05; b = 0.05; k = 1.5; r = 0.6;
+	m = 0.05; b = 0.05; k = 1.5; r = 0.4;
 	acc.push_back(Vector3f::ZERO);
 	acc.push_back(Vector3f::ZERO);
 	current_pos = get_position(state);

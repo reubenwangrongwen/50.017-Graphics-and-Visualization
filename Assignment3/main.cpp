@@ -34,98 +34,49 @@ namespace
     TimeStepper * timeStepper;
 	
 	// declare variables
+	int system_indx = 1;
 	char sim_system; // variable to take simulated system from user input
-	float h; // variable to take step size from user input
-	int num_particles; // variable for number of particles
-	int particle_idx = -1; // variable to store particle index 
-
+	float h = 0.05f; // variable to take step size from user input
+	int num_particles = 12; // variable for number of particles
+	
   // initialize your particle systems
   void initSystem(int argc, char * argv[]) {
 	  
 	int time_step = 0; // init time stepper argument variable
 	
+	
 	// seed the random number generator with the current time
     srand( time( NULL ) );	
 
-	// check if right number of arguments have been provided
-	if (argc < 4) {
-		cout << "Error: too few arguments have been parsed!" << endl << endl;
-		
-		cout << "To run: a3.exe s e/t/r/R h" << endl;
-		cout << "To run: a3.exe p num_particles particle_idx e/t/r/R h" << endl;
-		cout << "To run: a3.exe c grid_size e/t/r/R h" << endl << endl;
-		
-		// running default simulation instead
-		cout << "Default: Running simpleSystem with the RKF45 ODE solver..." << endl;
-		system = new SimpleSystem();
-		sim_system = 's'; // update system type char variable
-		time_step = 2; // update time stepper argument variable
-		timeStepper = new RKF45();
-		// exit(0);
-	}
+	// cout << "To run: a3.exe e/t/r/R h" << endl;
 
-	// if correct number of arguments have been parsed...
-	else { 
-		// for selecting the type of system to load (simple, pendulum, cloth)
-		if (*argv[1] == 's') { // simple system 
+	// running default simulation instead
+	cout << "Default: Running simpleSystem with the RKF45 ODE solver..." << endl;
+	system = new SimpleSystem();
+	timeStepper = new RKF45();
 
-			system = new SimpleSystem(); // simple system class 
-			sim_system = 's'; // update system type char variable
-			time_step = 2; // update time stepper argument variable
-		}
-		else if (*argv[1] == 'p') { // pendulum system
+	if (argc >= 2) {
 
-			// checking the right number of argumets for the pendulum system
-			if (argc < 6) {
-				cout << "To run: a3.exe p num_particles particle_idx e/t/r/R h" << endl;
-				exit(0);
-			}
-
-			num_particles = atoi(argv[2]); // parse the number of particles 
-			particle_idx = atoi(argv[3]); // parse index of particle to render
-
-			system = new PendulumSystem(num_particles); // pendulum system class 
-
-			if (particle_idx >= num_particles) {
-				cout << "Error: particle_idx is larger than num_particles!" << endl;
-				exit(0);
-			}
-
-			sim_system = 'p'; // update char variable
-			time_step = 4; // update time stepper argument variable
-		}
-		else if (*argv[1] == 'c') { // cloth system 
-
-			num_particles = atoi(argv[2]); // parse the number of particles 
-			system = new ClothSystem(num_particles, num_particles, 0.1f);
-			//system = new ClothSystem(num_particles);
-			time_step = 3; // update time stepper argument variable
-			sim_system = 'c'; // update system type char variable
-		}
-		else { 
-			cout << "Error: Please input an appropriate argument (s/p/c) !" << endl;
-			exit(0);
-		}
-
-		// getting numerical step size
-		h = atof(argv[time_step + 1]); 
-
-		// for selecting type of ODE solver
-		if (*argv[time_step] == 'e') { // forward Euler ODE solver
+		if (*argv[1] == 'e') { // forward Euler ODE solver
 			timeStepper = new ForwardEuler();
 		}
-		else if (*argv[time_step] == 't') { // trapezoidal ODE solver
+		else if (*argv[1] == 't') { // trapezoidal ODE solver
 			timeStepper = new Trapezoidal();
 		}
-		else if (*argv[time_step] == 'r') { // RK4 ODE solver
+		else if (*argv[1] == 'r') { // RK4 ODE solver
 			timeStepper = new RK4();
 		}
-		else if (*argv[time_step] == 'R') { // RKF45 ODE solver
+		else if (*argv[1] == 'R') { // RKF45 ODE solver
 			timeStepper = new RKF45();
 		}
 		else {
 			cout << "Error: Please input an appropriate argument (e/t/r/R) !" << endl;
 		}
+
+	}
+
+	if (argc > 2) {
+		h = atof(argv[2]);
 	}
   }
 
@@ -133,9 +84,7 @@ namespace
   ///TODO: Optional. modify this function to display various particle systems
   ///and switch between different timeSteppers
   void stepSystem()
-  {
-      ///TODO The stepsize should change according to commandline arguments
-    const float h = 0.04f;
+  {   
     if(timeStepper!=0){
       timeStepper->takeStep(system,h);
     }
@@ -201,14 +150,35 @@ namespace
             camera.SetCenter( Vector3f::ZERO );
             break;
         }
+		case 't':
+		{
+			if (system_indx == 0) {
+				cout << "Running simple system..." << endl;
+				system = new SimpleSystem(); // simple system class 
+				system_indx += 1;
+			}
+			else if (system_indx == 1) {
+				cout << "Running pendulum system..." << endl;
+				system = new PendulumSystem(num_particles); // pendulum system class 
+				system_indx += 1;
+			}  
+			else if (system_indx == 2) {
+				cout << "Running cloth system..." << endl;
+				cout << "To toggle cloth rendering, press 'r'. " << endl;
+				cout << "To toggle cloth motion, press 'm'. " << endl;
+				system = new ClothSystem(num_particles, num_particles, 0.1f);
+				sim_system = 'c'; // update system type char variable
+				system_indx = 0;
+			}
+		}
 		case 'r':
 		{
 			if (sim_system == 'c') {
-				cout << "rendering..." << endl;
+				cout << "render toggled..." << endl;
 				system->render_toggle ();
 			}
 			else {
-				cout << "parse 'c' with the executable to begin cloth system simulation." << endl;
+				cout << "This toggle only works in the cloth system." << endl;
 			}
 			break;
 		}
@@ -219,7 +189,7 @@ namespace
 				system->motion_toggle ();
 			}
 			else {
-				cout << "parse 'c' with the executable to begin cloth system simulation." << endl;
+				cout << "This toggle only works in the cloth system." << endl;
 			}
 			break;
 		}
@@ -307,8 +277,8 @@ namespace
         glShadeModel(GL_SMOOTH);
         glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
         
-	glEnable(GL_CULL_FACE);
-	glCullFace(GL_BACK);
+		glEnable(GL_CULL_FACE);
+		glCullFace(GL_BACK);
 
         // Clear to black
         glClearColor(0,0,0,1);
@@ -332,7 +302,6 @@ namespace
         glLoadMatrixf( camera.viewMatrix() );
 
         // THIS IS WHERE THE DRAW CODE GOES.
-
         drawSystem();
 
         // This draws the coordinate axes when you're rotating, to

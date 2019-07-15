@@ -63,8 +63,9 @@ vector<vector<int>> get_spring_indices (int grid_x, int grid_y, int i, int j) {
 ClothSystem::ClothSystem (int grid_x, int grid_y, float ds) {
 
 	// initializing particle cloth-grid parameters
-	this->motion = false; // init motion boolean 
+	this->motion = false; // init motion boolean
 	this->render = false; // init rendering boolean 
+	
 	m_numParticles = grid_x * grid_y; // total number of particles
 	height = grid_y; // height of grid
 	width = grid_x; // width of grid
@@ -211,7 +212,6 @@ vector<Vector3f> ClothSystem::evalF(vector<Vector3f> state) {
 				// Vector3f edge_force = -(state[i] - Vector3f(state[i].x(), 0, 2)); // cloth rides back and forth
 				edge_force = -state[i]; // cloth circulates around  
 			}
-
 			force.push_back(edge_force);
 		}
 		else { // non-boundary particles 
@@ -266,12 +266,12 @@ void ClothSystem::draw_cloth(int row, int col) {
 	n4 = Vector3f::cross(p3 - p2, p4 - p2); n4.normalize();
 	n5 = Vector3f::cross(p4 - p3, p2 - p3); n5.normalize();
 	n6 = Vector3f::cross(p2 - p4, p3 - p4); n6.normalize();
-	
+
 	// loading normals and vertices
 	glBegin(GL_TRIANGLES);
 	glNormal3f(n1[0], n1[1], n1[2]); glVertex3f(p1[0], p1[1], p1[2]);
-	glNormal3f(n2[0], n2[1], n2[2]); glVertex3f(p2[0], p2[1], p2[2]);
-	glNormal3f(n3[0], n3[1], n3[2]); glVertex3f(p3[0], p3[1], p3[2]); 
+	glNormal3f(n2[0], n2[1], n2[2]); glVertex3f(p3[0], p3[1], p3[2]);
+	glNormal3f(n3[0], n3[1], n3[2]); glVertex3f(p2[0], p2[1], p2[2]); 
 	glEnd();
 
 	glBegin(GL_TRIANGLES);
@@ -310,14 +310,14 @@ void ClothSystem::draw()
 	Vector3f pos;
 
 	// checking render toggle boolean variable
-	if (render) {
+	if (render) { // draw smooth cloth 
 		for (int i = 0; i < this->height - 1; i++) {
 			for (int j = 0; j < this->width - 1; j++) {
-				draw_cloth (i, j);
+				draw_cloth (i, j); 
 			}
 		}
 	}
-	else {
+	else { // draw grid
 		for (int i = 0; i < this->height; i++) {
 			for (int j = 0; j < this->width; j++) {
 				
