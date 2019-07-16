@@ -12,7 +12,7 @@ This program requires Windows SDK version 10.0.16299.0 to run.
 
 * Implemented the Runge-Kutta 4th order numerical ODE solver (**easy extra credit**). 
 * Implemented smooth shading for cloth system, but only renders one side (**easy extra credit**).
-* Attempted an implementation of the Runge-Kutta-Felhberg numerical ODE technique but very slow, needs to be optimized (**medium extra credit**). 
+* Implementated the Runge-Kutta-Felhberg numerical ODE technique (**medium extra credit**). 
 
 ## Running the Executable
 
