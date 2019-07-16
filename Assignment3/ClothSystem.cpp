@@ -271,7 +271,7 @@ void ClothSystem::draw_cloth(int row, int col) {
 	glBegin(GL_TRIANGLES);
 	glNormal3f(n1[0], n1[1], n1[2]); glVertex3f(p1[0], p1[1], p1[2]);
 	glNormal3f(n2[0], n2[1], n2[2]); glVertex3f(p3[0], p3[1], p3[2]);
-	glNormal3f(n3[0], n3[1], n3[2]); glVertex3f(p2[0], p2[1], p2[2]); 
+	glNormal3f(n3[0], n3[1], n3[2]); glVertex3f(p2[0], p2[1], p2[2]);
 	glEnd();
 
 	glBegin(GL_TRIANGLES);

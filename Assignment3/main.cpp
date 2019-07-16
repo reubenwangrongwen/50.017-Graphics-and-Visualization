@@ -36,7 +36,7 @@ namespace
 	// declare variables
 	int system_indx = 1;
 	char sim_system; // variable to take simulated system from user input
-	float h = 0.05f; // variable to take step size from user input
+	float h = 0.1f; // variable to take step size from user input
 	int num_particles = 12; // variable for number of particles
 	
   // initialize your particle systems
