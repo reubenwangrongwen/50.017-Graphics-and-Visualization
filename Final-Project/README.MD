@@ -1,6 +1,6 @@
 # Graphics Final Project
 
-Here is the (soon to be) completed code for the final project prototyped in MATLAB and written in C++ on Visual Studio 2019. 
+Here is the (soon to be) completed code for the final project prototyped in MATLAB 2019 and written in C++ on Visual Studio 2019. 
 This program requires Windows SDK version 10.0.16299.0 to run. 
 
 ## TO DO
