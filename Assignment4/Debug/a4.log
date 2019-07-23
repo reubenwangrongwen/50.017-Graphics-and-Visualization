@@ -1,0 +1,22 @@
+﻿  SceneParser.cpp
+C:\Users\Admin\Desktop\Graphics Assignments\Assignment4_setup\SceneParser.cpp(43): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.16299.0\ucrt\stdio.h(207): note: see declaration of 'fopen'
+C:\Users\Admin\Desktop\Graphics Assignments\Assignment4_setup\SceneParser.cpp(118): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Admin\Desktop\Graphics Assignments\Assignment4_setup\SceneParser.cpp(402): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\Admin\Desktop\Graphics Assignments\Assignment4_setup\SceneParser.cpp(404): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\Admin\Desktop\Graphics Assignments\Assignment4_setup\SceneParser.cpp(406): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\Admin\Desktop\Graphics Assignments\Assignment4_setup\SceneParser.cpp(411): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Admin\Desktop\Graphics Assignments\Assignment4_setup\SceneParser.cpp(445): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.16299.0\ucrt\stdio.h(1195): note: see declaration of 'fscanf'
+C:\Users\Admin\Desktop\Graphics Assignments\Assignment4_setup\SceneParser.cpp(456): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.16299.0\ucrt\stdio.h(1195): note: see declaration of 'fscanf'
+C:\Users\Admin\Desktop\Graphics Assignments\Assignment4_setup\SceneParser.cpp(467): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.16299.0\ucrt\stdio.h(1195): note: see declaration of 'fscanf'
+C:\Users\Admin\Desktop\Graphics Assignments\Assignment4_setup\SceneParser.cpp(478): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.16299.0\ucrt\stdio.h(1195): note: see declaration of 'fscanf'
+C:\Users\Admin\Desktop\Graphics Assignments\Assignment4_setup\SceneParser.cpp(489): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.16299.0\ucrt\stdio.h(1195): note: see declaration of 'fscanf'
+  texture.cpp
+  Vector4f.cpp
+  Generating Code...
+  a4.vcxproj -> C:\Users\Admin\Desktop\Graphics Assignments\Assignment4_setup\Debug\a4.exe

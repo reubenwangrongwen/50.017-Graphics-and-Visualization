@@ -1,0 +1,46 @@
+﻿  Image.cpp
+C:\Users\Admin\Desktop\Graphics Assignments\Assignment4_setup\Image.cpp(49): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.16299.0\ucrt\stdio.h(207): note: see declaration of 'fopen'
+C:\Users\Admin\Desktop\Graphics Assignments\Assignment4_setup\Image.cpp(109): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\Admin\Desktop\Graphics Assignments\Assignment4_setup\Image.cpp(83): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.16299.0\ucrt\stdio.h(207): note: see declaration of 'fopen'
+C:\Users\Admin\Desktop\Graphics Assignments\Assignment4_setup\Image.cpp(125): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.16299.0\ucrt\stdio.h(207): note: see declaration of 'fopen'
+C:\Users\Admin\Desktop\Graphics Assignments\Assignment4_setup\Image.cpp(172): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\Admin\Desktop\Graphics Assignments\Assignment4_setup\Image.cpp(150): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.16299.0\ucrt\stdio.h(207): note: see declaration of 'fopen'
+C:\Users\Admin\Desktop\Graphics Assignments\Assignment4_setup\Image.cpp(160): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.16299.0\ucrt\stdio.h(2261): note: see declaration of 'sscanf'
+C:\Users\Admin\Desktop\Graphics Assignments\Assignment4_setup\Image.cpp(256): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.16299.0\ucrt\string.h(132): note: see declaration of 'strcpy'
+C:\Users\Admin\Desktop\Graphics Assignments\Assignment4_setup\Image.cpp(272): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.16299.0\ucrt\stdio.h(207): note: see declaration of 'fopen'
+  main.cpp
+  Mesh.cpp
+  SceneParser.cpp
+C:\Users\Admin\Desktop\Graphics Assignments\Assignment4_setup\SceneParser.cpp(42): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.16299.0\ucrt\stdio.h(207): note: see declaration of 'fopen'
+C:\Users\Admin\Desktop\Graphics Assignments\Assignment4_setup\SceneParser.cpp(117): error C2065: 'M_PI': undeclared identifier
+C:\Users\Admin\Desktop\Graphics Assignments\Assignment4_setup\SceneParser.cpp(401): error C2065: 'M_PI': undeclared identifier
+C:\Users\Admin\Desktop\Graphics Assignments\Assignment4_setup\SceneParser.cpp(403): error C2065: 'M_PI': undeclared identifier
+C:\Users\Admin\Desktop\Graphics Assignments\Assignment4_setup\SceneParser.cpp(405): error C2065: 'M_PI': undeclared identifier
+C:\Users\Admin\Desktop\Graphics Assignments\Assignment4_setup\SceneParser.cpp(410): error C2065: 'M_PI': undeclared identifier
+C:\Users\Admin\Desktop\Graphics Assignments\Assignment4_setup\SceneParser.cpp(444): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.16299.0\ucrt\stdio.h(1195): note: see declaration of 'fscanf'
+C:\Users\Admin\Desktop\Graphics Assignments\Assignment4_setup\SceneParser.cpp(455): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.16299.0\ucrt\stdio.h(1195): note: see declaration of 'fscanf'
+C:\Users\Admin\Desktop\Graphics Assignments\Assignment4_setup\SceneParser.cpp(466): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.16299.0\ucrt\stdio.h(1195): note: see declaration of 'fscanf'
+C:\Users\Admin\Desktop\Graphics Assignments\Assignment4_setup\SceneParser.cpp(477): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.16299.0\ucrt\stdio.h(1195): note: see declaration of 'fscanf'
+C:\Users\Admin\Desktop\Graphics Assignments\Assignment4_setup\SceneParser.cpp(488): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.16299.0\ucrt\stdio.h(1195): note: see declaration of 'fscanf'
+  texture.cpp
+  Matrix2f.cpp
+  Matrix3f.cpp
+  Matrix4f.cpp
+  Quat4f.cpp
+  Vector2f.cpp
+  Vector3f.cpp
+  Vector4f.cpp
+  Generating Code...
