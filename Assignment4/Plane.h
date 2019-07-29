@@ -11,30 +11,30 @@ class Plane: public Object3D
 {
 public:
 	
-	Plane( const Vector3f& normal , float d , Material* m):Object3D(m){
+	Plane ( const Vector3f& normal , float d , Material* m) : Object3D(m){
 		this->_normal = normal.normalized();
 		this->_d = d;
 	} // constructor
 	~Plane(){} // destructor
 
-	virtual bool intersect( const Ray& r , Hit& h , float tmin){
+	virtual bool intersect( const Ray& r , Hit& h , float tmin ){
 
 		// declaring variables
 		Vector3f r_o;
 		Vector3f r_d;
-		float n_r_d, n_r_o, t;
+		float N_r_d, N_r_o, t;
 
 		// computing vectors and dot products
 		r_o = r.getOrigin();
 		r_d = r.getDirection().normalized();
-		n_r_d = Vector3f::dot(this->_normal, r_d); // dot product between n and r_d
-		n_r_o = Vector3f::dot(this->_normal, r_o); // dot product between n and  r_o
+		N_r_d = Vector3f::dot(this->_normal, r_d); // dot product between N and r_d
+		N_r_o = Vector3f::dot(this->_normal, r_o); // dot product between N and  r_o
 
-		if (n_r_d == 0.) { // checking for orthogonal rays (grazing rays)
+		if (N_r_d == 0.) { // checking for orthogonal rays (grazing rays)
 			return false; 
 		}
 
-		t = - (n_r_o - this->_d) / (n_r_d); // computing ray parameter
+		t = - (N_r_o - this->_d) / (N_r_d); // computing ray parameter
 		if (t > tmin && t < h.getT()) {
 			h.set(t, this->material, this->_normal);
 			return true;

@@ -25,12 +25,11 @@ public:
 		// declaring variables
 		Vector3f N, R; // vectors
 		Vector3f col_diff, col_spec; // diffused and specular color
-		float L_N, L_R;
+		float L_N, L_R; // dot product variables
 
 		N = hit.getNormal(); N.normalized(); // effective normal vector
 		L_N = Vector3f::dot(N, dirToLight); if (L_N < 0.) { L_N = 0.; } // clamped (N dot L)
-		// v = -ray.getDirection(); // negated ray direction
-
+		
 		// checking for texture validity
 		if (t.valid()) { 
 			Vector3f k_d = t(hit.texCoord[0], hit.texCoord[1]);
@@ -45,7 +44,6 @@ public:
 		L_R = Vector3f::dot(dirToLight, R); if (L_R < 0.) { L_R = 0.; } // clamped (v dot r)
 	
 		col_spec = pow(L_R, shininess) * lightColor * specularColor;
-
 		return col_diff + col_spec;
 		}
 

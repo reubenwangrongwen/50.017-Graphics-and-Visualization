@@ -73,24 +73,29 @@ int main( int argc, char* argv[] )
 	Light* light;
 	Hit hit;
 	Vector2f coordinate;
+	Vector3f pix_col;
 	Vector3f light_dir, light_col, shading_col;
 	float light_dist;
 
 	// init variables
 	SceneParser scene(scene_filename); // First, parse the scene using SceneParser.
-	Image img(width, height);
-	Vector3f pix_col = Vector3f::ZERO;
-
+	Image img(width, height); // init image
+	Image img_depth(width, height); // init depth image 
+	Image img_normals(width, height); // init normal image 
+	
+	
 	/* Then loop over each pixel in the image, shooting a ray
 	 through that pixel and finding its intersection with
 	 the scene.  Write the color at the intersection to that
 	 pixel in your output image.*/
 
 	img.SetAllPixels( scene.getBackgroundColor() ); // init scene pixels
+	img_depth.SetAllPixels( Vector3f::ZERO ); // init depth scene pixels
+	img_normals.SetAllPixels( Vector3f::ZERO ); // init normal scene pixels
 
 	// loops over scene view width and height
-	for (int i = 0; i < width; i++) {
-		for (int j = 0; j < height; j++) {
+	for (unsigned i = 0; i < width; i++) {
+		for (unsigned j = 0; j < height; j++) {
 
 			coordinate = Vector2f(2. * float(i) / (float(width) - 1.) - 1., 
 								2. * float(j) / (float(height) - 1.) - 1.); // mapping coordinates to scene pixel-grid
@@ -102,7 +107,7 @@ int main( int argc, char* argv[] )
 				pix_col = Vector3f::ZERO; // re-init to zero
 
 				// loop over lights for diffused lighting
-				for (int i = 0; i < scene.getNumLights(); i++) {
+				for (unsigned i = 0; i < scene.getNumLights(); i++) {
 
 					light = scene.getLight(i); // light specification
 					light->getIllumination(ray.pointAtParameter(hit.getT()), light_dir, light_col, light_dist);
@@ -113,69 +118,29 @@ int main( int argc, char* argv[] )
 
 				pix_col = pix_col + hit.getMaterial()->getDiffuseColor() * scene.getAmbientLight(); // copmuting ambient color
 				img.SetPixel(j, i, pix_col); // setting pixels to color
-			}
-		}
-	}
-	img.SaveBMP(output_filename);
 
 
-	if (depth_toggle) { // checking for depth image toggle
+				// getting depth image 
+				if (depth_toggle) {
 
-		// init variables
-		Vector2f coordinate;
-		Hit hit;
-		Image img_depth(width, height);
-		img_depth.SetAllPixels(Vector3f::ZERO);
-
-		// loops over scene view width and height
-		for (int i = 0; i < width; i++) {
-			for (int j = 0; j < height; j++) {
-
-				coordinate = Vector2f((2. * float(i) / (float(width) - 1.)) - 1., 
-									(2. * float(j) / (float(height) - 1.)) - 1.); // mapping coordinates to scene pixel-grid
-				Ray ray = scene.getCamera()->generateRay(coordinate);
-				hit = Hit(FLT_MAX, NULL, Vector3f::ZERO);
-
-				// checking for ray intersection
-				if (scene.getGroup()->intersect(ray, hit, scene.getCamera()->getTMin())) {
 					if (hit.getT() < depth_min) {
-						img_depth.SetPixel(j, i, Vector3f(1.));
+						img_depth.SetPixel(j, i, Vector3f(1., 1., 1.));
 					}
 					else if (hit.getT() > depth_max) {
 						img_depth.SetPixel(j, i, Vector3f::ZERO);
 					}
 					else {
-						float gray_scale = (depth_max - hit.getT()) / (depth_max - depth_min);
-						img_depth.SetPixel(j, i, Vector3f(gray_scale));
+						float depths = (depth_max - hit.getT()) / (depth_max - depth_min);
+						img_depth.SetPixel(j, i, depths * Vector3f(1., 1., 1.));
 					}
 				}
-			}
-		}
-		img_depth.SaveBMP(depth_filename);
-	}
 
+				// getting normal image 
+				if (normal_toggle) {
 
-	if (normal_toggle) { // checking for normal image toggle
+					// declaring color variable
+					Vector3f col_norm;
 
-		// init variables
-		Vector2f coordinate;
-		Vector3f col_norm;
-		Hit hit;
-		Image img_normals(width, height);
-		img_normals.SetAllPixels(Vector3f::ZERO);
-
-		// loops over scene view width and height
-		for (int i = 0; i < width; i++) {
-			for (int j = 0; j < height; j++) {
-				
-				coordinate = Vector2f((2. * float(i) / (float(width) - 1.)) - 1., 
-									(2. * float(j) / (float(height) - 1.)) - 1.); // mapping coordinates to scene pixel-grid
-				Ray ray = scene.getCamera()->generateRay(coordinate);
-				hit = Hit(FLT_MAX, NULL, Vector3f::ZERO);
-
-				// checking for ray intersection
-				if (scene.getGroup()->intersect(ray, hit, 0.)) {
-					
 					// getting coloring as normal vector
 					col_norm = hit.getNormal();
 					col_norm.normalized();
@@ -188,8 +153,10 @@ int main( int argc, char* argv[] )
 				}
 			}
 		}
-		img_normals.SaveBMP(normal_filename);
 	}
+	img.SaveBMP(output_filename);
+	if (depth_toggle) { img_depth.SaveBMP(depth_filename); }
+	if (normal_toggle) { img_normals.SaveBMP(normal_filename); }
 
 
 	///TODO: below demonstrates how to use the provided Image class	
@@ -201,4 +168,3 @@ int main( int argc, char* argv[] )
 	
 	return 0;
 }
-

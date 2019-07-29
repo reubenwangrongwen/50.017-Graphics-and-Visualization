@@ -12,14 +12,14 @@ using namespace std;
 class Sphere: public Object3D
 {
 public:
-	Sphere() : center(Vector3f(0., 0., 0.)), radius(1.0f) {}
+	Sphere() : center(Vector3f(0., 0., 0.)), radius(1.0f) {} // constructor
 
 	Sphere( Vector3f center , float radius , Material* material ) : Object3D(material) {
 		this->center = center;
 		this->radius = radius;
-	}
+	} 
 	
-	~Sphere(){}
+	~Sphere(){} // destructor
 
 	virtual bool intersect( const Ray& r , Hit& h , float tmin){
 		
@@ -40,6 +40,17 @@ public:
 		// checking the discriminant
 		if (discriminant >= 0.) { 
 
+			t = (-b - sqrt(discriminant)) / (2. * a); // computing root (-)
+			if (t >= tmin && t <= h.getT()) {
+
+				// computing normal
+				normal = (r.getOrigin() + t * r_d - this->center);
+				normal.normalized();
+
+				h.set(t, this->material, normal);
+				return true;
+			}
+
 			t = (-b + sqrt(discriminant)) / (2. * a); // computing root (+)
 			if (t >= tmin && t <= h.getT()) {
 
@@ -48,17 +59,6 @@ public:
 				normal.normalized();
 
 				h.set(t, this->material, normal); 
-				return true;
-			}
-
-			t = (-b - sqrt(discriminant)) / (2. * a); // computing root (-)
-			if (t >= tmin && t <= h.getT()) {
-				
-				// computing normal
-				normal = (r.getOrigin() + t * r_d - this->center);
-				normal.normalized();
-				
-				h.set(t, this->material, normal);
 				return true;
 			}
 		}

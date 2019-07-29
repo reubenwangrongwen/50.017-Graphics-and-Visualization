@@ -1,6 +1,6 @@
 ﻿  SceneParser.cpp
 C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment4\Camera.h(51,13): warning C4244:  '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment4\Material.h(44,26): warning C4244:  'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment4\Material.h(43,26): warning C4244:  'argument': conversion from 'double' to 'float', possible loss of data
 C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment4\Triangle.h(77,14): warning C4244:  'argument': conversion from 'double' to 'float', possible loss of data
 C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment4\Triangle.h(77,41): warning C4244:  'argument': conversion from 'double' to 'float', possible loss of data
 C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment4\Triangle.h(77,67): warning C4244:  'argument': conversion from 'double' to 'float', possible loss of data
@@ -32,7 +32,7 @@ C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github
   main.cpp
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.16299.0\ucrt\stdio.h(1195): message :  see declaration of 'fscanf'
 C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment4\Camera.h(51,13): warning C4244:  '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment4\Material.h(44,26): warning C4244:  'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment4\Material.h(43,26): warning C4244:  'argument': conversion from 'double' to 'float', possible loss of data
 C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment4\Triangle.h(77,14): warning C4244:  'argument': conversion from 'double' to 'float', possible loss of data
 C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment4\Triangle.h(77,41): warning C4244:  'argument': conversion from 'double' to 'float', possible loss of data
 C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment4\Triangle.h(77,67): warning C4244:  'argument': conversion from 'double' to 'float', possible loss of data
@@ -47,13 +47,12 @@ C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github
 C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment4\Sphere.h(61,11): warning C4244:  'argument': conversion from 'double' to 'float', possible loss of data
 C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment4\main.cpp(62,19): warning C4244:  '=': conversion from 'double' to 'float', possible loss of data
 C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment4\main.cpp(63,20): warning C4244:  '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment4\main.cpp(96,46): warning C4244:  'argument': conversion from 'double' to 'float', possible loss of data
-C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment4\main.cpp(95,62): warning C4244:  'argument': conversion from 'double' to 'float', possible loss of data
-C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment4\main.cpp(135,49): warning C4244:  'argument': conversion from 'double' to 'float', possible loss of data
-C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment4\main.cpp(134,65): warning C4244:  'argument': conversion from 'double' to 'float', possible loss of data
-C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment4\main.cpp(172,49): warning C4244:  'argument': conversion from 'double' to 'float', possible loss of data
-C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment4\main.cpp(171,65): warning C4244:  'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment4\main.cpp(97,25): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment4\main.cpp(98,26): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment4\main.cpp(101,46): warning C4244:  'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment4\main.cpp(100,62): warning C4244:  'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment4\main.cpp(110,28): warning C4018:  '<': signed/unsigned mismatch
   Generating Code...
-C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment4\main.cpp(185,50): warning C4244:  '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment4\main.cpp(185,50): warning C4244: C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment4\Sphere.h(68) : warning C4715: 'Sphere::intersect': not all control paths return a value
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment4\main.cpp(150,50): warning C4244:  '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment4\main.cpp(150,50): warning C4244: C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment4\Sphere.h(68) : warning C4715: 'Sphere::intersect': not all control paths return a value
   a4.vcxproj -> C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Assignment4\Debug\a4.exe
