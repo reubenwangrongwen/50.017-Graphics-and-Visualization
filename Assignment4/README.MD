@@ -6,8 +6,8 @@ All output file requirements for this assignment are in the "outputs" folder.
 
 ## TO DO
 
-* Fix the light intensity for spherical objects (likely to be a bug in Sphere.h).
 * Fix depth maps that do no display for several test cases. 
+* Yet to do any of the extra credit components.
 
 ## Extra Credit Components
 
@@ -19,15 +19,15 @@ To run the ray caster program:
 
 ```
 cd [path] 
-a4 -input scene01_plane.txt -size 200 200 -output 1.bmp -depth 0 10 1depth.bmp -normal 1normal.bmp
-a4 -input scene02_cube.txt -size 200 200 -output 2.bmp -depth 0 10 2depth.bmp -normal 2normal.bmp
-a4 -input scene03_sphere.txt -size 200 200 -output 3.bmp -depth 0 10 3depth.bmp -normal 3normal.bmp
-a4 -input scene04_axes.txt -size 200 200 -output 4.bmp -depth 0 10 4depth.bmp -normal 4normal.bmp
-a4 -input scene05_bunny_200.txt -size 200 200 -output 5.bmp -depth 0 10 5depth.bmp -normal 5normal.bmp
-a4 -input scene06_bunny_1k.txt -size 1000 1000 -output 6.bmp -depth 0 10 6depth.bmp -normal 6normal.bmp
-a4 -input scene07_shine.txt -size 200 200 -output 7.bmp -depth 0 10 7depth.bmp -normal 7normal.bmp
-a4 -input scene08_c.txt -size 200 200 -output 8.bmp -depth 0 10 8depth.bmp -normal 8normal.bmp
-a4 -input scene09_s.txt -size 200 200 -output 9.bmp -depth 0 10 9depth.bmp -normal 9normal.bmp
+a4 -input scene01_plane.txt -size 200 200 -output 1.bmp -depth 0 10 depth1.bmp -normal normal1.bmp
+a4 -input scene02_cube.txt -size 200 200 -output 2.bmp -depth 0 10 depth2.bmp -normal normal2.bmp
+a4 -input scene03_sphere.txt -size 200 200 -output 3.bmp -depth 0 10 depth3.bmp -normal normal3.bmp
+a4 -input scene04_axes.txt -size 200 200 -output 4.bmp -depth 0 10 depth4.bmp -normal normal4.bmp
+a4 -input scene05_bunny_200.txt -size 200 200 -output 5.bmp -depth 0 10 depth5.bmp -normal normal5.bmp
+a4 -input scene06_bunny_1k.txt -size 1000 1000 -output 6.bmp -depth 0 10 depth6.bmp -normal normal6.bmp
+a4 -input scene07_shine.txt -size 200 200 -output 7.bmp -depth 0 10 depth7.bmp -normal normal7.bmp
+a4 -input scene08_c.txt -size 200 200 -output 8.bmp -depth 0 10 depth8.bmp -normal normal8.bmp
+a4 -input scene09_s.txt -size 200 200 -output 9.bmp -depth 0 10 depth9.bmp -normal normal9.bmp
 ```
 
 where [path] is the file path to the solution folder.
