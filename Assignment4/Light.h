@@ -5,44 +5,30 @@
 
 #include "Object3D.h"
 
-class Light
-{
+class Light {
 public:
 
-    Light()
-    {
-
-    }
-
-    virtual ~Light()
-    {
-
-    }
+    Light() {} // constructor
+    virtual ~Light() {} // destructor
 
     virtual void getIllumination( const Vector3f& p, Vector3f& dir, Vector3f& col, float& distanceToLight ) const = 0;
 
 };
 
-class DirectionalLight : public Light
-{
+class DirectionalLight : public Light {
 public:
 
-    DirectionalLight( const Vector3f& d, const Vector3f& c )
-    {
+    DirectionalLight( const Vector3f& d, const Vector3f& c ) {
         direction = d.normalized();
         color = c;
-    }
+    } // constructor
+    ~DirectionalLight() {} // destructor
 
-    ~DirectionalLight()
-    {
-
-    }
   ///@param p unsed in this function
   ///@param distanceToLight not well defined because it's not a point light
     virtual void getIllumination( const Vector3f& p, Vector3f& dir, Vector3f& col, float& distanceToLight ) const
     {
-        // the direction to the light is the opposite of the
-        // direction of the directional light source
+        // the direction to the light is the opposite of the direction of the directional light source
         dir = -direction;
         col = color;
     }
@@ -56,27 +42,22 @@ private:
 
 };
 
-class PointLight : public Light
-{
+class PointLight : public Light {
+
 public:
 
-    PointLight( const Vector3f& p, const Vector3f& c )
-    {
+    PointLight( const Vector3f& p, const Vector3f& c ) {
         position = p;
         color = c;
-    }
+    } // constructor
 
-    ~PointLight()
-    {
+    ~PointLight() {} // destructor
 
-    }
-
-    virtual void getIllumination( const Vector3f& p, Vector3f& dir, Vector3f& col, float& distanceToLight ) const
-    {
+    virtual void getIllumination( const Vector3f& p, Vector3f& dir, Vector3f& col, float& distanceToLight ) const {
         // the direction to the light is the opposite of the
         // direction of the directional light source
-		dir = (position-p);
-		dir = dir/dir.abs();
+		dir = (position - p);
+		dir = dir / dir.abs();
         col = color;
     }
 

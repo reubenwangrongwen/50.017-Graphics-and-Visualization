@@ -5,6 +5,9 @@
 #include <vecmath.h>
 #include <float.h>
 #include <cmath>
+#include <iostream>
+
+using namespace std;
 
 
 class Camera
@@ -28,12 +31,28 @@ protected:
 class PerspectiveCamera: public Camera
 {
 public:
-	PerspectiveCamera(const Vector3f& center, const Vector3f& direction,const Vector3f& up , float angle){
-
+	PerspectiveCamera(const Vector3f& center, const Vector3f& direction,const Vector3f& up , float angle) {
+		
+		this->center = center;
+		this->w = direction;
+		this->u = Vector3f::cross(w, up);
+		this->v = Vector3f::cross(u, w);
+		this->_angle = angle;
+		
 	}
 
-	virtual Ray generateRay( const Vector2f& point){
-		return Ray(Vector3f(1,0,0),Vector3f(1,0,0));
+	virtual Ray generateRay( const Vector2f& point) {
+
+		// declaring variables
+		Vector3f r; 
+		float dist;
+		
+		// computing ray direction
+		dist = 1. / tan(_angle / 2.);
+		r = v * point.x() + u * point.y() + dist * w; 
+		r.normalize(); 
+		
+		return Ray(this->center, r);
 	}
 
 	virtual float getTMin() const { 
@@ -41,6 +60,9 @@ public:
 	}
 
 private:
+
+	Vector3f u, v, w;
+	float _angle;
 
 };
 

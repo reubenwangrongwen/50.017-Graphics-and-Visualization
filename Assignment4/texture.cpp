@@ -1,28 +1,24 @@
 #include "texture.hpp"
 #include "bitmap_image.hpp"
 void
-Texture::load(const char * filename)
-{
+Texture::load(const char * filename) {
 	bimg=new bitmap_image(filename);
 	height = bimg->height();
     width = bimg->width();
 }
 
 void
-Texture::operator()(int x, int y,  unsigned char * color)
-{
+Texture::operator()(int x, int y,  unsigned char * color) {
     x = clamp(x,0,width-1);
     y = clamp(y,0,height-1);
     bimg->get_pixel(x,y,color[0],color[1],color[2]);
 }
-bool Texture::valid()
-{
+bool Texture::valid() {
 	return bimg!=0;
 }
 ///@param x assumed to be between 0 and 1
 Vector3f
-Texture::operator()(float x, float y)
-{
+Texture::operator()(float x, float y) {
 	Vector3f color;
     int ix,iy;
     x=x*width;
@@ -45,14 +41,9 @@ Texture::operator()(float x, float y)
 	return color/255;
 }
 
-Texture::~Texture()
-{
-	if(bimg!=0){
-		delete bimg;
-	}
+Texture::~Texture() {
+	if(bimg!=0) { delete bimg; }
 }
 
-Texture::Texture():bimg(0),width(0),height(0)
-{
-}
+Texture::Texture():bimg(0),width(0),height(0) {}
 

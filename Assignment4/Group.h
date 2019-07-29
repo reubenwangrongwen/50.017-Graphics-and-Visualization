@@ -16,32 +16,42 @@ class Group:public Object3D
 {
 public:
 
-  Group(){
-
-  }
+  Group() : Object3D(NULL) {}
 	
-  Group( int num_objects ){
-
-  }
+  Group ( int num_objects ) {}
 
   ~Group(){
    
   }
 
   virtual bool intersect( const Ray& r , Hit& h , float tmin ) {
-		return false;
+	  
+	  // declare intersect flag variable
+	  bool flag; 
+
+	  flag = false; // init intersect flag to false
+	  // loop over all objects
+	  for (int i = 0; i < objects.size(); i++) {
+
+		  // set flag to true if intersection occurs
+		  if (objects[i]->intersect(r, h, tmin)) { 
+			  flag = true;
+		  }
+	  }
+
+	  return flag;
    }
 	
-  void addObject( int index , Object3D* obj ){
-
+  void addObject( int index , Object3D* obj ) {
+	  this->objects.push_back(obj);
   }
 
-  int getGroupSize(){ 
-  
+  int getGroupSize() { 
+	  return this->objects.size();
   }
 
  private:
-
+	 std::vector<Object3D*> objects;
 };
 
 #endif
