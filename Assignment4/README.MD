@@ -2,6 +2,7 @@
 
 Here is the (almost) completed code for assignment 4 writen in C++ on Visual Studio 2019. 
 This program requires Windows SDK version 10.0.16299.0 to run. 
+All output file requirements for this assignment are in the "outputs" folder. 
 
 ## TO DO
 
