@@ -16,6 +16,11 @@ Coming soon.
 Right now, we have a prototype MATLAB code that has an animated visualization of a boundstate wavefunction in an infinite-square well
 potential of varying width. There is also a MATLAB code for the evolution QHO wavefunction but it is not completed. 
 
+
+## Built With
+
+[Eigen](http://eigen.tuxfamily.org/index.php?title=Main_Page) - C++ template library for linear algebra: matrices, vectors, numerical solvers, and related algorithms.
+
 ## References
 
 Below is a list of references used for the completion of this project. 
