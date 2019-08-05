@@ -5,7 +5,7 @@ This program requires Windows SDK version 10.0.16299.0 to run.
 
 ## TO DO
 
-* Everything basically.
+* Graphical visualizations for the quantum wavefunction simulations.
 
 ## Running the Executable
 
@@ -14,8 +14,7 @@ Coming soon.
 ### Simulation Functionalities
 
 Right now, we have a prototype MATLAB code that has an animated visualization of a boundstate wavefunction in an infinite-square well
-potential of varying width. There is also a MATLAB code for the evolution QHO wavefunction but it is not completed. 
-
+potential of varying width. The simulation model without graphical visualizations have also been written up in C++. 
 
 ## Built With
 
