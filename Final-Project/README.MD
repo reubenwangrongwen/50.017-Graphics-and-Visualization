@@ -19,7 +19,9 @@ potential of varying width. There is also a MATLAB code for the evolution QHO wa
 
 ## Built With
 
-[Eigen 3.3.7](http://eigen.tuxfamily.org/index.php?title=Main_Page) - C++ template library for linear algebra: matrices, vectors, numerical solvers, and related algorithms.
+* [Windows Visual Studio 2019](https://visualstudio.microsoft.com/) - The IDE.
+* [OpenGL](https://www.opengl.org/) - Open source C++ graphics library.
+* [Eigen 3.3.7](http://eigen.tuxfamily.org/index.php?title=Main_Page) - C++ template library for linear algebra: matrices, vectors, numerical solvers, and related algorithms.
 
 ## References
 
