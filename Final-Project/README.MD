@@ -33,5 +33,10 @@ http://eigen.tuxfamily.org/index.php?title=Main_Page#Documentation
 http://lief.if.ufrgs.br/~ambusher/griffiths/sol5-Quantum_Mechanics_-_Griffiths_.pdf
 
 
+## Authors
+
+* **Reuben R. W. Wang** - *Initial work* - [ReubsWRW](https://github.com/ReubsWRW)
+* **Cheryl Goh Qian Ping** - *Initial work* - [cherylgohqp](https://github.com/cherylgohqp)
+* **Tan Ting Yu** - *Initial work* - 
 
 
