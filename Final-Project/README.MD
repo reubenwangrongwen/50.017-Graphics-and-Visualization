@@ -26,7 +26,11 @@ potential of varying width. The simulation model without graphical visualization
 
 Below is a list of references used for the completion of this project. 
 
-https://aapt.scitation.org/doi/pdf/10.1119/1.18049?class=pdf
+http://www.songho.ca/opengl/gl_displaylist.html
+
+http://eigen.tuxfamily.org/index.php?title=Main_Page#Documentation
+
+http://lief.if.ufrgs.br/~ambusher/griffiths/sol5-Quantum_Mechanics_-_Griffiths_.pdf
 
 
 
