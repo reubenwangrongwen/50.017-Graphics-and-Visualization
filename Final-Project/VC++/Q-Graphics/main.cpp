@@ -16,25 +16,34 @@
 #include <vector>
 #include <sstream>
 #include <vecmath.h>
+#include <Eigen/Dense> // c++ eigen library
 #include "camera.h"
 
 #include "TimeStepper.hpp"
-#include "ClothSystem.h"
+#include "TimeEvolution.h"
 
 using namespace std;
 
 // Globals here.
-namespace
-{
+namespace {
 	// class pointer instances
-    ParticleSystem *system;
+	wavefunction * Qwave;
+    ParticleSystem * system;
     TimeStepper * timeStepper;
+	TimeEvolution * timeEvolve;
 	
-	// declare variables
-	int system_indx = 1;
-	char sim_system; // variable to take simulated system from user input
-	float h = 0.1f; // variable to take step size from user input
+	// declare variables for cloth simulation
+	int system_indx = 0;
+	float h = 0.05f; // variable to take step size from user input
 	int num_particles = 12; // variable for number of particles
+
+	// simulation numerical constants
+	int num_t = 10; // number of dt steps
+	int F_end = 25; // number of Fourier series terms
+
+	// model parameters
+	double dx; // numerical step sizes
+	double L_new = 2.; // width of ISW
 	
   // initialize your particle systems
   void initSystem(int argc, char * argv[]) {
@@ -45,9 +54,11 @@ namespace
 	// seed the random number generator with the current time
     srand( time( NULL ) );	
 
+	// cout << "To run: a3.exe e/t/r/R h" << endl;
+
 	// running default simulation instead
 	cout << "Default: Running with the RK4 ODE solver..." << endl;
-	system = new ClothSystem(num_particles, num_particles, 0.1f);
+	system = new ClothSystem(n0, L0);
 	timeStepper = new RK4();
 
 	if (argc >= 2) {
@@ -76,14 +87,17 @@ namespace
   }
 
   // Take a step forward for the particle shower
-  ///TODO: Optional. modify this function to display various particle systems
-  ///and switch between different timeSteppers
-  void stepSystem()
-  {   
+  void stepSystem()   {   
     if(timeStepper!=0){
       timeStepper->takeStep(system,h);
     }
   }
+
+
+  void evolveSystem() {
+	  timeEvolve->tEvolve(h);
+  }
+
 
   // Draw the current particle positions
   void drawSystem()
@@ -91,18 +105,18 @@ namespace
     
     // Base material colors (they don't change)
     GLfloat particleColor[] = {0.4f, 0.7f, 1.0f, 1.0f};
-    GLfloat floorColor[] = {1.0f, 0.0f, 0.0f, 1.0f};
+    GLfloat floorColor[] = {0.0f, 0.0f, 0.0f, 1.0f};
     
     glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE, particleColor);
     
-    glutSolidSphere(0.1f,10.0f,10.0f);
+    //glutSolidSphere(0.1f,10.0f,10.0f);
     
-    system->draw();
+    system->draw(); // draw current system
     
     
     glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE, floorColor);
     glPushMatrix();
-    glTranslatef(0.0f,-5.0f,0.0f);
+    glTranslatef(0.0f,-10.0f,0.0f);
     glScaled(50.0f,0.01f,50.0f);
     glutSolidCube(1);
     glPopMatrix();
@@ -133,7 +147,8 @@ namespace
     // received.
     void keyboardFunc( unsigned char key, int x, int y )
     {
-        switch ( key ) {
+        switch ( key )
+        {
         case 27: // Escape key
             exit(0);
             break;
@@ -145,10 +160,9 @@ namespace
         }
 		case 't': {
 			if (system_indx == 0) {
-				cout << "Running simulation..." << endl;
-				cout << "To toggle cloth-like rendering, press 'r'. " << endl;
-				system = new ClothSystem(num_particles, num_particles, 0.1f);
-				sim_system = 'c'; // update system type char variable
+				cout << "Running cloth system..." << endl;
+				cout << "To toggle cloth rendering, press 'r'. " << endl;
+				system = new ClothSystem(n0, L0);
 			}
 		}
 		case 'r': {
@@ -156,7 +170,7 @@ namespace
 			system->render_toggle ();
 			break;
 		}
-        default:
+        default: 
             cout << "Unhandled key press " << key << "." << endl;        
         }
 
@@ -304,26 +318,26 @@ namespace
         glutSwapBuffers();
     }
 
-    void timerFunc(int t)
-    {
-        stepSystem();
+    void timerFunc(int t) {
+
+		// evolveSystem(); // PROBLEM HERE
+		
+		stepSystem();
 
         glutPostRedisplay();
 
         glutTimerFunc(t, &timerFunc, t);
+
     }
 
-    
-
-    
     
 }
 
 // Main routine.
 // Set up OpenGL, define the callbacks and start the main loop
-int main( int argc, char* argv[] )
-{
-    glutInit( &argc, argv );
+int main( int argc, char* argv[] ) {
+
+	glutInit( &argc, argv );
 
     // We're going to animate it, so double buffer 
     glutInitDisplayMode( GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH );
@@ -337,7 +351,7 @@ int main( int argc, char* argv[] )
     camera.SetDistance( 10 );
     camera.SetCenter( Vector3f::ZERO );
     
-    glutCreateWindow("Assignment 4");
+    glutCreateWindow("Quantum Infinite-Square Well Simulation");
 
     // Initialize OpenGL parameters.
     initRendering();
@@ -360,8 +374,8 @@ int main( int argc, char* argv[] )
     glutDisplayFunc( drawScene );
 
     // Trigger timerFunc every 20 msec
-    glutTimerFunc(20, timerFunc, 20);
-
+	glutTimerFunc(20, timerFunc, 20);
+	
         
     // Start the main loop.  glutMainLoop never returns.
     glutMainLoop();

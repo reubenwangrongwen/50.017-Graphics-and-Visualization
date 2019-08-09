@@ -1,0 +1,28 @@
+﻿  camera.cpp
+  ClothSystem.cpp
+  main.cpp
+C:\Users\Admin\Desktop\Graphics Assignments\Assignment3_setup\main.cpp(34): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\Admin\Desktop\Graphics Assignments\Assignment3_setup\main.cpp(61): warning C4244: 'argument': conversion from 'float' to 'GLint', possible loss of data
+C:\Users\Admin\Desktop\Graphics Assignments\Assignment3_setup\main.cpp(125): warning C4060: switch statement contains no 'case' or 'default' labels
+  particleSystem.cpp
+  pendulumSystem.cpp
+C:\Users\Admin\Desktop\Graphics Assignments\Assignment3_setup\pendulumSystem.cpp(35): warning C4244: 'argument': conversion from 'float' to 'GLint', possible loss of data
+  simpleSystem.cpp
+C:\Users\Admin\Desktop\Graphics Assignments\Assignment3_setup\simpleSystem.cpp(27): warning C4244: 'argument': conversion from 'float' to 'GLint', possible loss of data
+  TimeStepper.cpp
+  Matrix2f.cpp
+  Matrix3f.cpp
+  Matrix4f.cpp
+  Quat4f.cpp
+  Vector2f.cpp
+  Vector3f.cpp
+  Vector4f.cpp
+  Generating Code...
+LINK : warning LNK4075: ignoring '/INCREMENTAL' due to '/OPT:ICF' specification
+RK4.lib(integrator.obj) : error LNK2038: mismatch detected for '_MSC_VER': value '1600' doesn't match value '1900' in camera.obj
+LINK : warning LNK4217: symbol '??1exception@std@@UAE@XZ (public: virtual __thiscall std::exception::~exception(void))' defined in 'MSVCRT.lib(throw_bad_alloc.obj)' is imported by 'RK4.lib(integrator.obj)' in function '"public: virtual __thiscall std::bad_alloc::~bad_alloc(void)" (??1bad_alloc@std@@UAE@XZ)'
+LINK : warning LNK4217: symbol '??0exception@std@@QAE@ABV01@@Z (public: __thiscall std::exception::exception(class std::exception const &))' defined in 'MSVCRT.lib(throw_bad_alloc.obj)' is imported by 'RK4.lib(integrator.obj)' in function '"public: __thiscall std::bad_alloc::bad_alloc(class std::bad_alloc const &)" (??0bad_alloc@std@@QAE@ABV01@@Z)'
+RK4.lib(integrator.obj) : error LNK2019: unresolved external symbol "__declspec(dllimport) public: __thiscall std::exception::exception(char const * const &)" (__imp_??0exception@std@@QAE@ABQBD@Z) referenced in function "public: __thiscall std::bad_alloc::bad_alloc(char const *)" (??0bad_alloc@std@@QAE@PBD@Z)
+    Hint on symbols that are defined and could potentially match:
+      "__declspec(dllimport) public: __thiscall std::exception::exception(class std::exception const &)" (__imp_??0exception@std@@QAE@ABV01@@Z)
+C:\Users\Admin\Desktop\Graphics Assignments\Assignment3_setup\Release\a3.exe : fatal error LNK1120: 1 unresolved externals

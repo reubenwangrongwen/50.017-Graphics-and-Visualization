@@ -1,14 +1,15 @@
+// #include "particleSystem.h"
 #include "ClothSystem.h"
 #include <iostream>
 
 using namespace std;
 
 // simulation parameters
-float m = 0.25f; // mass
+float mass = 0.25f; // mass
 float g = 9.81f; // gravity
 float b = 2.f; // viscous drag coefficient
 
-float k_st = 400.f; // structural spring coefficient
+float k_st = 200.f; // structural spring coefficient
 float k_sh = 40.f; // shear spring coefficient
 float k_f = 200.f; // flexion spring coefficient
 
@@ -60,32 +61,33 @@ vector<vector<int>> get_spring_indices (int grid_x, int grid_y, int i, int j) {
 }
 
 
-ClothSystem::ClothSystem (int grid_x, int grid_y, float ds) {
+ClothSystem::ClothSystem (int n0, double L0) {
 
 	// initializing particle cloth-grid parameters
 	this->motion = false; // init motion boolean
 	this->render = false; // init rendering boolean 
 	
-	m_numParticles = grid_x * grid_y; // total number of particles
-	height = grid_y; // height of grid
-	width = grid_x; // width of grid
-	spacing = ds; // grid particle spacing
+	// setting class objects
+	m_numParticles = height * width; // total number of particles
+	double spacing = this->get_width() / width; // grid particle spacing
 
 	// declaring variable vector of spring index vectors
 	vector<vector<int>> spring_idx; 
 
 	// loop over vertical axis
-	for (int i = 0; i < grid_y; i++) { // m: height
+	for (int dy = 0; dy < height; dy++) { // m: height
 
 		// loop over horizontal axis
-		for (int j = 0; j < grid_x; j++) { // n: width
+		for (int dx = 0; dx < width; dx++) { // n: width
 
 			// appending position and velocity vectors
-			m_vVecState.push_back(Vector3f(spacing * j + 1, -spacing * i, 0));
+			// m_vVecState.push_back(Vector3f(spacing * (dx - width / 2.), - spacing * dy, 0.));
+			cdV quantum_state = this->get_Qstate();
+			m_vVecState.push_back(Vector3f(spacing * (dx - width / 2.), dy * quantum_state(dx).real() / height, dy * quantum_state(dx).imag() / height));
 			m_vVecState.push_back(Vector3f(0, 0, 0));			
 			
 			// getting all indices for springs
-			spring_idx = get_spring_indices(grid_y, grid_x, i, j);
+			spring_idx = get_spring_indices(height, width, dy, dx);
 			spring_indices.push_back(spring_idx);
 		}
 	}
@@ -102,7 +104,7 @@ Vector3f ClothSystem::get_gravity () {
 		Gravitational force vector.
 	*/
 
-	return -m * Vector3f(0, g, 0);
+	return -mass * Vector3f(0, g, 0);
 }
 
 
@@ -139,6 +141,7 @@ Vector3f ClothSystem::get_net_force(vector<Vector3f> state, int idx) {
 	vector<int> st_idx = spring_indices[idx / 2][0];
 	vector<int> sh_idx = spring_indices[idx / 2][1];
 	vector<int> f_idx = spring_indices[idx / 2][2];
+	double spacing = this->get_width() / width; // grid particle spacing
 
 	// adding drag and gravitational forces
 	F_N += get_gravity(); // gravitational force
@@ -198,25 +201,23 @@ vector<Vector3f> ClothSystem::evalF(vector<Vector3f> state) {
 	// declaring variables
 	Vector3f net_force;
 	vector<Vector3f> force;
+	Vector3f edge_force = Vector3f::ZERO; // cloth is stationary
 
 	// loop over particles
-	for (unsigned i = 0; i < state.size(); i += 2) { 
+	for (unsigned idx = 0; idx < state.size(); idx += 2) {
 
-		if (i == 0 || i == (width - 1) * 2) { // boundary particles
-			force.push_back (state[i + 1]);
 
-			Vector3f edge_force = Vector3f(0., 0., 0.); // cloth is stationary
-			// checking motion toggle
-			if (motion) {
-				// Vector3f edge_force = -(state[i] - Vector3f(state[i].x(), 0, 2)); // cloth rides back and forth
-				edge_force = -state[i]; // cloth circulates around  
-			}
+
+		if ((idx >= 0) && (idx <= (width - 1) * 2)) { // boundary particles
+			force.push_back (state[idx + 1]);
+			cout << state[idx + 1][0] << state[idx + 1][1] << state[idx + 1][2] << endl;
 			force.push_back(edge_force);
 		}
 		else { // non-boundary particles 
-			force.push_back (state[i + 1]);
-			net_force = get_net_force (state, i);
+			force.push_back (state[idx + 1]);
+			net_force = get_net_force (state, idx);
 			force.push_back(net_force);
+			// cout << net_force[0] << net_force[1] << net_force[2] << endl;
 		}
 	}
 
@@ -235,7 +236,7 @@ int ClothSystem::get_index(int row, int col) {
 		Equivalent index in the flattened array.
 	*/
 
-	return row * (this->width) + col;
+	return row * (width) + col;
 }
 
 
@@ -268,12 +269,14 @@ void ClothSystem::draw_cloth(int row, int col) {
 
 	// loading normals and vertices
 	glBegin(GL_TRIANGLES);
+	glColor3f(abs(n1[0]), abs(n1[1]), abs(n1[2])); // coloring triangles
 	glNormal3f(n1[0], n1[1], n1[2]); glVertex3f(p1[0], p1[1], p1[2]);
 	glNormal3f(n2[0], n2[1], n2[2]); glVertex3f(p3[0], p3[1], p3[2]);
 	glNormal3f(n3[0], n3[1], n3[2]); glVertex3f(p2[0], p2[1], p2[2]);
 	glEnd();
 
 	glBegin(GL_TRIANGLES);
+	glColor3f(abs(n4[0]), abs(n4[1]), abs(n4[2])); // coloring triangles
 	glNormal3f(n4[0], n4[1], n4[2]); glVertex3f(p2[0], p2[1], p2[2]);
 	glNormal3f(n5[0], n5[1], n5[2]); glVertex3f(p3[0], p3[1], p3[2]);
 	glNormal3f(n6[0], n6[1], n6[2]); glVertex3f(p4[0], p4[1], p4[2]);
@@ -286,8 +289,8 @@ void ClothSystem::draw_line(int row1, int col1, int row2, int col2) {
 	// declare variables
 	Vector3f p1, p2;
 
-	if (row1 < 0 || row1 >= this->height || row2 < 0 || row2 >= this->height ||
-		col1 < 0 || col1 >= this->width || col2 < 0 || col2 >= this->width) {
+	if (row1 < 0 || row1 >= height || row2 < 0 || row2 >= height ||
+		col1 < 0 || col1 >= width || col2 < 0 || col2 >= width) {
 		return;
 	}
 
@@ -310,15 +313,15 @@ void ClothSystem::draw()
 
 	// checking render toggle boolean variable
 	if (render) { // draw smooth cloth 
-		for (int i = 0; i < this->height - 1; i++) {
-			for (int j = 0; j < this->width - 1; j++) {
+		for (int i = 0; i < height - 1; i++) {
+			for (int j = 0; j < width - 1; j++) {
 				draw_cloth (i, j); 
 			}
 		}
 	}
 	else { // draw grid
-		for (int i = 0; i < this->height; i++) {
-			for (int j = 0; j < this->width; j++) {
+		for (int i = 0; i < height; i++) {
+			for (int j = 0; j < width; j++) {
 				
 				pos = (this->getState())[get_index(i, j) * 2];
 
