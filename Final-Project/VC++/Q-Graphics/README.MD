@@ -1,24 +1,27 @@
-# Assignment 3
+# Quantum Infinite-Square Well w/ Cloth System
 
-Here is the completed code for assignment 3 writen in C++ on Visual Studio 2019. 
+Here is the code for visualizing a quantum infinite-square well system with an added cloth-life surface. 
+This code is written in C++ on Visual Studio 2019. 
 This program requires Windows SDK version 10.0.16299.0 to run. 
+
+### Class Inheritance Hierarchy
+
+From parent to child classes, the class inheritance hierarchy is as follows:
+* wavefunction
+* ParticleSystem
+* ClothSystem
+* TimeEvolution
 
 ## TO DO
 
-* Fix cloth rendering for it to render both sides.
-* Optimize Runge-Kutta-Felhberg numerical ODE solver method.
-
-## Extra Credit Components
-
-* Implemented the Runge-Kutta 4th order numerical ODE solver (**easy extra credit**). 
-* Implemented smooth shading for cloth system, but only renders one side (**easy extra credit**).
-* Implementated the Runge-Kutta-Felhberg numerical ODE technique (**medium extra credit**). 
+* Fix cloth force vectors for the cloth system.
+* Implement quantum time-evolution. 
 
 ## Running the Executable
 
 To run the particle system simulations:
 ```
-cd [path] a3.exe e/t/r/R h
+cd [path] quantum_ISW.exe e/t/r/R h
 ```
 
 where [path] is the file path to the solution folder, "e/t/r/R" is the choice of numerical ODE solver:
@@ -32,10 +35,7 @@ and "h" is the numerical step size (optional argument).
 
 ### Simulation Functionalities
 
-While in the graphical particle system simulation window, use "t" to toggle between different systems (simple, pendulum, cloth). 
-While in the cloth system, you can:
-* use "r" to toggle between smooth cloth shading and grid render options,  
-* use "m" to toggle between applying a centripetal force to act on the cloth pin points to cause motion.
+You can use "r" to toggle between smooth cloth shading and grid render options.
 
 ## References
 
