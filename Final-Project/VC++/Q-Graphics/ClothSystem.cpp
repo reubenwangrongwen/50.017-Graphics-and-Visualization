@@ -81,9 +81,10 @@ ClothSystem::ClothSystem (int n0, double L0) {
 		for (int dx = 0; dx < width; dx++) { // n: width
 
 			// appending position and velocity vectors
-			// m_vVecState.push_back(Vector3f(spacing * (dx - width / 2.), - spacing * dy, 0.));
+			// m_vVecState.push_back(Vector3f(spacing * (dx - (width / 2.)), - spacing * dy, 0.));
 			cdV quantum_state = this->get_Qstate();
 			m_vVecState.push_back(Vector3f(spacing * (dx - width / 2.), dy * quantum_state(dx).real() / height, dy * quantum_state(dx).imag() / height));
+			// cout << dy * quantum_state(dx).real() / height << dy* quantum_state(dx).imag() / height << endl;
 			m_vVecState.push_back(Vector3f(0, 0, 0));			
 			
 			// getting all indices for springs
@@ -153,7 +154,12 @@ Vector3f ClothSystem::get_net_force(vector<Vector3f> state, int idx) {
 		// getting current spring force
 		l_e = spacing; // structural spring equilibrium length
 		del_x = state[idx] - state[2 * st_idx[n]]; // spring displacement
-		F_s = -k_st * (del_x.abs() - l_e) * del_x / del_x.abs(); // spring force
+		if (del_x.abs() == 0.) {
+			F_s = Vector3f::ZERO;
+		}
+		else {
+			F_s = -k_st * (del_x.abs() - l_e) * del_x / del_x.abs(); // spring force
+		}
 		
 		// adding to net force
 		F_N += F_s;
@@ -163,7 +169,12 @@ Vector3f ClothSystem::get_net_force(vector<Vector3f> state, int idx) {
 		// getting current spring force
 		l_e = spacing / sqrt(2.); // shear spring equilibrium length
 		del_x = state[idx] - state[2 * sh_idx[n]]; // spring displacement
-		F_s = -k_sh * (del_x.abs() - l_e) * del_x / del_x.abs(); // spring force
+		if (del_x.abs() == 0.) {
+			F_s = Vector3f::ZERO;
+		}
+		else {
+			F_s = -k_sh * (del_x.abs() - l_e) * del_x / del_x.abs(); // spring force
+		}
 		
 		// adding to net force
 		F_N += F_s;
@@ -173,10 +184,19 @@ Vector3f ClothSystem::get_net_force(vector<Vector3f> state, int idx) {
 		// getting current spring force
 		l_e = spacing * 2.; // flexion spring equilibrium length
 		del_x = state[idx] - state[2 * f_idx[n]]; // spring displacement
-		F_s = -k_f * (del_x.abs() - l_e) * del_x / del_x.abs(); // spring force
+		if (del_x.abs() == 0.) {
+			F_s = Vector3f::ZERO;
+		}
+		else {
+			F_s = -k_f * (del_x.abs() - l_e) * del_x / del_x.abs(); // spring force
+		}
 		
 		// adding to net force
 		F_N += F_s;
+	}
+
+	if ((idx >= 0) || (idx <= (width - 1) * 2)) {
+		return Vector3f::ZERO;
 	}
 
 	return F_N;
@@ -201,16 +221,14 @@ vector<Vector3f> ClothSystem::evalF(vector<Vector3f> state) {
 	// declaring variables
 	Vector3f net_force;
 	vector<Vector3f> force;
-	Vector3f edge_force = Vector3f::ZERO; // cloth is stationary
 
 	// loop over particles
 	for (unsigned idx = 0; idx < state.size(); idx += 2) {
 
-
-
 		if ((idx >= 0) && (idx <= (width - 1) * 2)) { // boundary particles
+		// if ((idx == 0) || (idx == (width - 1) * 2)) { // boundary particles
+			Vector3f edge_force = Vector3f::ZERO; // cloth is stationary
 			force.push_back (state[idx + 1]);
-			cout << state[idx + 1][0] << state[idx + 1][1] << state[idx + 1][2] << endl;
 			force.push_back(edge_force);
 		}
 		else { // non-boundary particles 

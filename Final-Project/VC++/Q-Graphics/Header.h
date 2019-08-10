@@ -27,8 +27,8 @@ const double L0 = 2.; // width of ISW
 const double x_c = 0.; // center of square-well
 
 // cloth model parameters
-const int height = 15;
-const int width = 30;
+const int height = 12;
+const int width = 12;
 const cdV x_domain = Eigen::VectorXcd::LinSpaced(width, x_min, x_max); // coordinate space vector
 
 

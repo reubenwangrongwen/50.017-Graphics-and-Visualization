@@ -35,7 +35,6 @@ namespace {
 	// declare variables for cloth simulation
 	int system_indx = 0;
 	float h = 0.05f; // variable to take step size from user input
-	int num_particles = 12; // variable for number of particles
 
 	// simulation numerical constants
 	int num_t = 10; // number of dt steps
