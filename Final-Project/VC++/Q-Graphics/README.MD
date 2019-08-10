@@ -14,8 +14,8 @@ From parent to child classes, the class inheritance hierarchy is as follows:
 
 ## TO DO
 
-* Fix cloth force vectors for the cloth system.
 * Implement quantum time-evolution. 
+* Amend code to allow non-square cloth grids. 
 
 ## Running the Executable
 
