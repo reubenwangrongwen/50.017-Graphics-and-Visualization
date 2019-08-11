@@ -7,10 +7,10 @@ This program requires Windows SDK version 10.0.16299.0 to run.
 ### Class Inheritance Hierarchy
 
 From parent to child classes, the class inheritance hierarchy is as follows:
-* wavefunction
-  * ParticleSystem
-    * ClothSystem
-      * TimeEvolution
+1. wavefunction
+   2. ParticleSystem
+      3. ClothSystem
+         4. TimeEvolution
 
 ## TO DO
 
