@@ -117,10 +117,9 @@ void RK4::takeStep(ParticleSystem* particleSystem, float stepSize) {
 		final_state.push_back(state);
 	}
 
-	/*ClothSystem* cloth;
-	final_state = cloth->state_update(final_state);*/
 
 	particleSystem->setState(final_state);
+	// particleSystem->state_update();
 }
 
 

@@ -15,7 +15,7 @@ class ClothSystem: public ParticleSystem {
 
 public:
 
-	ClothSystem(int n, double L); // to set-up cloth system
+	ClothSystem(int n = n0, double L = L0); // to set-up cloth system
 	vector<Vector3f> evalF(vector<Vector3f> state); // to evaluate force
 
 	// for drawing the scene
@@ -24,21 +24,19 @@ public:
 	void draw();
 
 	// for quantum state time-evolution
-	vector<Vector3f> ClothSystem::state_update(vector<Vector3f> state);
+	/*vector<Vector3f> ClothSystem::state_update(vector<Vector3f> state);*/
 	void set_Qstate(const cdV& State) { Qstate = State; } // setter method for the quantum system's state
 	cdV get_Qstate() { return Qstate; } // getter method for the quantum system's state
 	void set_Qstate_vel(const cdV& StateVel) { Qstate_vel = StateVel; } // setter method for the quantum system's state
 	cdV get_Qstate_vel() { return Qstate_vel; } // getter method for the quantum system's state velocity
 
-	void set_time(double t) { time = t; } // set time for quantum time-evolution
-	double get_time() { return time; } // get time for quantum time-evolution
 
 private:
 
-	// quantum state variable
-	cdV Qstate_vel = Eigen::VectorXcd::Zero(width);
-	cdV Qstate = this->ISW_eigenstate(n0, L0, x_domain, 0.); // get wavefunction;
-	double time = 0.; // time for quantum time_evolution
+	//// quantum state variable
+	//cdV Qstate_vel = Eigen::VectorXcd::Zero(width);
+	//cdV Qstate = this->ISW_eigenstate(n0, L0, x_domain, 0.); // get wavefunction;
+	//double time = 0.; // time for quantum time_evolution
 
 	// render and motion toggle booleans
 	bool render;
@@ -58,5 +56,3 @@ private:
 
 
 #endif
-
-

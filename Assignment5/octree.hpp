@@ -1,5 +1,6 @@
 #ifndef OCTREE_HPP
 #define OCTREE_HPP
+
 struct Box
 {
 	Vector3f mn, mx;

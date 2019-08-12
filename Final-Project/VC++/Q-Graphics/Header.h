@@ -25,7 +25,7 @@ const double x_min = -5.; // lower-bound of coordinate-space domain
 const double x_max = 5.; // upper-bound of coordinate-space domain
 const double L0 = 5.; // width of ISW
 const double x_c = 0.; // center of square-well
-const double dt = 0.05f;
+const double dt = 0.001f;
 
 // cloth model parameters
 const int height = 10;

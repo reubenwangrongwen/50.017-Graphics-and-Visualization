@@ -29,6 +29,7 @@ class Triangle;
 class Transform;
 */
 #define MAX_PARSER_TOKEN_LENGTH 100
+#define M_PI 3.14159265359
 
 class SceneParser
 {
@@ -44,7 +45,7 @@ public:
 
     Vector3f getBackgroundColor(Vector3f dir) const
     {
-		if(cubemap ==0){
+		if(cubemap == 0){
 			return background_color;
 		}
 		return cubemap->operator()(dir);

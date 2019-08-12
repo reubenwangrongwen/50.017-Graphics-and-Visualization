@@ -20,19 +20,13 @@ bool transmittedDirection( const Vector3f& normal, const Vector3f& incoming,
 {
 }
 
-RayTracer::RayTracer( SceneParser * scene, int max_bounces 
-  //more arguments if you need...
-                      ) :
-  m_scene(scene)
-
-{
-  g=scene->getGroup();
+//more arguments if you need...
+RayTracer::RayTracer( SceneParser* scene, int max_bounces, bool shadow_toggle ) : m_scene(scene) {
+  g = scene->getGroup();
   m_maxBounces = max_bounces;
 }
 
-RayTracer::~RayTracer()
-{
-}
+RayTracer::~RayTracer() {}
 
 Vector3f RayTracer::traceRay( Ray& ray, float tmin, int bounces,
         float refr_index, Hit& hit ) const

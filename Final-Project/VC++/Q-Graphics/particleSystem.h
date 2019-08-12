@@ -23,13 +23,22 @@ public:
 	vector<Vector3f> getState(){ return m_vVecState; };
 	
 	// setter method for the system's state
-	void setState(const vector<Vector3f>  & newState) { m_vVecState = newState; };
+	void setState(const vector<Vector3f> & newState) { m_vVecState = newState; };
+
+	void set_time(double t) { time = t; } // set time for quantum time-evolution
+	double get_time() { return time; } // get time for quantum time-evolution
+	void ParticleSystem::state_update();
 	
 	virtual void render_toggle() = 0;
 	virtual void motion_toggle() = 0;
 	virtual void draw() = 0;
 	
 protected:
+
+	// quantum state variable
+	cdV Qstate_vel = Eigen::VectorXcd::Zero(width);
+	cdV Qstate = this->ISW_eigenstate(n0, L0, x_domain, 0.); // get wavefunction;
+	double time = 0.; // time for quantum time_evolution
 
 	vector<Vector3f> m_vVecState;
 	

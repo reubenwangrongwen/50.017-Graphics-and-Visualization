@@ -4,7 +4,9 @@
 #include "Mesh.hpp"
 #include "octree.hpp"
 #include <vector>
+#include <algorithm>
 
+ 
 ///@brief two intervals intersect
 bool intersect(float * a, float * b)
 {

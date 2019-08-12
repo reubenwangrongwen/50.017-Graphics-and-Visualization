@@ -8,7 +8,7 @@ using namespace std;
 
 // simulation parameters
 float mass = 0.25f; // mass
-float g = 9.81f; // gravity
+float g = 4.81f; // gravity
 float b = 2.f; // viscous drag coefficient
 
 float k_st = 200.f; // structural spring coefficient
@@ -256,12 +256,13 @@ vector<Vector3f> ClothSystem::evalF(vector<Vector3f> state) {
 			
 			force.push_back(state[idx + 1]);
 
-			// edge_force = Vector3f::ZERO; // cloth is stationary
+			// edge_force = Vector3f(0.f, 0.f, 0.f); // cloth is stationary
 			
-			int j = idx - (state.size() - (width - 1) * 2);
+			int j = idx - (state.size() - (width - 1) * 2); 
 			edge_force = Vector3f(0., wf_force[j / 2].real(), wf_force[j / 2].imag());
 			if (edge_force.abs() != 0.) { edge_force.normalize(); } // normalizing quantum state force
-			// cout << edge_force[0] << edge_force[1] << edge_force[2] << endl;
+			
+			cout << edge_force[0] << ", " << edge_force[1] << ", " << edge_force[2] << endl;
 
 			force.push_back(edge_force);
 		}
@@ -275,30 +276,6 @@ vector<Vector3f> ClothSystem::evalF(vector<Vector3f> state) {
 	return force;
 }
 
-
-vector<Vector3f> ClothSystem::state_update(vector<Vector3f> state) {
-
-	double spacing = this->get_width() / width; // grid particle spacing
-	double L = this->get_width(); // width of ISW
-	int n = this->get_level(); // quantization index
-	double t = this->get_time();
-
-	cdV psi_new = this->ISW_eigenstate(n, L, x_domain, t); // computing time-evolved state
-
-	// loop over vertical axis
-	for (int dy = 0; dy < height; dy += 2) { // m: height
-		// loop over horizontal axis
-		for (int dx = 0; dx < width; dx += 2) { // n: width
-
-			if ((dy * (width)+dx >= state.size() - (width - 1) * 2) && (dy * (width)+dx < state.size())) {
-				// updating position vectors
-				state[dy * (width) + dx] = Vector3f(spacing * (dx - width / 2.), psi_new(dx).real(), psi_new(dx).imag());
-			}
-		}
-	}
-
-	return state;
-}
 
 
 int ClothSystem::get_index(int row, int col) {
