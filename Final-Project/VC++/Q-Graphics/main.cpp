@@ -319,8 +319,6 @@ namespace {
 
     void timerFunc(int t) {
 
-		// evolveSystem(); // PROBLEM HERE
-		
 		stepSystem();
 
         glutPostRedisplay();

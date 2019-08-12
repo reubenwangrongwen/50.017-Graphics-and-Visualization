@@ -23,12 +23,13 @@ const int n0 = 1; // initial quantization index
 const double m = 0.1; // mass of quantum particle
 const double x_min = -5.; // lower-bound of coordinate-space domain
 const double x_max = 5.; // upper-bound of coordinate-space domain
-const double L0 = 2.; // width of ISW
+const double L0 = 5.; // width of ISW
 const double x_c = 0.; // center of square-well
+const double dt = 0.05f;
 
 // cloth model parameters
-const int height = 12;
-const int width = 12;
+const int height = 10;
+const int width = 10;
 const cdV x_domain = Eigen::VectorXcd::LinSpaced(width, x_min, x_max); // coordinate space vector
 
 

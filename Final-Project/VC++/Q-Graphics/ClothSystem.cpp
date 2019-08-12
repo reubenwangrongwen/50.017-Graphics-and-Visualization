@@ -1,8 +1,10 @@
-// #include "particleSystem.h"
+#include "TimeEvolution.h"
 #include "ClothSystem.h"
 #include <iostream>
 
+
 using namespace std;
+
 
 // simulation parameters
 float mass = 0.25f; // mass
@@ -84,7 +86,6 @@ ClothSystem::ClothSystem (int n0, double L0) {
 			// m_vVecState.push_back(Vector3f(spacing * (dx - (width / 2.)), - spacing * dy, 0.));
 			cdV quantum_state = this->get_Qstate();
 			m_vVecState.push_back(Vector3f(spacing * (dx - width / 2.), dy * quantum_state(dx).real() / height, dy * quantum_state(dx).imag() / height));
-			// cout << dy * quantum_state(dx).real() / height << dy* quantum_state(dx).imag() / height << endl;
 			m_vVecState.push_back(Vector3f(0, 0, 0));			
 			
 			// getting all indices for springs
@@ -194,8 +195,8 @@ Vector3f ClothSystem::get_net_force(vector<Vector3f> state, int idx) {
 		// adding to net force
 		F_N += F_s;
 	}
-
-	if ((idx >= 0) || (idx <= (width - 1) * 2)) {
+	
+	if (((idx >= 0) && (idx <= (width - 1) * 2)) || ((idx >= state.size() - (width - 1) * 2) && (idx < state.size()))) {
 		return Vector3f::ZERO;
 	}
 
@@ -219,27 +220,84 @@ vector<Vector3f> ClothSystem::evalF(vector<Vector3f> state) {
 	*/
 
 	// declaring variables
-	Vector3f net_force;
+	Vector3f net_force, edge_force;
 	vector<Vector3f> force;
+
+	// getting class instances and parameters for quantum state
+	TimeEvolution* timeEvolve;
+	double L = this->get_width(); // width of ISW
+	int n = this->get_level(); // quantization index
+	cdV psi(width), psi_new(width), wf_vel(width), wf_force(width); // quantum state vectors
+	double spacing = this->get_width() / width; // grid particle spacing
+
+	// ---------------------------- for cloth boundary (quantum state) ----------------------------
+	// getting time
+	double t = this->get_time();
+
+	// init model parameters
+	psi = this->get_Qstate(); // get wavefunction
+
+	// computing next wavefunction
+	this->set_time(t + dt); // updating time for quantum time-evolution
+	psi_new = this->ISW_eigenstate(n, L, x_domain, t); // computing time-evolved state
+	this->set_Qstate(psi_new); // updating quantum state
+
+	// computing quantum state 'rope' velocity and force
+	wf_vel = (psi_new - psi) / dt; // computing quantum state current velocity
+	wf_force = (wf_vel - this->get_Qstate_vel()) / dt; // computing quantum state force
+	this->set_Qstate_vel(wf_vel); // updating quantum state velocity
+	// --------------------------------------------------------------------------------------------
 
 	// loop over particles
 	for (unsigned idx = 0; idx < state.size(); idx += 2) {
 
-		if ((idx >= 0) && (idx <= (width - 1) * 2)) { // boundary particles
+		if ((idx >= state.size() - (width - 1) * 2) && (idx < state.size())) { // boundary particles
 		// if ((idx == 0) || (idx == (width - 1) * 2)) { // boundary particles
-			Vector3f edge_force = Vector3f::ZERO; // cloth is stationary
-			force.push_back (state[idx + 1]);
+			
+			force.push_back(state[idx + 1]);
+
+			// edge_force = Vector3f::ZERO; // cloth is stationary
+			
+			int j = idx - (state.size() - (width - 1) * 2);
+			edge_force = Vector3f(0., wf_force[j / 2].real(), wf_force[j / 2].imag());
+			if (edge_force.abs() != 0.) { edge_force.normalize(); } // normalizing quantum state force
+			// cout << edge_force[0] << edge_force[1] << edge_force[2] << endl;
+
 			force.push_back(edge_force);
 		}
 		else { // non-boundary particles 
 			force.push_back (state[idx + 1]);
 			net_force = get_net_force (state, idx);
 			force.push_back(net_force);
-			// cout << net_force[0] << net_force[1] << net_force[2] << endl;
 		}
 	}
 
 	return force;
+}
+
+
+vector<Vector3f> ClothSystem::state_update(vector<Vector3f> state) {
+
+	double spacing = this->get_width() / width; // grid particle spacing
+	double L = this->get_width(); // width of ISW
+	int n = this->get_level(); // quantization index
+	double t = this->get_time();
+
+	cdV psi_new = this->ISW_eigenstate(n, L, x_domain, t); // computing time-evolved state
+
+	// loop over vertical axis
+	for (int dy = 0; dy < height; dy += 2) { // m: height
+		// loop over horizontal axis
+		for (int dx = 0; dx < width; dx += 2) { // n: width
+
+			if ((dy * (width)+dx >= state.size() - (width - 1) * 2) && (dy * (width)+dx < state.size())) {
+				// updating position vectors
+				state[dy * (width) + dx] = Vector3f(spacing * (dx - width / 2.), psi_new(dx).real(), psi_new(dx).imag());
+			}
+		}
+	}
+
+	return state;
 }
 
 

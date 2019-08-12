@@ -1,4 +1,6 @@
 #include "TimeStepper.hpp"
+#include "TimeEvolution.h"
+#include "ClothSystem.h"
 #include <iostream>
 
 using namespace std;
@@ -114,6 +116,9 @@ void RK4::takeStep(ParticleSystem* particleSystem, float stepSize) {
 		state = current_state[i] + (stepSize / 6.) * (K1[i] + 2.*K2[i] + 2.*K3[i] + K4[i]);
 		final_state.push_back(state);
 	}
+
+	/*ClothSystem* cloth;
+	final_state = cloth->state_update(final_state);*/
 
 	particleSystem->setState(final_state);
 }

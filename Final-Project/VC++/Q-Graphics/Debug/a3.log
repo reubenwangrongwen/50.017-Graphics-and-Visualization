@@ -1,19 +1,98 @@
 ﻿  ClothSystem.cpp
-C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(86,134): warning C4244:  'argument': conversion from '_Ty' to 'float', possible loss of data
-C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(86,134): warning C4244:         with
-C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(86,134): warning C4244:         [
-C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(86,134): warning C4244:             _Ty=double
-C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(86,134): warning C4244:         ]
-C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(86,94): warning C4244:  'argument': conversion from '_Ty' to 'float', possible loss of data
-C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(86,94): warning C4244:         with
-C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(86,94): warning C4244:         [
-C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(86,94): warning C4244:             _Ty=double
-C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(86,94): warning C4244:         ]
-C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(86,43): warning C4244:  'argument': conversion from 'double' to 'float', possible loss of data
-C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(152,20): warning C4018:  '<': signed/unsigned mismatch
-C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(155,9): warning C4244:  '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(167,20): warning C4018:  '<': signed/unsigned mismatch
-C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(170,17): warning C4244:  '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(182,20): warning C4018:  '<': signed/unsigned mismatch
-C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(185,17): warning C4244:  '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(88,134): warning C4244:  'argument': conversion from '_Ty' to 'float', possible loss of data
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(88,134): warning C4244:         with
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(88,134): warning C4244:         [
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(88,134): warning C4244:             _Ty=double
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(88,134): warning C4244:         ]
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(88,94): warning C4244:  'argument': conversion from '_Ty' to 'float', possible loss of data
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(88,94): warning C4244:         with
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(88,94): warning C4244:         [
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(88,94): warning C4244:             _Ty=double
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(88,94): warning C4244:         ]
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(88,43): warning C4244:  'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(153,20): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(156,9): warning C4244:  '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(168,20): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(171,17): warning C4244:  '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(183,20): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(186,17): warning C4244:  '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(199,56): warning C4018:  '>=': signed/unsigned mismatch
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(199,99): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(262,74): warning C4244:  'argument': conversion from '_Ty' to 'float', possible loss of data
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(262,74): warning C4244:         with
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(262,74): warning C4244:         [
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(262,74): warning C4244:             _Ty=double
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(262,74): warning C4244:         ]
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(262,50): warning C4244:  'argument': conversion from '_Ty' to 'float', possible loss of data
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(262,50): warning C4244:         with
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(262,50): warning C4244:         [
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(262,50): warning C4244:             _Ty=double
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(262,50): warning C4244:         ]
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(227,17): warning C4101:  'timeEvolve': unreferenced local variable
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(293,25): warning C4018:  '>=': signed/unsigned mismatch
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(293,80): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(295,106): warning C4244:  'argument': conversion from '_Ty' to 'float', possible loss of data
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(295,106): warning C4244:         with
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(295,106): warning C4244:         [
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(295,106): warning C4244:             _Ty=double
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(295,106): warning C4244:         ]
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(295,86): warning C4244:  'argument': conversion from '_Ty' to 'float', possible loss of data
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(295,86): warning C4244:         with
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(295,86): warning C4244:         [
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(295,86): warning C4244:             _Ty=double
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(295,86): warning C4244:         ]
+  TimeStepper.cpp
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(295,49): warning C4244:  'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\TimeStepper.cpp(28,20): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\TimeStepper.cpp(58,20): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\TimeStepper.cpp(66,20): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\TimeStepper.cpp(67,40): warning C4244:  'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\TimeStepper.cpp(97,20): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\TimeStepper.cpp(98,40): warning C4244:  'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\TimeStepper.cpp(103,20): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\TimeStepper.cpp(104,40): warning C4244:  'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\TimeStepper.cpp(109,20): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\TimeStepper.cpp(115,20): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\TimeStepper.cpp(116,40): warning C4244:  'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\TimeStepper.cpp(151,20): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\TimeStepper.cpp(152,40): warning C4244:  'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\TimeStepper.cpp(157,20): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\TimeStepper.cpp(158,45): warning C4244:  'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\TimeStepper.cpp(159,21): warning C4244:  'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\TimeStepper.cpp(164,20): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\TimeStepper.cpp(165,48): warning C4244:  'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\TimeStepper.cpp(166,24): warning C4244:  'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\TimeStepper.cpp(167,24): warning C4244:  'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\TimeStepper.cpp(172,20): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\TimeStepper.cpp(173,47): warning C4244:  'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\TimeStepper.cpp(174,10): warning C4244:  'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\TimeStepper.cpp(175,24): warning C4244:  'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\TimeStepper.cpp(176,23): warning C4244:  'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\TimeStepper.cpp(181,20): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\TimeStepper.cpp(182,45): warning C4244:  'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\TimeStepper.cpp(183,10): warning C4244:  'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\TimeStepper.cpp(184,24): warning C4244:  'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\TimeStepper.cpp(185,24): warning C4244:  'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\TimeStepper.cpp(186,22): warning C4244:  'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\TimeStepper.cpp(192,20): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\TimeStepper.cpp(194,47): warning C4244:  'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\TimeStepper.cpp(195,24): warning C4244:  'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\TimeStepper.cpp(196,24): warning C4244:  'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\TimeStepper.cpp(197,21): warning C4244:  'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\TimeStepper.cpp(199,47): warning C4244:  'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\TimeStepper.cpp(200,24): warning C4244:  'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\TimeStepper.cpp(201,25): warning C4244:  'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\TimeStepper.cpp(202,21): warning C4244:  'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\TimeStepper.cpp(203,21): warning C4244:  'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\TimeStepper.cpp(205,40): warning C4244:  '+=': conversion from 'double' to 'float', possible loss of data
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\TimeStepper.cpp(210,18): warning C4244:  'return': conversion from 'double' to 'float', possible loss of data
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\TimeStepper.cpp(232,55): warning C4305:  'argument': truncation from 'double' to 'float'
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\TimeStepper.cpp(238,20): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\TimeStepper.cpp(239,28): warning C4244:  'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\TimeStepper.cpp(244,20): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\TimeStepper.cpp(245,28): warning C4244:  'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\TimeStepper.cpp(250,20): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\TimeStepper.cpp(256,20): warning C4018:  '<': signed/unsigned mismatch
+  Generating Code...
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\TimeStepper.cpp(257,28): warning C4244:  'argument': conversion from 'double' to 'float', possible loss of data
   a3.vcxproj -> C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\Debug\quantum_ISW.exe
