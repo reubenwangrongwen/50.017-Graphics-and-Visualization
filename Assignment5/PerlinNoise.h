@@ -43,7 +43,7 @@ public:
         for (int i = 0; i < octaves; i++)
         {
             float tmp = pow(2.0f,i);
-            answer += noise(tmp*pt[0],tmp*pt[1],tmp*pt[2]) / float(tmp);
+            answer += noise(tmp*pt[0], tmp*pt[1], tmp*pt[2]) / float(tmp);
         }
         return answer;
     }

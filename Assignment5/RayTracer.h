@@ -18,7 +18,7 @@ public:
       assert( false );
   }
 
-  RayTracer( SceneParser* scene, int max_bounces, bool shadow_toggle ); //more arguments as you need...
+  RayTracer( SceneParser* scene, int max_bounces, bool shadow_tog); //more arguments as you need...
   ~RayTracer();
   
   Vector3f traceRay( Ray& ray, float tmin, int bounces, float refr_index, Hit& hit ) const;

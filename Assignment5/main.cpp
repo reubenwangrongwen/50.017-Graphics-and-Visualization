@@ -82,6 +82,7 @@ int main( int argc, char* argv[] )
 	Image img(width, height); // init image
 	Image img_depth(width, height); // init depth image 
 	Image img_normals(width, height); // init normal image 
+	RayTracer ray_tracer = RayTracer::RayTracer(&scene, 10, true);
 	
 	
 	/* Then loop over each pixel in the image, shooting a ray
@@ -89,7 +90,7 @@ int main( int argc, char* argv[] )
 	 the scene.  Write the color at the intersection to that
 	 pixel in your output image.*/
 
-	img.SetAllPixels( scene.getBackgroundColor(Vector3f(0.0f, 0.0f, 0.0f)) ); // init scene pixels
+	img.SetAllPixels( scene.getBackgroundColor(Vector3f::ZERO) ); // init scene pixels
 	img_depth.SetAllPixels( Vector3f::ZERO ); // init depth scene pixels
 	img_normals.SetAllPixels( Vector3f::ZERO ); // init normal scene pixels
 
@@ -102,25 +103,32 @@ int main( int argc, char* argv[] )
 			hit = Hit(FLT_MAX, NULL, Vector3f::ZERO); // init hit variable
 			Ray ray = scene.getCamera()->generateRay(coordinate); // init ray for ray casting
 
+			// ------------------------- performing ray tracing -------------------------
+			pix_col = ray_tracer.traceRay(ray, scene.getCamera()->getTMin(), 0, 1.0f, hit); 
+			img.SetPixel(j, i, pix_col); // setting pixels to color
+			// --------------------------------------------------------------------------
+
 			if (scene.getGroup()->intersect(ray, hit, scene.getCamera()->getTMin())) {
 
-				pix_col = Vector3f::ZERO; // re-init to zero
+				// ------------------------- getting image output -------------------------
+				//pix_col = Vector3f::ZERO; // re-init to zero
 
-				// loop over lights for diffused lighting
-				for (unsigned i = 0; i < scene.getNumLights(); i++) {
+				//// loop over lights for diffused lighting
+				//for (unsigned i = 0; i < scene.getNumLights(); i++) {
 
-					light = scene.getLight(i); // light specification
-					light->getIllumination(ray.pointAtParameter(hit.getT()), light_dir, light_col, light_dist);
+				//	light = scene.getLight(i); // light specification
+				//	light->getIllumination(ray.pointAtParameter(hit.getT()), light_dir, light_col, light_dist);
 
-					shading_col = hit.getMaterial()->Shade(ray, hit, light_dir, light_col); // material specification
-					pix_col = pix_col + shading_col; // adding shading color for next iteration
-				}
+				//	shading_col = hit.getMaterial()->Shade(ray, hit, light_dir, light_col); // material specification
+				//	pix_col = pix_col + shading_col; // adding shading color for next iteration
+				//}
 
-				pix_col = pix_col + hit.getMaterial()->getDiffuseColor() * scene.getAmbientLight(); // copmuting ambient color
-				img.SetPixel(j, i, pix_col); // setting pixels to color
+				//pix_col = pix_col + hit.getMaterial()->getDiffuseColor() * scene.getAmbientLight(); // copmuting ambient color
+				//img.SetPixel(j, i, pix_col); // setting pixels to color
+				// ------------------------------------------------------------------------
 
 
-				// getting depth image 
+				// ------------------------- getting depth image -------------------------
 				if (depth_toggle) {
 
 					if (hit.getT() < depth_min) {
@@ -134,8 +142,9 @@ int main( int argc, char* argv[] )
 						img_depth.SetPixel(j, i, depths * Vector3f(1., 1., 1.));
 					}
 				}
+				// -----------------------------------------------------------------------
 
-				// getting normal image 
+				// ------------------------- getting normal image -------------------------
 				if (normal_toggle) {
 
 					// declaring color variable
@@ -151,6 +160,7 @@ int main( int argc, char* argv[] )
 					}
 					img_normals.SetPixel(j, i, col_norm);
 				}
+				// ------------------------------------------------------------------------
 			}
 		}
 	}

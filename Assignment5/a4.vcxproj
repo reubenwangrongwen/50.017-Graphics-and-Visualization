@@ -14,6 +14,7 @@
     <Keyword>Win32Proj</Keyword>
     <ProjectGuid>{AF1E1472-9295-CA68-2662-0BCC4DF5823D}</ProjectGuid>
     <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+    <ProjectName>a5</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -77,7 +78,9 @@
     <ClCompile Include="CubeMap.cpp" />
     <ClCompile Include="Image.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Material.cpp" />
     <ClCompile Include="Mesh.cpp" />
+    <ClCompile Include="Noise.cpp" />
     <ClCompile Include="octree.cpp" />
     <ClCompile Include="PerlinNoise.cpp" />
     <ClCompile Include="RayTracer.cpp" />
@@ -101,6 +104,7 @@
     <ClInclude Include="Light.h" />
     <ClInclude Include="Material.h" />
     <ClInclude Include="Mesh.hpp" />
+    <ClInclude Include="Noise.h" />
     <ClInclude Include="Object3D.h" />
     <ClInclude Include="octree.hpp" />
     <ClInclude Include="PerlinNoise.h" />
