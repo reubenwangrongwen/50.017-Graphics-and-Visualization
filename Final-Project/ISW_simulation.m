@@ -4,8 +4,8 @@
 %%
 dt = 0.01; % time steps
 m = 0.1; % particle mass
-L0 = 1; % initial width of square-well
-n0 = 1; % initial quantization index
+L0 = 10; % initial width of square-well
+n0 = 3; % initial quantization index
 x_c = 0; % center of square-well
 
 L_new = L0; % new square-well width 
@@ -41,24 +41,30 @@ for t = 1 : n_samples
     wavefunctions = [];
     c = [];
     
-    % increasing width of square-well
-    if (mod(t, 20) == 0)
-       L0 = L_new;
-       L_new = L_new + 1; 
-       % f_end = f_end + 50;
-    end
+%     % increasing width of square-well
+%     if (mod(t, 20) == 0)
+%        L0 = L_new;
+%        L_new = L_new + 1; 
+%        % f_end = f_end + 50;
+%     end
+%     
+%     % for loop over linear combination
+%     for i = 1:f_end
+%         % coefficients for linear combination
+%         c_new = coeff (m, x_c, n0, L0, i, L_new, dx, x, t*dt);
+%         c = [c, c_new];
+% 
+%         % eigenstates for linear combination
+%         wavefunction = ISW_soln (m, x_c, i, L_new, x, t*dt);
+%         wavefunctions = [wavefunctions; wavefunction];
+%     end
+%     psi = wavefun (c, wavefunctions); % new state
     
-    % for loop over linear combination
-    for i = 1:f_end
-        % coefficients for linear combination
-        c_new = coeff (m, x_c, n0, L0, i, L_new, dx, x, t*dt);
-        c = [c, c_new];
-
-        % eigenstates for linear combination
-        wavefunction = ISW_soln (m, x_c, i, L_new, x, t*dt);
-        wavefunctions = [wavefunctions; wavefunction];
+    psi = psi_0;
+    for n_i = n0:n0+5
+        psi = psi + ISW_soln (m, x_c, n_i, L_new, x, t*dt);
     end
-    psi = wavefun (c, wavefunctions); % new state
+    psi = psi / norm(psi);
     
     plot4_isw (fig, x_min, x_max, x_c, L_new, x, psi)
     
@@ -175,7 +181,7 @@ function plots = plot4_isw (fig, x_min, x_max, x_c, L_new, x, psi)
     xlabel('$x$-axis', 'Interpreter', 'latex')
     ylabel('$|\psi(x)|^2$', 'Interpreter', 'latex')    
     xlim([x_min x_max])
-    ylim([-0.5 2.25])
+    ylim([-0.5 0.5])
     
     % plotting real-part of the wavefunction
     fig;
@@ -185,7 +191,7 @@ function plots = plot4_isw (fig, x_min, x_max, x_c, L_new, x, psi)
     xlabel('$x$-axis', 'Interpreter', 'latex')
     ylabel('$\Re\{\psi(x)\}$', 'Interpreter', 'latex')    
     xlim([x_min x_max])
-    ylim([-1.5 1.5])
+    ylim([-0.5 0.5])
     
     % plotting imaginary-part of the wavefunction
     fig;
@@ -195,7 +201,7 @@ function plots = plot4_isw (fig, x_min, x_max, x_c, L_new, x, psi)
     xlabel('$x$-axis', 'Interpreter', 'latex')
     ylabel('$\Im\{\psi(x)\}$', 'Interpreter', 'latex')    
     xlim([x_min x_max])
-    ylim([-1.5 1.5])
+    ylim([-0.5 0.5])
 end
 
 
