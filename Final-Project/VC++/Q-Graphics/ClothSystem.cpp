@@ -305,7 +305,13 @@ void ClothSystem::draw_cloth(int row, int col) {
 	Vector3f n1, n2, n3, n4, n5, n6; // normal vectors
 
 	current_state = this->getState(); // init current state
-	
+
+	float red, green, blue;
+	red = (float)rand() / (float)RAND_MAX;
+	green = (float)rand() / (float)RAND_MAX;
+	blue = (float)rand() / (float)RAND_MAX;
+	GLfloat clothColor[] = { red, green, blue, 1.0f };
+
 	// getting vertices
 	p1 = current_state[get_index(row, col) * 2]; 
 	p2 = current_state[get_index(row, col + 1) * 2];
@@ -322,12 +328,16 @@ void ClothSystem::draw_cloth(int row, int col) {
 
 	// loading normals and vertices
 	glBegin(GL_TRIANGLES);
+	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE, clothColor);
+	// glColor3f(abs(n1[0]), abs(n1[1]), abs(n1[2])); // coloring triangles
 	glNormal3f(n1[0], n1[1], n1[2]); glVertex3f(p1[0], p1[1], p1[2]);
 	glNormal3f(n2[0], n2[1], n2[2]); glVertex3f(p3[0], p3[1], p3[2]);
 	glNormal3f(n3[0], n3[1], n3[2]); glVertex3f(p2[0], p2[1], p2[2]);
 	glEnd();
 
 	glBegin(GL_TRIANGLES);
+	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE, clothColor);
+	// glColor3f(abs(n4[0]), abs(n4[1]), abs(n4[2])); // coloring triangles
 	glNormal3f(n4[0], n4[1], n4[2]); glVertex3f(p2[0], p2[1], p2[2]);
 	glNormal3f(n5[0], n5[1], n5[2]); glVertex3f(p3[0], p3[1], p3[2]);
 	glNormal3f(n6[0], n6[1], n6[2]); glVertex3f(p4[0], p4[1], p4[2]);
@@ -350,12 +360,16 @@ void ClothSystem::draw_cloth(int row, int col) {
 
 	// loading normals and vertices
 	glBegin(GL_TRIANGLES);
+	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE, clothColor);
+	// glColor3f(abs(n1[0]), abs(n1[1]), abs(n1[2])); // coloring triangles
 	glNormal3f(n1[0], n1[1], n1[2]); glVertex3f(p1[0], p1[1], p1[2]);
 	glNormal3f(n2[0], n2[1], n2[2]); glVertex3f(p3[0], p3[1], p3[2]);
 	glNormal3f(n3[0], n3[1], n3[2]); glVertex3f(p2[0], p2[1], p2[2]);
 	glEnd();
 
 	glBegin(GL_TRIANGLES);
+	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE, clothColor);
+	// glColor3f(abs(n4[0]), abs(n4[1]), abs(n4[2])); // coloring triangles
 	glNormal3f(n4[0], n4[1], n4[2]); glVertex3f(p2[0], p2[1], p2[2]);
 	glNormal3f(n5[0], n5[1], n5[2]); glVertex3f(p3[0], p3[1], p3[2]);
 	glNormal3f(n6[0], n6[1], n6[2]); glVertex3f(p4[0], p4[1], p4[2]);
