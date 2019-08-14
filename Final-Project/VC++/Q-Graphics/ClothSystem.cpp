@@ -1,4 +1,3 @@
-#include "TimeEvolution.h"
 #include "ClothSystem.h"
 #include <iostream>
 
@@ -7,13 +6,13 @@ using namespace std;
 
 
 // simulation parameters
-float mass = 0.25f; // mass
-float g = 4.81f; // gravity
-float b = 2.f; // viscous drag coefficient
+float mass = 0.2f; // mass
+float g = 0.5f; // gravity
+float b = 0.01f; // viscous drag coefficient
 
-float k_st = 200.f; // structural spring coefficient
-float k_sh = 40.f; // shear spring coefficient
-float k_f = 200.f; // flexion spring coefficient
+float k_st = 400.f; // structural spring coefficient
+float k_sh = 80.f; // shear spring coefficient
+float k_f = 400.f; // flexion spring coefficient
 
 
 
@@ -153,7 +152,7 @@ Vector3f ClothSystem::get_net_force(vector<Vector3f> state, int idx) {
 	for (int n = 0; n < st_idx.size(); n++) { // structural springs
 		
 		// getting current spring force
-		l_e = spacing; // structural spring equilibrium length
+		l_e = 0.8 * spacing; // structural spring equilibrium length
 		del_x = state[idx] - state[2 * st_idx[n]]; // spring displacement
 		if (del_x.abs() == 0.) {
 			F_s = Vector3f::ZERO;
@@ -168,7 +167,7 @@ Vector3f ClothSystem::get_net_force(vector<Vector3f> state, int idx) {
 	for (int n = 0; n < sh_idx.size(); n++) { // shear springs
 
 		// getting current spring force
-		l_e = spacing / sqrt(2.); // shear spring equilibrium length
+		l_e = 0.8 * spacing / sqrt(2.); // shear spring equilibrium length
 		del_x = state[idx] - state[2 * sh_idx[n]]; // spring displacement
 		if (del_x.abs() == 0.) {
 			F_s = Vector3f::ZERO;
@@ -183,7 +182,7 @@ Vector3f ClothSystem::get_net_force(vector<Vector3f> state, int idx) {
 	for (int n = 0; n < f_idx.size(); n++) { // flexion springs
 
 		// getting current spring force
-		l_e = spacing * 2.; // flexion spring equilibrium length
+		l_e = 0.8 * spacing * 2.; // flexion spring equilibrium length
 		del_x = state[idx] - state[2 * f_idx[n]]; // spring displacement
 		if (del_x.abs() == 0.) {
 			F_s = Vector3f::ZERO;
@@ -222,9 +221,9 @@ vector<Vector3f> ClothSystem::evalF(vector<Vector3f> state) {
 	// declaring variables
 	Vector3f net_force, edge_force;
 	vector<Vector3f> force;
+	float a_c; // centripetal acceleration
 
 	// getting class instances and parameters for quantum state
-	TimeEvolution* timeEvolve;
 	double L = this->get_width(); // width of ISW
 	int n = this->get_level(); // quantization index
 	cdV psi(width), psi_new(width), wf_vel(width), wf_force(width); // quantum state vectors
@@ -240,6 +239,10 @@ vector<Vector3f> ClothSystem::evalF(vector<Vector3f> state) {
 	// computing next wavefunction
 	this->set_time(t + dt); // updating time for quantum time-evolution
 	psi_new = this->ISW_eigenstate(n, L, x_domain, t); // computing time-evolved state
+	for (unsigned n_i = n + 1; n_i < n + 5; n_i++) {
+		psi_new += this->ISW_eigenstate(n_i, L, x_domain, t); // computing time-evolved state
+	}
+	psi_new.normalize();
 	this->set_Qstate(psi_new); // updating quantum state
 
 	// computing quantum state 'rope' velocity and force
@@ -252,19 +255,21 @@ vector<Vector3f> ClothSystem::evalF(vector<Vector3f> state) {
 	for (unsigned idx = 0; idx < state.size(); idx += 2) {
 
 		if ((idx >= state.size() - (width - 1) * 2) && (idx < state.size())) { // boundary particles
-		// if ((idx == 0) || (idx == (width - 1) * 2)) { // boundary particles
 			
-			force.push_back(state[idx + 1]);
+			//force.push_back(state[idx + 1]);
 
-			// edge_force = Vector3f(0.f, 0.f, 0.f); // cloth is stationary
-			
 			int j = idx - (state.size() - (width - 1) * 2); 
-			edge_force = Vector3f(0., wf_force[j / 2].real(), wf_force[j / 2].imag());
-			if (edge_force.abs() != 0.) { edge_force.normalize(); } // normalizing quantum state force
-			
-			cout << edge_force[0] << ", " << edge_force[1] << ", " << edge_force[2] << endl;
+			float scale = float(j) / float(state.size());
 
-			force.push_back(edge_force);
+			edge_force = Vector3f(0., scale * wf_force[j / 2].real(), scale * wf_force[j / 2].imag());
+			if (edge_force.abs() != 0.) { edge_force.normalize(); } // normalizing quantum state force
+
+			force.push_back(5 * edge_force);
+
+			edge_force = Vector3f(0., scale * wf_force[j / 2 + 1].real(), scale * wf_force[j / 2 + 1].imag());
+			if (edge_force.abs() != 0.) { edge_force.normalize(); } // normalizing quantum state force
+
+			force.push_back(5 * edge_force);
 		}
 		else { // non-boundary particles 
 			force.push_back (state[idx + 1]);
@@ -334,6 +339,36 @@ void ClothSystem::draw_cloth(int row, int col) {
 	glNormal3f(n5[0], n5[1], n5[2]); glVertex3f(p3[0], p3[1], p3[2]);
 	glNormal3f(n6[0], n6[1], n6[2]); glVertex3f(p4[0], p4[1], p4[2]);
 	glEnd();
+
+	// --------------- the other side of the cloth --------------- 
+	// getting vertices
+	p1 = -p1;
+	p2 = -p2;
+	p3 = -p3;
+	p4 = -p4;
+
+	// computing normals
+	n1 = Vector3f::cross(p3 - p1, p2 - p1); n1.normalize();
+	n2 = Vector3f::cross(p2 - p3, p1 - p3); n2.normalize();
+	n3 = Vector3f::cross(p1 - p2, p3 - p2); n3.normalize();
+	n4 = Vector3f::cross(p3 - p2, p4 - p2); n4.normalize();
+	n5 = Vector3f::cross(p4 - p3, p2 - p3); n5.normalize();
+	n6 = Vector3f::cross(p2 - p4, p3 - p4); n6.normalize();
+
+	// loading normals and vertices
+	glBegin(GL_TRIANGLES);
+	glColor3f(abs(n1[0]), abs(n1[1]), abs(n1[2])); // coloring triangles
+	glNormal3f(n1[0], n1[1], n1[2]); glVertex3f(p1[0], p1[1], p1[2]);
+	glNormal3f(n2[0], n2[1], n2[2]); glVertex3f(p3[0], p3[1], p3[2]);
+	glNormal3f(n3[0], n3[1], n3[2]); glVertex3f(p2[0], p2[1], p2[2]);
+	glEnd();
+
+	glBegin(GL_TRIANGLES);
+	glColor3f(abs(n4[0]), abs(n4[1]), abs(n4[2])); // coloring triangles
+	glNormal3f(n4[0], n4[1], n4[2]); glVertex3f(p2[0], p2[1], p2[2]);
+	glNormal3f(n5[0], n5[1], n5[2]); glVertex3f(p3[0], p3[1], p3[2]);
+	glNormal3f(n6[0], n6[1], n6[2]); glVertex3f(p4[0], p4[1], p4[2]);
+	glEnd();
 }
 
 
@@ -341,6 +376,7 @@ void ClothSystem::draw_line(int row1, int col1, int row2, int col2) {
 
 	// declare variables
 	Vector3f p1, p2;
+	float red, green, blue;
 
 	if (row1 < 0 || row1 >= height || row2 < 0 || row2 >= height ||
 		col1 < 0 || col1 >= width || col2 < 0 || col2 >= width) {
@@ -351,11 +387,30 @@ void ClothSystem::draw_line(int row1, int col1, int row2, int col2) {
 	p1 = (this->getState())[get_index(row1, col1) * 2];
 	p2 = (this->getState())[get_index(row2, col2) * 2];
 
+	// getting colors 
+	red = (float)rand() / (float)RAND_MAX;
+	green = (float)rand() / (float)RAND_MAX;
+	blue = (float)rand() / (float)RAND_MAX;
+
+	glPushAttrib(GL_ALL_ATTRIB_BITS);
+	glDisable(GL_LIGHTING);
 	glLineWidth(2.5); // setting interpolation line width
+	glPushMatrix();
 	glBegin(GL_LINES);
+	glColor3f(red, green, blue);
 	glVertex3f(p1[0], p1[1], p1[2]);
 	glVertex3f(p2[0], p2[1], p2[2]);
+	glVertex3f(-p1[0], -p1[1], -p1[2]);
+	glVertex3f(-p2[0], -p2[1], -p2[2]);
 	glEnd();
+	glPopMatrix();
+	glPopAttrib();
+
+	//glLineWidth(2.5); // setting interpolation line width
+	//glBegin(GL_LINES);
+	//glVertex3f(p1[0], p1[1], p1[2]);
+	//glVertex3f(p2[0], p2[1], p2[2]);
+	//glEnd();
 }
 
 

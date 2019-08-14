@@ -30,13 +30,7 @@ public:
 	void set_Qstate_vel(const cdV& StateVel) { Qstate_vel = StateVel; } // setter method for the quantum system's state
 	cdV get_Qstate_vel() { return Qstate_vel; } // getter method for the quantum system's state velocity
 
-
 private:
-
-	//// quantum state variable
-	//cdV Qstate_vel = Eigen::VectorXcd::Zero(width);
-	//cdV Qstate = this->ISW_eigenstate(n0, L0, x_domain, 0.); // get wavefunction;
-	//double time = 0.; // time for quantum time_evolution
 
 	// render and motion toggle booleans
 	bool render;

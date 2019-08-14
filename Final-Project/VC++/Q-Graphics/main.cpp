@@ -19,8 +19,8 @@
 #include <Eigen/Dense> // c++ eigen library
 #include "camera.h"
 
+#include "ClothSystem.h"
 #include "TimeStepper.hpp"
-#include "TimeEvolution.h"
 
 using namespace std;
 
@@ -30,7 +30,6 @@ namespace {
 	wavefunction * Qwave;
     ParticleSystem * system;
     TimeStepper * timeStepper;
-	TimeEvolution * timeEvolve;
 	
 	// declare variables for cloth simulation
 	int system_indx = 0;
@@ -91,12 +90,6 @@ namespace {
       timeStepper->takeStep(system,h);
     }
   }
-
-
-  void evolveSystem() {
-	  timeEvolve->tEvolve(h);
-  }
-
 
   // Draw the current particle positions
   void drawSystem()

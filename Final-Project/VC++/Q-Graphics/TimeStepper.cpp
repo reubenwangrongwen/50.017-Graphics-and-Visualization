@@ -88,7 +88,6 @@ void RK4::takeStep(ParticleSystem* particleSystem, float stepSize) {
 	// declaring variables
 	vector<Vector3f> current_state, next_state1, next_state2, next_state3, final_state, K1, K2, K3, K4;
 	Vector3f state;
-
 	
 	// computing the 4 terms for the Runge-Kutta solver
 	current_state = particleSystem->getState(); // initializing states for RK 4th order solver	
@@ -119,7 +118,6 @@ void RK4::takeStep(ParticleSystem* particleSystem, float stepSize) {
 
 
 	particleSystem->setState(final_state);
-	// particleSystem->state_update();
 }
 
 

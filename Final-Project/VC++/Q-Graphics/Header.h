@@ -19,17 +19,17 @@ const cplex i(0., 1.); // complex number i
 const double pi = 3.1415926535; // value of pi
 
 // quantum model parameters
-const int n0 = 1; // initial quantization index 
+const int n0 = 3; // initial quantization index 
 const double m = 0.1; // mass of quantum particle
 const double x_min = -5.; // lower-bound of coordinate-space domain
 const double x_max = 5.; // upper-bound of coordinate-space domain
-const double L0 = 5.; // width of ISW
+const double L0 = 9.5; // width of ISW
 const double x_c = 0.; // center of square-well
-const double dt = 0.001f;
+const double dt = 0.0005;
 
 // cloth model parameters
 const int height = 10;
-const int width = 10;
+const int width = height;
 const cdV x_domain = Eigen::VectorXcd::LinSpaced(width, x_min, x_max); // coordinate space vector
 
 

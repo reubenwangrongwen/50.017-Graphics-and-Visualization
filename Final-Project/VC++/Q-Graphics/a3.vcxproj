@@ -83,7 +83,6 @@
     <ClCompile Include="ClothSystem.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="particleSystem.cpp" />
-    <ClCompile Include="TimeEvolution.cpp" />
     <ClCompile Include="TimeStepper.cpp" />
     <ClCompile Include="vecmath\src\Matrix2f.cpp" />
     <ClCompile Include="vecmath\src\Matrix3f.cpp" />
@@ -99,7 +98,6 @@
     <ClInclude Include="ClothSystem.h" />
     <ClInclude Include="Header.h" />
     <ClInclude Include="particleSystem.h" />
-    <ClInclude Include="TimeEvolution.h" />
     <ClInclude Include="TimeStepper.hpp" />
     <ClInclude Include="vecmath\include\Matrix2f.h" />
     <ClInclude Include="vecmath\include\Matrix3f.h" />
