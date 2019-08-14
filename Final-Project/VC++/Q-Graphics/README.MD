@@ -10,11 +10,9 @@ From parent to child classes, the class inheritance hierarchy is as follows:
 - wavefunction
   - ParticleSystem
     - ClothSystem
-      - TimeEvolution
 
 ## TO DO
 
-* Implement quantum time-evolution. 
 * Amend code to allow non-square cloth grids. 
 
 ## Running the Executable
