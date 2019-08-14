@@ -13,6 +13,8 @@ public:
 
 	// method declarations
 	cdV ISW_eigenstate(int n, double L, cdV x, double t);
+	cdV ISW_uniform_state(int n, double L, cdV x, double t, int num_states);
+	cdV ISW_exp_state(int n, double L, cdV x, double t, int num_states);
 	cplex coeff(int n1, double L1, int n, double L, double dx, cdV x, double t);
 	cdV wavefun(wavefunction* wf, cdV coeffs, cdM wavefunctions);
 

@@ -25,10 +25,10 @@ const double x_min = -5.; // lower-bound of coordinate-space domain
 const double x_max = 5.; // upper-bound of coordinate-space domain
 const double L0 = 9.5; // width of ISW
 const double x_c = 0.; // center of square-well
-const double dt = 0.0005;
+const double dt = 0.001;
 
 // cloth model parameters
-const int height = 10;
+const int height = 15;
 const int width = height;
 const cdV x_domain = Eigen::VectorXcd::LinSpaced(width, x_min, x_max); // coordinate space vector
 

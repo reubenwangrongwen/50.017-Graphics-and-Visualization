@@ -37,7 +37,9 @@ protected:
 
 	// quantum state variable
 	cdV Qstate_vel = Eigen::VectorXcd::Zero(width);
-	cdV Qstate = this->ISW_eigenstate(n0, L0, x_domain, 0.); // get wavefunction;
+	//cdV Qstate = this->ISW_eigenstate(n0, L0, x_domain, 0.); // get wavefunction;
+	cdV Qstate = this->ISW_uniform_state(n0, L0, x_domain, 0., 5); // get wavefunction
+	//cdV Qstate = this->ISW_exp_state(n0, L0, x_domain, 0., 5);
 	double time = 0.; // time for quantum time_evolution
 
 	vector<Vector3f> m_vVecState;

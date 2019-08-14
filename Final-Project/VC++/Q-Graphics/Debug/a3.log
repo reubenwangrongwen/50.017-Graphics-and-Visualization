@@ -18,26 +18,25 @@ C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github
 C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(185,23): warning C4244:  '=': conversion from 'double' to 'float', possible loss of data
 C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(198,56): warning C4018:  '>=': signed/unsigned mismatch
 C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(198,99): warning C4018:  '<': signed/unsigned mismatch
-C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(242,33): warning C4018:  '<': signed/unsigned mismatch
-C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(264,68): warning C4244:  'argument': conversion from '_Ty' to 'float', possible loss of data
-C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(264,68): warning C4244:         with
-C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(264,68): warning C4244:         [
-C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(264,68): warning C4244:             _Ty=double
-C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(264,68): warning C4244:         ]
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(259,68): warning C4244:  'argument': conversion from '_Ty' to 'float', possible loss of data
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(259,68): warning C4244:         with
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(259,68): warning C4244:         [
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(259,68): warning C4244:             _Ty=double
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(259,68): warning C4244:         ]
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(259,36): warning C4244:  'argument': conversion from '_Ty' to 'float', possible loss of data
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(259,36): warning C4244:         with
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(259,36): warning C4244:         [
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(259,36): warning C4244:             _Ty=double
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(259,36): warning C4244:         ]
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(264,72): warning C4244:  'argument': conversion from '_Ty' to 'float', possible loss of data
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(264,72): warning C4244:         with
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(264,72): warning C4244:         [
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(264,72): warning C4244:             _Ty=double
+C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(264,72): warning C4244:         ]
 C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(264,36): warning C4244:  'argument': conversion from '_Ty' to 'float', possible loss of data
 C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(264,36): warning C4244:         with
 C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(264,36): warning C4244:         [
 C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(264,36): warning C4244:             _Ty=double
 C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(264,36): warning C4244:         ]
-C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(269,72): warning C4244:  'argument': conversion from '_Ty' to 'float', possible loss of data
-C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(269,72): warning C4244:         with
-C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(269,72): warning C4244:         [
-C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(269,72): warning C4244:             _Ty=double
-C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(269,72): warning C4244:         ]
-C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(269,36): warning C4244:  'argument': conversion from '_Ty' to 'float', possible loss of data
-C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(269,36): warning C4244:         with
-C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(269,36): warning C4244:         [
-C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(269,36): warning C4244:             _Ty=double
-C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(269,36): warning C4244:         ]
 C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\ClothSystem.cpp(224,8): warning C4101:  'a_c': unreferenced local variable
   a3.vcxproj -> C:\Users\reube\Desktop\Work\SUTD\Term 8\50.017 Graphics and Visualization\github_repo\Final-Project\VC++\Q-Graphics\Debug\quantum_ISW.exe

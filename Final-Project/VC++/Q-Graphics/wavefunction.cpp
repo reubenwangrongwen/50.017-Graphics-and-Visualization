@@ -36,6 +36,58 @@ cdV wavefunction::ISW_eigenstate(int n, double L, cdV x, double t) {
 }
 
 
+cdV wavefunction::ISW_uniform_state(int n, double L, cdV x, double t, int num_states = 5) {
+	/*
+	Description:
+		Function that computes a uniform linear combination of infinite-square well eigenstate given parameters.
+	Argumnents :
+		- x_c : square - well center
+		- n : quantization index
+		- L : width of square - well
+		- x : x coordinate vector
+		- t : current time
+		- n : number of states for superposition
+	Return :
+		ISW state (complex vector).
+	*/
+
+	cdV psi;
+	psi = ISW_eigenstate(n, L, x_domain, t); // computing time-evolved state
+	for (unsigned n_i = n + 1; n_i < n + num_states; n_i++) {
+		psi += ISW_eigenstate(n_i, L, x_domain, t); // computing time-evolved state
+	}
+	psi.normalize();
+
+	return psi;
+}
+
+
+cdV wavefunction::ISW_exp_state(int n, double L, cdV x, double t, int num_states = 5) {
+	/*
+	Description:
+		Function that computes a decaying exponential linear combination of infinite-square well eigenstate given parameters.
+	Argumnents :
+		- x_c : square - well center
+		- n : quantization index
+		- L : width of square - well
+		- x : x coordinate vector
+		- t : current time
+		- n : number of states for superposition
+	Return :
+		ISW state (complex vector).
+	*/
+
+	cdV psi;
+	psi = exp(-n) * ISW_eigenstate(n, L, x_domain, t); // computing time-evolved state
+	for (unsigned n_i = n + 1; n_i < n + num_states; n_i++) {
+		psi += exp(-n_i) * ISW_eigenstate(n_i, L, x_domain, t); // computing time-evolved state
+	}
+	psi.normalize();
+
+	return psi;
+}
+
+
 cplex wavefunction::coeff(int n1, double L1, int n, double L, double dx, cdV x, double t) {
 	/*
 	Description:

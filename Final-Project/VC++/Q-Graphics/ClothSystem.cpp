@@ -7,7 +7,7 @@ using namespace std;
 
 // simulation parameters
 float mass = 0.2f; // mass
-float g = 0.5f; // gravity
+float g = 0.f; // gravity
 float b = 0.01f; // viscous drag coefficient
 
 float k_st = 400.f; // structural spring coefficient
@@ -230,19 +230,14 @@ vector<Vector3f> ClothSystem::evalF(vector<Vector3f> state) {
 	double spacing = this->get_width() / width; // grid particle spacing
 
 	// ---------------------------- for cloth boundary (quantum state) ----------------------------
-	// getting time
-	double t = this->get_time();
-
 	// init model parameters
+	double t = this->get_time(); // getting time
 	psi = this->get_Qstate(); // get wavefunction
 
 	// computing next wavefunction
 	this->set_time(t + dt); // updating time for quantum time-evolution
-	psi_new = this->ISW_eigenstate(n, L, x_domain, t); // computing time-evolved state
-	for (unsigned n_i = n + 1; n_i < n + 5; n_i++) {
-		psi_new += this->ISW_eigenstate(n_i, L, x_domain, t); // computing time-evolved state
-	}
-	psi_new.normalize();
+	//psi_new = this->ISW_exp_state(n, L, x_domain, t, 5);
+	psi_new = this->ISW_uniform_state(n, L, x_domain, t, 5);
 	this->set_Qstate(psi_new); // updating quantum state
 
 	// computing quantum state 'rope' velocity and force
@@ -327,14 +322,12 @@ void ClothSystem::draw_cloth(int row, int col) {
 
 	// loading normals and vertices
 	glBegin(GL_TRIANGLES);
-	glColor3f(abs(n1[0]), abs(n1[1]), abs(n1[2])); // coloring triangles
 	glNormal3f(n1[0], n1[1], n1[2]); glVertex3f(p1[0], p1[1], p1[2]);
 	glNormal3f(n2[0], n2[1], n2[2]); glVertex3f(p3[0], p3[1], p3[2]);
 	glNormal3f(n3[0], n3[1], n3[2]); glVertex3f(p2[0], p2[1], p2[2]);
 	glEnd();
 
 	glBegin(GL_TRIANGLES);
-	glColor3f(abs(n4[0]), abs(n4[1]), abs(n4[2])); // coloring triangles
 	glNormal3f(n4[0], n4[1], n4[2]); glVertex3f(p2[0], p2[1], p2[2]);
 	glNormal3f(n5[0], n5[1], n5[2]); glVertex3f(p3[0], p3[1], p3[2]);
 	glNormal3f(n6[0], n6[1], n6[2]); glVertex3f(p4[0], p4[1], p4[2]);
@@ -357,14 +350,12 @@ void ClothSystem::draw_cloth(int row, int col) {
 
 	// loading normals and vertices
 	glBegin(GL_TRIANGLES);
-	glColor3f(abs(n1[0]), abs(n1[1]), abs(n1[2])); // coloring triangles
 	glNormal3f(n1[0], n1[1], n1[2]); glVertex3f(p1[0], p1[1], p1[2]);
 	glNormal3f(n2[0], n2[1], n2[2]); glVertex3f(p3[0], p3[1], p3[2]);
 	glNormal3f(n3[0], n3[1], n3[2]); glVertex3f(p2[0], p2[1], p2[2]);
 	glEnd();
 
 	glBegin(GL_TRIANGLES);
-	glColor3f(abs(n4[0]), abs(n4[1]), abs(n4[2])); // coloring triangles
 	glNormal3f(n4[0], n4[1], n4[2]); glVertex3f(p2[0], p2[1], p2[2]);
 	glNormal3f(n5[0], n5[1], n5[2]); glVertex3f(p3[0], p3[1], p3[2]);
 	glNormal3f(n6[0], n6[1], n6[2]); glVertex3f(p4[0], p4[1], p4[2]);
@@ -394,7 +385,7 @@ void ClothSystem::draw_line(int row1, int col1, int row2, int col2) {
 
 	glPushAttrib(GL_ALL_ATTRIB_BITS);
 	glDisable(GL_LIGHTING);
-	glLineWidth(2.5); // setting interpolation line width
+	glLineWidth(4); // setting interpolation line width
 	glPushMatrix();
 	glBegin(GL_LINES);
 	glColor3f(red, green, blue);
