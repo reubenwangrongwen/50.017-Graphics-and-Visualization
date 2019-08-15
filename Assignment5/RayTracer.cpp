@@ -108,13 +108,15 @@ Vector3f RayTracer::traceRay( Ray& ray, float tmin, int bounces, float refr_inde
 			light->getIllumination(ray.pointAtParameter(hit.getT()), light_dir, light_col, dist2light);
 
 			// getting shadows
-			Ray ray_shadow(intersect + light_dir * EPSILON, light_dir);
-			Hit hit_shadow(dist2light, NULL, NULL);
+			if (shadow_toggle) {
+				Ray ray_shadow(intersect + light_dir * EPSILON, light_dir);
+				Hit hit_shadow(dist2light, NULL, NULL);
 
-			// checking for ray intersection
-			if (!m_scene->getGroup()->intersect(ray_shadow, hit_shadow, tmin)) {
-				Vector3f shading_col = hit.getMaterial()->Shade(ray, hit, light_dir, light_col);
-				pix_col += shading_col;
+				// checking for ray intersection
+				if (!m_scene->getGroup()->intersect(ray_shadow, hit_shadow, tmin)) {
+					Vector3f shading_col = hit.getMaterial()->Shade(ray, hit, light_dir, light_col);
+					pix_col += shading_col;
+				}
 			}
 
 		}
