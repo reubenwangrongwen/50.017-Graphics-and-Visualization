@@ -6,7 +6,6 @@ All output file requirements for this assignment are in the "outputs" folder.
 
 ## TO DO
 
-* Fix 2nd and 4th outputs. 
 * Yet to do any of the extra credit components.
 
 ## Extra Credit Components
