@@ -25,12 +25,10 @@ public:
 
 
 private:
+
   SceneParser* m_scene;
-
   int m_maxBounces;
-
   bool shadow_toggle = false;
-
   Group* g;
 
 };

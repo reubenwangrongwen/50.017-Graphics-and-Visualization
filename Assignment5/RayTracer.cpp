@@ -9,8 +9,16 @@
 #define EPSILON 0.01
 
 //IMPLEMENT THESE FUNCTIONS
-//These function definitions are mere suggestions. Change them as you like.
 Vector3f mirrorDirection( const Vector3f& normal, const Vector3f& incoming) {
+	/*
+	Description:
+		Computes the direction of the reflected ray using Lambertian (cosine) technique.
+	Arguments:
+		- normal: normal vector of surface.
+		- incoming: direction of incoming ray. 
+	Return:
+		direction of reflected ray. 
+	*/
 
 	Vector3f dir; // declaring varible for unnormalized direction
 	dir = incoming - 2 * (Vector3f::dot(incoming, normal)) * (normal); // computing unnormalized direction
@@ -19,7 +27,19 @@ Vector3f mirrorDirection( const Vector3f& normal, const Vector3f& incoming) {
 }
 
 bool transmittedDirection( const Vector3f& normal, const Vector3f& incoming, float index_n, float index_nt, Vector3f& transmitted) {
-	
+	/*
+	Description:
+		Computes the direction of the refracted ray.
+	Arguments:
+		- normal: normal vector of surface.
+		- incoming: direction of incoming ray.
+		- index_n: refractive index of incoming medium.
+		- index_nt: refractive index of outgoing medium. 
+		- transmitted: direction of ray.
+	Return:
+		direction of refracted ray.
+	*/
+
 	// declaring variables
 	float refrac_ratio, n_I, sqrt_arg;
 
@@ -46,111 +66,113 @@ RayTracer::RayTracer( SceneParser* scene, int max_bounces, bool shadow_tog) : m_
   g = scene->getGroup();
   m_maxBounces = max_bounces;
   shadow_toggle = shadow_tog;
-
 }
 
 RayTracer::~RayTracer() {}
 
 Vector3f RayTracer::traceRay( Ray& ray, float tmin, int bounces, float refr_index, Hit& hit ) const {
-    
-	// declaring variable
-	float R = 1.f;
-	Vector3f color; 
+	/*
+	Description:
+		Performs ray tracing based on specified number of ray bounces.
+	Arguments:
+		- ray: Ray class instance.
+		- tmin: span parameter value for intersection checking. 
+		- bounces: number of ray tracing bounces.
+		- refr_index: refractive index of material.
+		- hit: Hit class instance.
+	Return:
+		effective color of the pixel after ray tracing.
+	*/
 
-	// checking if ray intersects group
-	if (g->intersect(ray, hit, tmin)) {
+	hit = Hit(FLT_MAX, NULL, Vector3f::ZERO);
+
+	if (m_scene->getGroup()->intersect(ray, hit, m_scene->getCamera()->getTMin())) {
 		
-		// ambient lighting 
-		color = (m_scene->getAmbientLight()) * (hit.getMaterial()->getDiffuseColor());
+		// declare variables
+		Light* light;
+		Vector3f light_dir;
+		Vector3f light_col;
+		Vector3f pix_col;
+		Vector3f intersect;
+		float dist2light;
 
-		// loop over number of lights
-		for (int i = 0; i < m_scene->getNumLights(); i++) {
+		// init vectors
+		pix_col = Vector3f::ZERO;
+		intersect = ray.getOrigin() + ray.getDirection() * hit.getT();
 
-			// declaring variables for shadow effect
-			Light* light;
-			Vector3f dir2light, light_col, hit_pt;
-			float distanceToLight;
+		// for loop to get diffuse and specular colors
+		for (int idx = 0; idx < m_scene->getNumLights(); idx++) {
+			
+			// setting light objects
+			light = m_scene->getLight(idx);
+			light->getIllumination(ray.pointAtParameter(hit.getT()), light_dir, light_col, dist2light);
 
-			light = m_scene->getLight(i);
-			light->getIllumination(ray.pointAtParameter(hit.getT()), dir2light, light_col, distanceToLight);
-			hit_pt = ray.pointAtParameter(hit.getT());
+			// getting shadows
+			Ray ray_shadow(intersect + light_dir * EPSILON, light_dir);
+			Hit hit_shadow(dist2light, NULL, NULL);
 
-			// for shadow rendering
-			if (shadow_toggle) {
+			// checking for ray intersection
+			if (!m_scene->getGroup()->intersect(ray_shadow, hit_shadow, tmin)) {
+				Vector3f shading_col = hit.getMaterial()->Shade(ray, hit, light_dir, light_col);
+				pix_col += shading_col;
+			}
 
-				// declaring variables
-				Hit shadowHit;
-				bool groupIntersect;
+		}
+		pix_col += hit.getMaterial()->getDiffuseColor() * m_scene->getAmbientLight(); // adding ambient color
 
-				// init variables
-				Ray shadowRay(hit_pt, dir2light);
-				shadowHit = Hit(distanceToLight, NULL, NULL);
-				groupIntersect = g->intersect(shadowRay, shadowHit, EPSILON);
+		if (bounces > 0) { // checking if there are ray reflections/refractions
 
-				// for diffused lighting (no intersection => no shadow)
-				if (shadowHit.getT() >= distanceToLight) {
-					color += hit.getMaterial()->Shade(ray, hit, dir2light, light_col);
-				}
+			// -------------------------- reflection --------------------------
+			// declare ray items
+			Vector3f reflect_dir;
+			Hit hit_refl;
+			Vector3f reflect_col;
+
+			// init ray items
+			reflect_dir = mirrorDirection(hit.getNormal().normalized(), ray.getDirection());
+			Ray ray_refl = Ray(intersect + reflect_dir * EPSILON, reflect_dir);
+			hit_refl = Hit(FLT_MAX, NULL, Vector3f::ZERO);
+			reflect_col = traceRay(ray_refl, 0, bounces - 1, refr_index, hit_refl);
+			// ----------------------------------------------------------------
+
+			// -------------------------- refraction --------------------------
+			// init ray items
+			float refr_index_new = hit.getMaterial()->getRefractionIndex();
+			Vector3f normal = (hit.getNormal()).normalized();
+			if (Vector3f::dot(ray.getDirection(), normal) > 0.) { // checking if normal needs to be negated
+				refr_index_new = 1.f; // new refractive index
+				normal = -normal; // negating normal
+			}
+			Vector3f refract_dir(0., 0., 0.); // init refraction direction (updated below)
+
+			// init boolean variable to check for refraction
+			bool refract_on = transmittedDirection(normal, ray.getDirection(), refr_index, refr_index_new, refract_dir);
+			if (refract_on) {
+
+				// declare ray items
+				Hit hit_refr;
+				Vector3f refractColor;
+
+				// init ray items
+				Ray ray_refr = Ray(intersect + refract_dir * EPSILON, refract_dir);
+				hit_refr = Hit(FLT_MAX, NULL, Vector3f::ZERO);
+				refractColor = traceRay(ray_refr, 0, bounces - 1, refr_index_new, hit_refr);
+
+				// Schlick's approximation
+				float c, R_0, R; 
+				if (refr_index <= refr_index_new) { c = abs(Vector3f::dot(ray.getDirection(), normal)); } 
+				else { c = abs(Vector3f::dot(refract_dir, normal)); }
+				R_0 = pow(((refr_index_new - refr_index) / (refr_index_new + refr_index)), 2); 
+				R = R_0 + (1. - R_0) * pow(1. - c, 5); 
+				pix_col += (1. - R) * hit.getMaterial()->getSpecularColor() * refractColor + R* reflect_col * hit.getMaterial()->getSpecularColor();
 			}
 			else {
-				// only diffuse lighting 
-				color += hit.getMaterial()->Shade(ray, hit, dir2light, light_col);
+				pix_col += reflect_col * hit.getMaterial()->getSpecularColor(); // only reflection
 			}
+			// ----------------------------------------------------------------
 		}
 
-		// declare color variables
-		Vector3f reflection_color;
-		Vector3f refraction_color;
-
-		// ray tracing recursion
-		if (bounces > m_maxBounces - 1) { return color; } // check for over-dense recursion
-		if (bounces > 0) { 
-
-			// ------------------------------- computing reflection ------------------------------- 
-			// init variables
-			Vector3f reflection_dir = mirrorDirection(hit.getNormal().normalized(), ray.getDirection().normalized());
-			Vector3f intersection_pt = ray.pointAtParameter(hit.getT());
-			Ray reflect_ray = Ray(intersection_pt, reflection_dir); // reflection_ray originates from the pt of intersection 
-			Hit reflectionHit = Hit(FLT_MAX, NULL, Vector3f::ZERO);
-			
-			reflection_color = traceRay(reflect_ray, EPSILON, refr_index, bounces - 1, reflectionHit) * hit.getMaterial()->getSpecularColor();
-			// ------------------------------------------------------------------------------------
-
-			// ------------------------------- computing refraction -------------------------------
-			// init variables
-			Vector3f refraction_dir;
-			Vector3f normal = hit.getNormal().normalized();
-			float index_nt = hit.getMaterial()->getRefractionIndex(); 
-			float R_0;
-			if (Vector3f::dot(ray.getDirection(), normal) > 0) {
-				normal *= -1.f; // change normal to be positive if the ray is currently in the object
-				index_nt = 1.f;
-			}
-			
-			bool refraction = transmittedDirection(normal, ray.getDirection(), refr_index, index_nt, refraction_dir); // check for pure reflection
-			if (refraction) {
-				
-				// init variables
-				float c;
-				Ray refraction_ray = Ray(intersection_pt, refraction_dir);
-				Hit refraction_hit = Hit();
-
-				refraction_color = traceRay(refraction_ray, EPSILON, index_nt, bounces - 1, refraction_hit) * hit.getMaterial()->getSpecularColor();
-
-				// Fresnel’s equation (blending reflection and refraction)
-				if (refr_index <= index_nt) { c = abs(Vector3f::dot(ray.getDirection(), normal)); }
-				else { c = abs(Vector3f::dot(refraction_dir, normal)); }
-				R_0 = pow(((index_nt - refr_index) / (index_nt + refr_index)), 2);
-				R = R_0 + (1 - R_0) * pow((1 - c), 5);
-			}
-			// ------------------------------------------------------------------------------------
-		}
-		//weighting of reflection and refraction
-		color += R * reflection_color + (1 - R) * refraction_color;
+		return pix_col;
 	}
-	else {
-		color = m_scene->getBackgroundColor(ray.getDirection());
-	}
-
-	return color;
+	else return m_scene->getBackgroundColor(ray.getDirection());
 }
